@@ -26,5 +26,3 @@ http://www-math.mit.edu/~shor/PAM/lempel_ziv_notes.pdf
 
 Muuta jännää:
 https://www.sciencedirect.com/topics/computer-science/compression-algorithm
-
-
