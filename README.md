@@ -1,4 +1,4 @@
-# Zip
+# NalleZip
 
 Projektin alustava määrittelydokumentti on täällä: 
 
