@@ -1,4 +1,4 @@
-# Zip
+# NalleZip
 
 Projektin tavoitteena on tutkia pakkausalgoritmien toimintaa. Tavoitteena on rakentaa tietoa hävittämätön pakkausalgoritmi. Pakkausalgoritmit ovat mielenkiintoisia, sillä ennen tätä harjoitustyötä minulla ei ole niiden toiminnasta mitään käsitystä.
 
