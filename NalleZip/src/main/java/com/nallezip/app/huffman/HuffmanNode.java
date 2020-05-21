@@ -44,14 +44,14 @@ public class HuffmanNode implements Comparable<HuffmanNode> {
      * @return 
      */
     
-    public boolean isItLeaf() {
-
-        if ((left == null) && (right == null)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+//    public boolean isItLeaf() {
+//
+//        if ((left == null) && (right == null)) {
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }
 
     public HuffmanNode getLeft() {
         return left;
@@ -87,7 +87,7 @@ public class HuffmanNode implements Comparable<HuffmanNode> {
     
     public String toString(){
     
-        return "Character of the node is"+ch;
+        return "Character of the node is "+ch+" position of the node is "+position;
     }
 
 }

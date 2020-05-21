@@ -17,7 +17,7 @@ import java.util.Set;
  */
 public class HuffmanAlgo {
 
-    private HashMap<Character, String> huffmanTree;
+    private HashMap<Character, String> huffmanTree = new HashMap();
     private HuffmanNode root;
 
     /**
@@ -26,29 +26,32 @@ public class HuffmanAlgo {
      * @param position
      * @return
      */
-    public HuffmanNode buildTree(HashMap<Character, Integer> position) {
+    public HuffmanNode findRootNode(HashMap<Character, Integer> position) {
         Set<Character> keys = position.keySet();
         PriorityQueue<HuffmanNode> nodeQueue = new PriorityQueue();
-        HuffmanNode mom = new HuffmanNode();
+        
         if (position.size() > 0) {
             nodeQueue = createNodes(position);
         }
         while (nodeQueue.size() > 1) {
+            HuffmanNode mom = new HuffmanNode();
             HuffmanNode firstBorn = nodeQueue.poll();
             HuffmanNode secondBorn = nodeQueue.poll();
             //HuffmanNode mom = new HuffmanNode(firstBorn, secondBorn, '-', firstBorn.getPosition() + secondBorn.getPosition());
-            
+
             mom.setLeft(firstBorn);
             mom.setRight(secondBorn);
             mom.setCh('-');
             mom.setPosition(firstBorn.getPosition() + secondBorn.getPosition());
             root = mom;
-            
+            nodeQueue.offer(mom);
         }
-        System.out.println("Peekataan nodejono "+ nodeQueue.peek());
-        System.out.println("peekkauksen kanssa mom Tsekkaus "+mom);
-        System.out.println("Solmujonon pituus: "+ nodeQueue.size());
-        return mom;
+        //System.out.println("Peekataan nodejono "+ nodeQueue.peek());
+        //System.out.println("peekkauksen kanssa mom Tsekkaus "+root);
+        //System.out.println("Solmujonon pituus: "+ nodeQueue.size());
+        //HuffmanNode testiNode = nodeQueue.peek();
+        //System.out.println("Solmujonon pituus: "+testiNode.toString());
+        return nodeQueue.poll();
     }
 
     /**
@@ -85,7 +88,7 @@ public class HuffmanAlgo {
      * @param builder
      */
     public void setHuffmanTree(HuffmanNode node, StringBuilder builder) {
-        System.out.println("Builder on: "+builder);
+        //System.out.println("Builder on: "+builder);
         if (node != null) {
             if (node.getLeft() == null && node.getRight() == null) {
                 huffmanTree.put(node.getCh(), builder.toString());
@@ -127,9 +130,10 @@ public class HuffmanAlgo {
             if (!position.containsKey(string.charAt(i))) {
                 position.put(string.charAt(i), 0);
             }
-            position.put(string.charAt(i), position.get(string.charAt(i))+1);
+            position.put(string.charAt(i), position.get(string.charAt(i)) + 1);
 
         }
+        System.out.println(position.toString()+" size: "+position.size());
         return position;
     }
 
@@ -142,17 +146,17 @@ public class HuffmanAlgo {
      */
     public String encodeString(String string) {
         HashMap<Character, Integer> position = createPosition(string);
-        System.out.println("Tämä on position:" +position);
-        root = buildTree(position);
-        System.out.println("Tämä on juuri: " +root);
+        //System.out.println("Tämä on position:" +position);
+        root = findRootNode(position);
+        //System.out.println("Tämä on juuri: " +root);
         setHuffmanTree(root, new StringBuilder());
-        System.out.println("Tämä on puu: "+ huffmanTree);
+        //System.out.println("Tämä on puu: "+ huffmanTree);
         StringBuilder builder = new StringBuilder();
 
         for (int i = 0; i < string.length(); i++) {
             char ch = string.charAt(i);
-            System.out.println(ch);
-            System.out.println(huffmanTree);
+            //System.out.println(ch);
+            //System.out.println(huffmanTree);
             builder.append(huffmanTree.get(ch));
 
         }
@@ -160,19 +164,32 @@ public class HuffmanAlgo {
 
     }
 
-    public void decodeString(String string) {
-
+    public String decodeString(String string) {
+        StringBuilder builder = new StringBuilder();
         HuffmanNode node = root;
         for (int i = 0; i < string.length(); i++) {
+            
             int j = Integer.parseInt(String.valueOf(string.charAt(i)));
             if (j == 0) {
                 node = node.getLeft();
-                appendInDecode(node);
+
+                if (node.getLeft() == null && node.getRight() == null) {
+                    builder.append(node.getCh());
+                    node = root;
+                }
+
+                //  appendInDecode(node);
             } else if (j == 1) {
                 node = node.getRight();
-                appendInDecode(node);
+
+                if (node.getLeft() == null && node.getRight() == null) {
+                    builder.append(node.getCh());
+                    node = root;
+                }
+                //   appendInDecode(node);
             }
         }
+        return builder.toString();
     }
 
     public void appendInDecode(HuffmanNode node) {
