@@ -163,7 +163,11 @@ public class HuffmanAlgo {
         return builder.toString();
 
     }
-
+    /**
+     * metodi palauttaa encodeString-metodilla koodatun Stringin alkuperäiseen muotoon.
+     * @param string Syöte on ykkösiä ja nollia sisältävä String.
+     * @return 
+     */
     public String decodeString(String string) {
         StringBuilder builder = new StringBuilder();
         HuffmanNode node = root;
@@ -191,7 +195,11 @@ public class HuffmanAlgo {
         }
         return builder.toString();
     }
-
+    
+    /**
+     * Metodi on apumetodi decodeString-metodille. Ongelmien vuoksi ei tällä hetkellä käytössä.
+     * @param node 
+     */
     public void appendInDecode(HuffmanNode node) {
         StringBuilder builder = new StringBuilder();
         if (node.getLeft() == null && node.getRight() == null) {
