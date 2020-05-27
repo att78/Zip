@@ -13,3 +13,7 @@ Toisen viikon viikkoraportti:
 
 [Viikko2](https://github.com/att78/NalleZip/blob/master/documentation/week2.md)
 
+Kolmannen viikon viikkoraportti:
+
+[VIikko3](https://github.com/att78/NalleZip/blob/master/documentation/week3.md)
+
