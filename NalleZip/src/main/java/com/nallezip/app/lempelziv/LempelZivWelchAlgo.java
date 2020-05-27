@@ -9,7 +9,7 @@ package com.nallezip.app.lempelziv;
  *
  * @author tallbera
  */
-public class LempelZivAlgo {
+public class LempelZivWelchAlgo {
     
     
     
