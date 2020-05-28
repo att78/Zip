@@ -19,34 +19,41 @@ public class LempelZivWelchAlgo {
 
     private List<Integer> encoded = new ArrayList();
     private HashMap<String, Integer> library = new HashMap();
+    private HashMap<Integer, String> libraryDecoded = new HashMap();
 
     public LempelZivWelchAlgo() {
     }
-
+    
+    /**
+     * Metodi enkoodaa annetun string-muotoisen syötteen. Käyttää apumetodeina createLibrary- ja fillLibrary-metodeita.
+     * @param string
+     * @return 
+     */
     public List<Integer> encodeString(String string) {
         int length = string.length();
-        createLibrary(string);
+        createLibraries();
         fillLibrary(string);
-        return encoded;        
+        return encoded;
     }
 
     /**
-     * Luodaan library annetulle stringille.
+     * Luodaan sekä enkoodauksessa että dekoodauksessa käytetyt kirjastot.
      *
      * @param string
      */
-    public void createLibrary(String string) {
-        for (int i = 0; i < string.length(); i++) {
+    public void createLibraries() {
+        for (int i = 0; i < 512; i++) {
+            
             library.put("" + (char) i, i);
+            libraryDecoded.put(i, ""+(char) i);
         }
     }
-    
-    public void fillLibrary(String string){
+
+    public void fillLibrary(String string) {
         String a = "";
-        String b = "";
-        int size = 128;
+        int size = 512;
         for (int i = 0; i < string.length(); i++) {
-            b = string.substring(i, i + 1);
+            String b = string.substring(i, i + 1);
             String ab = a + b;
 //       for(char ch : string.toCharArray()){
 //           String ach = a+ch;
@@ -54,14 +61,43 @@ public class LempelZivWelchAlgo {
                 a = ab;
             } else {
                 encoded.add(library.get(a));
-                library.put(ab,size++);
-                a= ""+b;
-            }            
-            if(!a.equals("")){
-               encoded.add(library.get(a));
+                library.put(ab, size++);
+                a = "" + b;
             }
-        }   
+        }
+
+        if (!a.equals("")) {
+            encoded.add(library.get(a));
+        }
     }
+
+    public String decodeString() {
+
+        int first = encoded.remove(0);
+        String answer = ""+ (char) first;
+        StringBuilder builder = new StringBuilder(answer);
+        decodeLoop(builder, answer);
+        return builder.toString();
+    }
+    
+    public void decodeLoop(StringBuilder builder, String answer){
+        int size = 512;
+        for (int number: encoded) {
+            String s = "";
+            if (libraryDecoded.containsKey(number)) {
+                s = libraryDecoded.get(number);
+            } else if ( number== size) {
+                s = answer + answer.charAt(0);
+            } 
+//            else{
+//              throw new  IllegalArgumentException("Does not work");            
+//            }            
+            builder.append(s);
+            libraryDecoded.put(size ++, answer + s.charAt(0));
+            answer = s;
+        }       
+    }
+    
     
 
 }
