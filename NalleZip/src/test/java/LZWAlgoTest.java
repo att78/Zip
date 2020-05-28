@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 
+import com.nallezip.app.lempelziv.LempelZivWelchAlgo;
+import java.util.HashMap;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -30,6 +32,7 @@ public class LZWAlgoTest {
     
     @Before
     public void setUp() {
+        
     }
     
     @After
@@ -43,6 +46,21 @@ public class LZWAlgoTest {
     // public void hello() {}
     @Test
     public void testCreateLibraries(){
+        LempelZivWelchAlgo algo = new LempelZivWelchAlgo();
+        algo.createLibraries();
+                
+        assertEquals(512,algo.getLibrary().size());
+        assertEquals(512, algo.getLibraryDecoded().size());
+    }
+    
+    
+    @Test
+    public void testFillLibrary(){
+        LempelZivWelchAlgo algo = new LempelZivWelchAlgo();
+        algo.createLibraries();
+        String s = "Nalle";
+        algo.fillLibrary(s);
+        assertEquals("[78, 97, 108, 108, 101]", algo.getEncoded().toString());
     
     }
            

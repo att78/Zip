@@ -23,14 +23,16 @@ public class LempelZivWelchAlgo {
 
     public LempelZivWelchAlgo() {
     }
-    
+
     /**
-     * Metodi enkoodaa annetun string-muotoisen syötteen. Käyttää apumetodeina createLibrary- ja fillLibrary-metodeita.
+     * Metodi enkoodaa annetun string-muotoisen syötteen. Käyttää apumetodeina
+     * createLibrary- ja fillLibrary-metodeita.
+     *
      * @param string
-     * @return 
+     * @return
      */
     public List<Integer> encodeString(String string) {
-        int length = string.length();
+
         createLibraries();
         fillLibrary(string);
         return encoded;
@@ -43,16 +45,23 @@ public class LempelZivWelchAlgo {
      */
     public void createLibraries() {
         for (int i = 0; i < 512; i++) {
-            
+
             library.put("" + (char) i, i);
-            libraryDecoded.put(i, ""+(char) i);
+            libraryDecoded.put(i, "" + (char) i);
         }
+        System.out.println(library.size());
     }
 
+    /**
+     * Enkoodauksessa käytettävän kirjaston täyttäminen annetun syötteen
+     * pohjalta
+     *
+     * @param string
+     */
     public void fillLibrary(String string) {
-        String a = "";
+        String a = string.substring(0, 1);
         int size = 512;
-        for (int i = 0; i < string.length(); i++) {
+        for (int i = 1; i < string.length(); i++) {
             String b = string.substring(i, i + 1);
             String ab = a + b;
 //       for(char ch : string.toCharArray()){
@@ -65,39 +74,44 @@ public class LempelZivWelchAlgo {
                 a = "" + b;
             }
         }
-
-        if (!a.equals("")) {
-            encoded.add(library.get(a));
-        }
+        encoded.add(library.get(a));
     }
 
     public String decodeString() {
 
         int first = encoded.remove(0);
-        String answer = ""+ (char) first;
+        String answer = "" + (char) first;
         StringBuilder builder = new StringBuilder(answer);
         decodeLoop(builder, answer);
         return builder.toString();
     }
-    
-    public void decodeLoop(StringBuilder builder, String answer){
+
+    public void decodeLoop(StringBuilder builder, String answer) {
         int size = 512;
-        for (int number: encoded) {
+        for (int number : encoded) {
             String s = "";
             if (libraryDecoded.containsKey(number)) {
                 s = libraryDecoded.get(number);
-            } else if ( number== size) {
+            } else if (number == size) {
                 s = answer + answer.charAt(0);
-            } 
-//            else{
-//              throw new  IllegalArgumentException("Does not work");            
-//            }            
+            }
+
             builder.append(s);
-            libraryDecoded.put(size ++, answer + s.charAt(0));
+            libraryDecoded.put(size++, answer + s.charAt(0));
             answer = s;
-        }       
+        }
     }
-    
-    
+
+    public HashMap<String, Integer> getLibrary() {
+        return library;
+    }
+
+    public HashMap<Integer, String> getLibraryDecoded() {
+        return libraryDecoded;
+    }
+
+    public List<Integer> getEncoded() {
+        return encoded;
+    }
 
 }
