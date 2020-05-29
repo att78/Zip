@@ -63,5 +63,26 @@ public class LZWAlgoTest {
         assertEquals("[78, 97, 108, 108, 101]", algo.getEncoded().toString());
     
     }
+    
+    @Test
+    public void testDecodeString(){
+    LempelZivWelchAlgo algo = new LempelZivWelchAlgo();
+    String string = "Nalle";
+    algo.encodeString(string);
+    String answer = algo.decodeString();
+    
+    assertEquals("Nalle", answer);
+    }
+    
+    @Test
+    public void testDecodeLoop(){
+    LempelZivWelchAlgo algo = new LempelZivWelchAlgo();
+    StringBuilder builder = new StringBuilder();
+    String string = "Nalle";
+    algo.encodeString(string);
+    algo.decodeLoop(builder, string);
+    
+    assertEquals("Nalle", builder.toString());
+    }
            
 }
