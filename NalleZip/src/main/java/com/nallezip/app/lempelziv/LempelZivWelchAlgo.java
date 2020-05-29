@@ -76,7 +76,12 @@ public class LempelZivWelchAlgo {
         }
         encoded.add(library.get(a));
     }
-
+    
+    
+    /**
+     * Metodi dekoodaa encodeString-metodin tekemän listan ja palauttaa alkuperäisen Stringin. Käyttää apumetodina decodeLoop-metodia.
+     * @return 
+     */
     public String decodeString() {
 
         int first = encoded.remove(0);
@@ -86,6 +91,11 @@ public class LempelZivWelchAlgo {
         return builder.toString();
     }
 
+    /**
+     * Metodi toimii apumetodina decodeString-metodille ja nimensä mukaisesti hoitaa enkoodatun listan läpikäynnin.
+     * @param builder
+     * @param answer 
+     */
     public void decodeLoop(StringBuilder builder, String answer) {
         int size = 512;
         for (int number : encoded) {
