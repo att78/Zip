@@ -16,34 +16,32 @@ public class HuffmanNode implements Comparable<HuffmanNode> {
     private HuffmanNode right;
     private char ch;
     private int position;
-    
+
 //    public HuffmanNode(){
 //    }
-
 //    public HuffmanNode(HuffmanNode left, HuffmanNode right, char ch, int position) {
 //        this.left = left;
 //        this.right = right;
 //        this.ch = ch;
 //        this.position = position;
 //    }
-
     /**
      * compareTo-metodi palauttaa kahden solmun vertailutuloksen
-     * 
+     *
      * @param second
-     * @return 
+     * @return
      */
-    
-    public int compareTo(HuffmanNode second){
-    
-        return this.position-second.position;
+    public int compareTo(HuffmanNode second) {
+
+        return this.position - second.position;
     }
-    
+
     /**
-     * Metodi palauttaa true, jos solmu on lehti ja false, jos solmu ei ole lehti
-     * @return 
+     * Metodi palauttaa true, jos solmu on lehti ja false, jos solmu ei ole
+     * lehti
+     *
+     * @return
      */
-    
 //    public boolean isItLeaf() {
 //
 //        if ((left == null) && (right == null)) {
@@ -52,7 +50,6 @@ public class HuffmanNode implements Comparable<HuffmanNode> {
 //            return false;
 //        }
 //    }
-
     public HuffmanNode getLeft() {
         return left;
     }
@@ -84,10 +81,10 @@ public class HuffmanNode implements Comparable<HuffmanNode> {
     public void setPosition(int position) {
         this.position = position;
     }
-    
-    public String toString(){
-    
-        return "Character of the node is "+ch+" position of the node is "+position;
+
+    public String toString() {
+
+        return "Character of the node is " + ch + " position of the node is " + position;
     }
 
 }

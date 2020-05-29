@@ -29,7 +29,7 @@ public class HuffmanAlgo {
     public HuffmanNode findRootNode(HashMap<Character, Integer> position) {
         Set<Character> keys = position.keySet();
         PriorityQueue<HuffmanNode> nodeQueue = new PriorityQueue();
-        
+
         if (position.size() > 0) {
             nodeQueue = createNodes(position);
         }
@@ -133,7 +133,7 @@ public class HuffmanAlgo {
             position.put(string.charAt(i), position.get(string.charAt(i)) + 1);
 
         }
-        System.out.println(position.toString()+" size: "+position.size());
+        System.out.println(position.toString() + " size: " + position.size());
         return position;
     }
 
@@ -163,16 +163,19 @@ public class HuffmanAlgo {
         return builder.toString();
 
     }
+
     /**
-     * metodi palauttaa encodeString-metodilla koodatun Stringin alkuperäiseen muotoon.
+     * metodi palauttaa encodeString-metodilla koodatun Stringin alkuperäiseen
+     * muotoon.
+     *
      * @param string Syöte on ykkösiä ja nollia sisältävä String.
-     * @return 
+     * @return
      */
     public String decodeString(String string) {
         StringBuilder builder = new StringBuilder();
         HuffmanNode node = root;
         for (int i = 0; i < string.length(); i++) {
-            
+
             int j = Integer.parseInt(String.valueOf(string.charAt(i)));
             if (j == 0) {
                 node = node.getLeft();
@@ -195,10 +198,12 @@ public class HuffmanAlgo {
         }
         return builder.toString();
     }
-    
+
     /**
-     * Metodi on apumetodi decodeString-metodille. Ongelmien vuoksi ei tällä hetkellä käytössä.
-     * @param node 
+     * Metodi on apumetodi decodeString-metodille. Ongelmien vuoksi ei tällä
+     * hetkellä käytössä.
+     *
+     * @param node
      */
     public void appendInDecode(HuffmanNode node) {
         StringBuilder builder = new StringBuilder();

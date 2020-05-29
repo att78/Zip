@@ -46,10 +46,10 @@ public class App {
 //        System.out.println(testQueue);
 
 
-        LempelZivWelchAlgo LZW = new LempelZivWelchAlgo();
-        List<Integer> testing = LZW.encodeString(string);
+        LempelZivWelchAlgo algo = new LempelZivWelchAlgo();
+        List<Integer> testing = algo.encodeString(string);
         System.out.println(testing);
-        String answer = LZW.decodeString();
+        String answer = algo.decodeString();
         System.out.println(answer);
 
     }
