@@ -8,6 +8,10 @@ To 28.5 8h Pitkä päivä Lempel Ziv Welchin kanssa. Aikani materiaaleja luettua
 
 Pe 29.5 2h Lisää testausta LempelZivWelchAlgo-luokkaan liittyen ja dokumentaation parantelua. Checkstylen löytämien virheiden korjailua ja muuta pientä säätöä.
 
+
+Yhteensä n.21 tuntia, joskin osa työtunneista hyvin rauhattomia ja katkonaisia. Silti voi sanoa, että meni jonkin verran ylitöiden puolelle. 
+
+
 ## Kysymys: 
 
 mitä tarkoittaa tiralabrassa "kattava yksikkötestaus"? 
