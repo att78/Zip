@@ -17,3 +17,9 @@ Kolmannen viikon viikkoraportti:
 
 [VIikko3](https://github.com/att78/NalleZip/blob/master/documentation/week3.md)
 
+
+Komentoja sovelluksen testaukseen liittyen:
+
+Mavenilla testaus: mvn test
+
+Mavenilla testikattavuusraportin generointi: mvn test jacoco:report
