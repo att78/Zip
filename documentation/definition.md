@@ -9,7 +9,7 @@ Tavoitteena on toteuttaa toisena pakkausalgoritmina Lempel Ziv(tai joku hyvin sa
 Alla on esitelty alustava luokkakaavio. Siinä ei ole esitelty mitään luokkien sisäisestä olemuksesta, sillä harjoitustyön edetessä luokkien sisällä tapahtuu rajua myllerrystä javan valmiiden rakenteiden korvautuessa omilla rakenteilla. Ainakin se on tavoitteena. Alkuvaiheessa ei ole varmaa käsitystä siitä, millaisia ne omat rakenteet tulevat olemaan. Siksipä tässä on esiteltynä lähinnä konseptuaalisella tasolla se, millaisia luokkia sovelluksessa tullee olemaan.
 Alustava Luokkakaavio:
 
-![Alustava luokkakaavio](https://github.com/att78/NalleZip/blob/master/documentation/NalleZip.jpg)
+![Alustava luokkakaavio](https://github.com/att78/NalleZip/blob/master/documentation/NalleZipUpdate1.jpg)
 
 
 ## Lähteitä:
