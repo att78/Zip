@@ -24,6 +24,8 @@ Lempel Ziv
 
 http://www-math.mit.edu/~shor/PAM/lempel_ziv_notes.pdf
 
+http://www.cs.columbia.edu/~allen/S14/NOTES/lzw.pdf
+
 Muuta jännää:
 
 https://www.sciencedirect.com/topics/computer-science/compression-algorithm
