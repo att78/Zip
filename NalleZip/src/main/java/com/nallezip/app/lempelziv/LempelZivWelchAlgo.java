@@ -20,6 +20,7 @@ public class LempelZivWelchAlgo {
     private List<Integer> encoded = new ArrayList();
     private HashMap<String, Integer> library = new HashMap();
     private HashMap<Integer, String> libraryDecoded = new HashMap();
+    private final int SIZE = 512;
 
     public LempelZivWelchAlgo() {
     }
@@ -44,7 +45,7 @@ public class LempelZivWelchAlgo {
      * @param string
      */
     public void createLibraries() {
-        for (int i = 0; i < 512; i++) {
+        for (int i = 0; i < SIZE; i++) {
 
             library.put("" + (char) i, i);
             libraryDecoded.put(i, "" + (char) i);
@@ -60,7 +61,7 @@ public class LempelZivWelchAlgo {
      */
     public void fillLibrary(String string) {
         String a = string.substring(0, 1);
-        int size = 512;
+        int size = SIZE;
         for (int i = 1; i < string.length(); i++) {
             String b = string.substring(i, i + 1);
             String ab = a + b;
@@ -97,7 +98,7 @@ public class LempelZivWelchAlgo {
      * @param answer 
      */
     public void decodeLoop(StringBuilder builder, String answer) {
-        int size = 512;
+        int size = SIZE;
         for (int number : encoded) {
             String s = "";
             if (libraryDecoded.containsKey(number)) {

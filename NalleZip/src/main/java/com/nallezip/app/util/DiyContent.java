@@ -15,17 +15,17 @@ public class DiyContent {
     
     private String key;
     private String value;
-    private DiyContent after;
+    private DiyContent nextOne;
 
-    public DiyContent getAfter() {
-        return after;
+    public DiyContent getNextOne() {
+        return nextOne;
     }
     private int hashValue;
     
     public DiyContent (String key, String value){
         this.key = key;
         this.value = value;
-        this.hashValue=hashValue(key);
+        this.hashValue=createHashValue(key);
     }
     
 
@@ -42,10 +42,14 @@ public class DiyContent {
         this.value = value;
     }
     
-    public int hashValue(String key){
+    public int createHashValue(String key){
     // onko riittävän uniikki tms...    
     int Hashvalue = key.hashCode();
         return Hashvalue;
+    }
+
+    public void setNextOne(DiyContent nextOne) {
+        this.nextOne = nextOne;
     }
     
     
