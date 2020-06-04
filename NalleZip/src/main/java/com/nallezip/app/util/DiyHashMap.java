@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 package com.nallezip.app.util;
+
 import com.nallezip.app.util.DiyContent;
+
 /**
  * Luokan tarkoitus on olla Do-it-yourself HashMap, joka korvaa sovelluksessa
  * käytetyn javan HashMapin
@@ -104,31 +106,34 @@ public class DiyHashMap<Key, Value> {
         DiyContent oldContent = new DiyContent(key, value);
         content.setNextOne(oldContent);
     }
+
     /**
      * metodia voi käyttää HashMapin containsKey-metodia vastaavalla tavalla
+     *
      * @param key
-     * @return 
+     * @return
      */
     public boolean containsKey(Key key) {
 
-        for (DiyContent content : table) {            
-            if (content.getKey().equals(key)) {//tällä rivillä virhe koodissa?
-               // System.out.println("avain löytyi");
-                return true;
+        for (DiyContent content : table) {
+            if (content != null) {
+                if (content.getKey().equals(key)) {//tällä rivillä virhe koodissa?
+                    // System.out.println("avain löytyi");
+                    return true;
+                }
             }
         }
 
         return false;
     }
-    
-   
+
     /**
      * Kertoo DiyHashMapin tablen koon.
-     * @return 
+     *
+     * @return
      */
-    public int size(){        
+    public int size() {
         return table.length;
     }
-    
 
 }

@@ -77,12 +77,10 @@ public class DiyHashMapTest {
         DiyHashMap<String, String> diy = new DiyHashMap();
         String key = "key";
         String value = "value";
-        diy.put(key, value);
-        
-       
-        //assertTrue(answer);
-        //answer = diy.containsKey(value);
-        //nswer);
-        
+        diy.put(key, value);       
+        boolean answer = diy.containsKey(key);        
+        assertTrue(answer);
+        answer = diy.containsKey(value);
+        assertFalse(answer);
     }
 }
