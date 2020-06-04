@@ -24,7 +24,7 @@ Huffman-algoritmin toiminta käyttää itsetehdyistä luokista tällä hetkellä
 
 
 Lempel Ziv Welch-algoritmin toiminnasta vastaa yksi luokka. Lisäksi Lempel Ziv Welchissä on otettu käyttöön DiyHashMap hoitamaan alussa generoitavien kirjastojen toimintaa. Manuaalisessa kokeilussa luokka näyttäisi toimivan, mutta JUnit testauksessa metodi ei toimi. Asiaa joutuu vielä tarkastelemaan tarkemmin.
-"[Lempel Ziv Welch](https://github.com/att78/NalleZip/blob/master/documentation/pictures/lempel.png)
+![Lempel Ziv Welch](https://github.com/att78/NalleZip/blob/master/documentation/pictures/lempel.png)
 
 
 DiyHashmapiin liittyviä luokkia on 2, DiyHashMap ja DiyContent. DiyContent:ille ei ole tehty testejä, sillä luokalla on ainoastaan konstuktori ja automaattisesti generoituja gettereitä ja settereitä, joiden testaaminen ei ole järkevää.
