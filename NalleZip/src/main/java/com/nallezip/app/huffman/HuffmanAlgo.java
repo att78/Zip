@@ -17,7 +17,7 @@ import java.util.Set;
  */
 public class HuffmanAlgo {
 
-    private HashMap<Character, String> huffmanTree = new HashMap();
+    public HashMap<Character, String> huffmanTree = new HashMap();
     private HuffmanNode root;
 
     /**
