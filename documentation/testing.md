@@ -14,10 +14,13 @@ Tarvittaessa koodiin on lisätty System.out.println-kutsuja, joilla on tarkastel
 Lähtökohtaisesti luokista on tarkoitus testata kaikki metodit poislukien getterit ja setterit. Konstruktorit testataan ainoastaan siinä
 tapauksessa, että niiden toiminnassa on jotakin poikkeuksellisen monimutkaista tai virhealtista. Osa toString-metodeista testataan, sillä niiden toiminta 
 saattaa olla joko toiminnan tai muun testauksen kannalta kriittistä. Tavoitteena on varmistaa, että metodit
-toimivat niille tarkoitetulla tavalla, käydä läpi metodien koodin laatu ja ettei piiloon jää virhetilanteita, joita ei ole tullut ajatelleeksi. JUnit-testit on tehty kullekin luokalle samalla viikolla kuin luokat on luotu. Testeissä on paranneltavaa ja niitä onkin tarkoitus kehittää kattavammiksi kun varmuus luokkien lopullisesta olemuksesta kasvaa.
+toimivat niille tarkoitetulla tavalla, käydä läpi metodien koodin laatu ja ettei piiloon jää virhetilanteita, joita ei ole tullut ajatelleeksi. JUnit-testit on tehty kullekin luokalle samalla viikolla kuin luokat on luotu. Testeissä on paranneltavaa ja niitä onkin tarkoitus kehittää kattavammiksi kun varmuus luokkien lopullisesta olemuksesta kasvaa. Tällä hetkellä testien rivikattavuus on korkea, mutta kaikkia haaroja ei metodeista testata. 
 
 Tällä hetkellä JUnit-testauksen rivikattavuus on korkea, mutta haaraumakattavuus on alempi.
 ![GeneralView](https://github.com/att78/NalleZip/blob/master/documentation/pictures/generalView.png)
+
+Huffman-algoritmin toiminta käyttää itsetehdyistä luokista tällä hetkellä HuffmanAlgo- ja HuffmanNode-luokkia. HuffmanNode-luokasta on testattu kaikkia metodeja, mutta HuffmanAlgossa on vielä hieman aukkoja.
+![Huffman](https://github.com/att78/NalleZip/blob/master/documentation/pictures/huffman.png)
 
 
 
