@@ -48,17 +48,19 @@ public class App {
 //        System.out.println(testQueue);
 //
 //
-        LempelZivWelchAlgo algo = new LempelZivWelchAlgo();
-        List<Integer> testing = algo.encodeString(string);
-        System.out.println(testing);
-        String answer = algo.decodeString();
-        System.out.println(answer);
-//        DiyHashMap<String,String> diy = new DiyHashMap();
-//        String nalle = "Nalle";
-//        
-//        diy.put(nalle, nalle);
-//        String answer = diy.get(nalle);
+//        LempelZivWelchAlgo algo = new LempelZivWelchAlgo();
+//        List<Integer> testing = algo.encodeString(string);
+//        System.out.println(testing);
+//        String answer = algo.decodeString();
 //        System.out.println(answer);
+        DiyHashMap<String,String> diy = new DiyHashMap();
+        String nalle = "Nalle";
+        
+        diy.put(nalle, nalle);
+        
+//        System.out.println(diy.containsKey(nalle));
+        String answer2 = diy.get(nalle);
+        System.out.println(answer2);
     }
 
 }

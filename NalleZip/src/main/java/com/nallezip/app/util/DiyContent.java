@@ -25,7 +25,7 @@ public class DiyContent<Key,Value> {
     public DiyContent getNextOne() {
         return nextOne;
     }
-    private int hashValue;
+
     
     public DiyContent (Key key, Value value){
         this.key = key;
