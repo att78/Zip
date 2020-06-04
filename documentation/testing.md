@@ -50,6 +50,7 @@ LZW algoritmin pieni pakkaus on ihan ymmärrettävää, koska kyseessä on mm. k
 
 
 Nopeus:
+
 Testeissa Huffman oli selkeästi nopeampi pakkaamaan kuin LZW. Yksi selittävä tekijä on LZW:n pakkauksessa käytetty javan oma List<> ja ArrayList<>, joista kumpikaan ei ole nopea rakenne.
 
 
