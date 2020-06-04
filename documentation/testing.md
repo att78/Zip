@@ -32,3 +32,16 @@ DiyHashmapiin liittyviä luokkia on 2, DiyHashMap ja DiyContent. DiyContent:ille
 ![DiyHashMap](https://github.com/att78/NalleZip/blob/master/documentation/pictures/diyHash.png)
 
 
+## Suorituskyvyn testaus
+
+Viikolla 4 on tehty alustavia testejä algoritmien suorituskykyyn liittyen. Testi koodi on oheisen linkin takana: 
+
+[Testikoodi](https://github.com/att78/NalleZip/blob/master/documentation/performance.md)
+
+Testituloksista on myös kuvakaappaus:
+
+
+
+
+
+
