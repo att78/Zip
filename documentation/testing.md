@@ -40,7 +40,17 @@ Viikolla 4 on tehty alustavia testejä algoritmien suorituskykyyn liittyen. Test
 
 Testituloksista on myös kuvakaappaus:
 
+![Tuloksia](https://github.com/att78/NalleZip/blob/master/documentation/pictures/suorituskykyrapsa.png)
 
+Pakkaus:
+
+Tuloksista voi vetää muutamia johtopäätöksiä, mutta niihin tulee suhtautua varauksella. Huffman-algoritmi on tällä hetkellä vielä hieman vajaa toiminnaltaan. Algoritmi kyllä tallentaa HuffmanTree:hen oikein, mutta visuaalisen hahmottamisen vuoksi algoritmissa on käytetty String-outputtia. todellisuudessahan tämä valinta kasvatttaa eikä pakkaa alkuperäistä syötettä. HuffmanTreestä näkee kuitenkin sen, miten algoritmi pakkaa tietoa. Kunpa sitä pakattua tietoa vielä käytettäisiin dekoodauksenkin puolella.HuffmanAlgoon tulee todennäköisesti ihan reippaita muutoksia, jotta kaikki pyörii byteinä.
+
+LZW algoritmin pieni pakkaus on ihan ymmärrettävää, koska kyseessä on mm. kuvatiedostojen pakkaamisessa käytettävä algoritmi. Algoritmin hyödyllisyys tulee esiin vasta huomattavasti suuremmissa kokoluokissa.
+
+
+Nopeus:
+Testeissa Huffman oli selkeästi nopeampi pakkaamaan kuin LZW. Yksi selittävä tekijä on LZW:n pakkauksessa käytetty javan oma List<> ja ArrayList<>, joista kumpikaan ei ole nopea rakenne.
 
 
 
