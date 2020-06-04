@@ -11,10 +11,10 @@ package com.nallezip.app.util;
  *
  * @author tallbera
  */
-public class DiyHashmap {
+public class DiyHashMap<Key, Value> {
 
     //vielä tyhjä eli motivointiluokka. Lukutuokio hashmappeihin käynnissä...
-    private static final int SIZE = 32;
+    private static final int SIZE = 512;
     private DiyContent table[] = new DiyContent[SIZE];
 
     /**
@@ -24,9 +24,9 @@ public class DiyHashmap {
      * @param key
      * @return
      */
-    private int getHashInt(String key) {
+    private int getHashInt(Key key) {
         // onko riittävän uniikki. Millä tämä kannattaisi laskea?
-        return key.hashCode();
+        return key.hashCode() % SIZE;
     }
 
     /**
@@ -35,7 +35,7 @@ public class DiyHashmap {
      * @param key
      * @return
      */
-    public DiyContent get(String key) {
+    public Value get(Key key) {
         int hashValue = getHashInt(key);
         DiyContent content = table[hashValue];
 
@@ -44,7 +44,8 @@ public class DiyHashmap {
         for (int i = 0; i < table.length; i++) {
             if (!content.equals(null)) {
                 if (content.getKey().equals(key)) {
-                    return content;
+                    Value answer = (Value) content.getValue();
+                    return answer;
                 }
                 content = content.getNextOne();
             }
@@ -53,19 +54,19 @@ public class DiyHashmap {
     }
 
     /**
-     * Javan Hashmapin put-metodia vastaava put-metodi.
-     * Käyttää apumetodeja createNewContent ja loopAfter
+     * Javan Hashmapin put-metodia vastaava put-metodi. Käyttää apumetodeja
+     * createNewContent ja loopAfter
+     *
      * @param key
-     * @param value 
+     * @param value
      */
-    public void put(String key, String value) {
+    public void put(Key key, Value value) {
         int hashValue = getHashInt(key);
         DiyContent content = table[hashValue];
 
         if (content == null) {
             createNewContent(key, value, hashValue);
-        } 
-        else {
+        } else {
             if (content.getKey().equals(key)) {
                 content.setValue(value);
             } else {
@@ -74,29 +75,52 @@ public class DiyHashmap {
             }
         }
     }
-    
-    /**Luo uuden DiyContent-olion ja asettaa sen tableen hashvaluen osoittamaan paikkaan
-     * 
+
+    /**
+     * Luo uuden DiyContent-olion ja asettaa sen tableen hashvaluen osoittamaan
+     * paikkaan
+     *
      * @param key
      * @param value
-     * @param hashValue 
+     * @param hashValue
      */
-    private void createNewContent(String key, String value, int hashValue) {
+    private void createNewContent(Key key, Value value, int hashValue) {
         DiyContent content = new DiyContent(key, value);
         table[hashValue] = content;
     }
 
     /**
-     * Metodi käy läpi DiyContent-olion "after"-listauksen. Metodi toimii put-metodin apumetodina.
+     * Metodi käy läpi DiyContent-olion "after"-listauksen. Metodi toimii
+     * put-metodin apumetodina.
+     *
      * @param content
      * @param key
-     * @param value 
+     * @param value
      */
-    private void loopNextOne(DiyContent content, String key, String value) {
+    private void loopNextOne(DiyContent content, Key key, Value value) {
         while (content.getNextOne() != null) {
             content = content.getNextOne();
         }
         DiyContent oldContent = new DiyContent(key, value);
         content.setNextOne(oldContent);
     }
+
+    public boolean containsKey(Key key) {
+
+        for (DiyContent content : table) {
+            if (content.getKey().equals(key)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+    
+    // size-metodi uupuu
+    
+    public int size(){        
+        return table.length;
+    }
+    
+
 }

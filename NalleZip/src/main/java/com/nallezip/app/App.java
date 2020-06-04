@@ -8,6 +8,8 @@ package com.nallezip.app;
 import com.nallezip.app.huffman.HuffmanAlgo;
 import com.nallezip.app.huffman.HuffmanNode;
 import com.nallezip.app.lempelziv.LempelZivWelchAlgo;
+import com.nallezip.app.util.DiyHashMap;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.PriorityQueue;
@@ -44,14 +46,19 @@ public class App {
 //        position.put('a', 1);
 //        PriorityQueue<HuffmanNode> testQueue = huff.createNodes(position);
 //        System.out.println(testQueue);
-
-
+//
+//
         LempelZivWelchAlgo algo = new LempelZivWelchAlgo();
         List<Integer> testing = algo.encodeString(string);
         System.out.println(testing);
         String answer = algo.decodeString();
         System.out.println(answer);
-
+//        DiyHashMap<String,String> diy = new DiyHashMap();
+//        String nalle = "Nalle";
+//        
+//        diy.put(nalle, nalle);
+//        String answer = diy.get(nalle);
+//        System.out.println(answer);
     }
 
 }

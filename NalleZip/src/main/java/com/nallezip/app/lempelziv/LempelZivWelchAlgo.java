@@ -5,6 +5,8 @@
  */
 package com.nallezip.app.lempelziv;
 
+import com.nallezip.app.util.DiyHashMap;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,8 +20,8 @@ import java.util.List;
 public class LempelZivWelchAlgo {
 
     private List<Integer> encoded = new ArrayList();
-    private HashMap<String, Integer> library = new HashMap();
-    private HashMap<Integer, String> libraryDecoded = new HashMap();
+    private DiyHashMap<String, Integer> library = new DiyHashMap();
+    private DiyHashMap<Integer, String> libraryDecoded = new DiyHashMap();
     private final int SIZE = 512;
 
     public LempelZivWelchAlgo() {
@@ -50,7 +52,7 @@ public class LempelZivWelchAlgo {
             library.put("" + (char) i, i);
             libraryDecoded.put(i, "" + (char) i);
         }
-        System.out.println(library.size());
+        //System.out.println(library.size());
     }
 
     /**
@@ -108,16 +110,17 @@ public class LempelZivWelchAlgo {
             }
 
             builder.append(s);
-            libraryDecoded.put(size++, answer + s.charAt(0));
+            String string = answer+s.charAt(0);
+            libraryDecoded.put(size++, string);
             answer = s;
         }
     }
 
-    public HashMap<String, Integer> getLibrary() {
+    public DiyHashMap<String, Integer> getLibrary() {
         return library;
     }
 
-    public HashMap<Integer, String> getLibraryDecoded() {
+    public DiyHashMap<Integer, String> getLibraryDecoded() {
         return libraryDecoded;
     }
 

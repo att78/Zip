@@ -10,44 +10,48 @@ package com.nallezip.app.util;
  *
  * @author tallbera
  */
-public class DiyContent {
+public class DiyContent<Key,Value> {
     
     
-    private String key;
-    private String value;
+    private Key key;
+    private Value value;        
     private DiyContent nextOne;
+// vielä hieman pohdintaa, millaisia rakenteita tämän kanssa tekisi..    
+    private int numberKey;
+    
+    
+    
 
     public DiyContent getNextOne() {
         return nextOne;
     }
     private int hashValue;
     
-    public DiyContent (String key, String value){
+    public DiyContent (Key key, Value value){
         this.key = key;
-        this.value = value;
-        this.hashValue=createHashValue(key);
+        this.setValue(value);
     }
     
+//    public DiyContent(Integer key, String value){
+//        this.numberKey = key;
+//        this.value = value;
+//    }
+    
+        
 
-    public String getKey() {
+    public Key getKey() {
         return key;
     }
 
 
-    public String getValue() {
+    public Value getValue() {
         return value;
     }
 
-    public void setValue(String value) {
+    public void setValue(Value value) {
         this.value = value;
     }
     
-    public int createHashValue(String key){
-    // onko riittävän uniikki tms...    
-    int Hashvalue = key.hashCode();
-        return Hashvalue;
-    }
-
     public void setNextOne(DiyContent nextOne) {
         this.nextOne = nextOne;
     }
