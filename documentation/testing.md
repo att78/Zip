@@ -16,6 +16,10 @@ tapauksessa, että niiden toiminnassa on jotakin poikkeuksellisen monimutkaista 
 saattaa olla joko toiminnan tai muun testauksen kannalta kriittistä. Tavoitteena on varmistaa, että metodit
 toimivat niille tarkoitetulla tavalla, käydä läpi metodien koodin laatu ja ettei piiloon jää virhetilanteita, joita ei ole tullut ajatelleeksi. JUnit-testit on tehty kullekin luokalle samalla viikolla kuin luokat on luotu. Testeissä on paranneltavaa ja niitä onkin tarkoitus kehittää kattavammiksi kun varmuus luokkien lopullisesta olemuksesta kasvaa.
 
+Tällä hetkellä JUnit-testauksen rivikattavuus on korkea, mutta haaraumakattavuus on alempi.
+![GeneralView](https://github.com/att78/NalleZip/blob/master/documentation/pictures/generalView.png)
+
+
 
 
 
