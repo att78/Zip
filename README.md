@@ -4,6 +4,14 @@ Projektin alustava määrittelydokumentti on täällä:
 
 [Määrittely](https://github.com/att78/Zip/blob/master/documentation/definition.md)
 
+Toteutuksesta löytyy aloitettu dokumentti täältä:
+
+[Toteutus](https://github.com/att78/NalleZip/blob/master/documentation/implementation.md)
+
+Testausraportti, joka kuvaa tällä hetkellä neljännen viikon tilannetta, löytyy täältä:
+
+[Testaus](https://github.com/att78/NalleZip/blob/master/documentation/testing.md)
+
 
 Ensimmäisen viikon viikkoraportti:
 
