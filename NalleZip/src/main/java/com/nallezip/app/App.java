@@ -8,6 +8,7 @@ package com.nallezip.app;
 import com.nallezip.app.huffman.HuffmanAlgo;
 import com.nallezip.app.huffman.HuffmanNode;
 import com.nallezip.app.lempelziv.LempelZivWelchAlgo;
+import com.nallezip.app.util.DiyArrayList;
 import com.nallezip.app.util.DiyHashMap;
 import java.util.ArrayList;
 
@@ -23,8 +24,9 @@ public class App {
 
     public static void main(String[] args) {
 
-//        String string = "Nalle";
-        // System.out.println("Original: " + string);
+        String string = "Nalle on soma ja haluaa kovasti hunajaa. Nalle kiipeää puuhun. Siellä on mehiläisillä pesä. Nalle kurkottaa kohti hunajaa. Nalle kurkotti liian pitkälle ja tömähtää maahan."
+                + "Nallea tömähti onneksi pehmeään heinäkasaan.";
+        System.out.println("Original: " + string);
 //        HuffmanAlgo huff = new HuffmanAlgo();
 //        String encoded = huff.encodeString(string);
 //        System.out.println("Encoded: " + encoded);
@@ -49,11 +51,13 @@ public class App {
 //        System.out.println(testQueue);
 //
 //
-//        LempelZivWelchAlgo algo = new LempelZivWelchAlgo();
-//        List<Integer> testing = algo.encodeString(string);
-//        System.out.println(testing);
-//        String answer = algo.decodeString();
-//        System.out.println(answer);
+        LempelZivWelchAlgo algo = new LempelZivWelchAlgo();
+        DiyArrayList testing = algo.encodeString(string);
+        System.out.println("Alkuperäinen koko on "+string.length());
+        System.out.println("Pakattu koko on: " +testing.size());
+        String answer = algo.decodeString();
+        System.out.println(answer);
+        
 //        DiyHashMap<String,String> diy = new DiyHashMap();
 //        String nalle = "Nalle";
 //        
@@ -61,7 +65,7 @@ public class App {
 //        
 //        System.out.println(diy.containsKey(nalle));
 //        String answer2 = diy.get(nalle);
-//        System.out.println(answer2);
+//        System.out.println(answer);
         System.out.println("Suorituskyvyn testausta: ");
         System.out.println("Ensin Huffman-algoritmi:");
         String test = "suorituskyvyn testaus";
@@ -88,7 +92,7 @@ public class App {
         System.out.println("");
         System.out.println("Sitten LZW:n testaus samalla stringillä");
         long lempelStart = System.currentTimeMillis();
-        List<Integer> lempelEncoding = lempel.encodeString(test);
+        DiyArrayList lempelEncoding = lempel.encodeString(test);
         long lempelEncoded = System.currentTimeMillis();
         String lempelDecoded = lempel.decodeString();
         long lempelEnd = System.currentTimeMillis();

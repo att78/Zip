@@ -28,6 +28,7 @@ public class DiyHashMap<Key, Value> {
      */
     private int getHashInt(Key key) {
         // onko riittävän uniikki. Millä tämä kannattaisi laskea?
+        //System.out.println("Haskcode for key " + key.toString() + " is " + (key.hashCode() % SIZE));
         return key.hashCode() % SIZE;
     }
 
@@ -40,18 +41,20 @@ public class DiyHashMap<Key, Value> {
     public Value get(Key key) {
         int hashValue = getHashInt(key);
         DiyContent content = table[hashValue];
-
+        
         //table pitäis käydä jotenkin järkevästi läpi. For-loop, while loop? jotain...loop
         // kylläpä tänään tökkii. Takas javan peruskurssille.       
         for (int i = 0; i < table.length; i++) {
-            if (!content.equals(null)) {
+            if (content != null) {
                 if (content.getKey().equals(key)) {
                     Value answer = (Value) content.getValue();
+                    //System.out.println("Key:" + key.toString()+ " answer "+answer.toString());
                     return answer;
                 }
                 content = content.getNextOne();
             }
         }
+        
         return null;
     }
 
@@ -114,16 +117,20 @@ public class DiyHashMap<Key, Value> {
      * @return
      */
     public boolean containsKey(Key key) {
-
-        for (DiyContent content : table) {
+        int hashValue = getHashInt(key);
+        DiyContent content = table[hashValue];
+        
+        //table pitäis käydä jotenkin järkevästi läpi. For-loop, while loop? jotain...loop
+        // kylläpä tänään tökkii. Takas javan peruskurssille.       
+        for (int i = 0; i < table.length; i++) {
             if (content != null) {
                 if (content.getKey().equals(key)) {
-                    // System.out.println("avain löytyi");
                     return true;
                 }
+                content = content.getNextOne();
             }
         }
-
+        
         return false;
     }
 

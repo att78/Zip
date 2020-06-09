@@ -5,11 +5,11 @@
  */
 package com.nallezip.app.lempelziv;
 
+import com.nallezip.app.util.DiyArrayContent;
+import com.nallezip.app.util.DiyArrayList;
 import com.nallezip.app.util.DiyHashMap;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+
 
 /**
  * Luokka toteuttaa Lempel-Ziv-Welch-algoritmin, joka on yksi niistä Lempel
@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class LempelZivWelchAlgo {
 
-    private List<Integer> encoded = new ArrayList();
+    private DiyArrayList encoded = new DiyArrayList();
     private DiyHashMap<String, Integer> library = new DiyHashMap();
     private DiyHashMap<Integer, String> libraryDecoded = new DiyHashMap();
     private final int SIZE = 512;
@@ -34,7 +34,7 @@ public class LempelZivWelchAlgo {
      * @param string
      * @return
      */
-    public List<Integer> encodeString(String string) {
+    public DiyArrayList encodeString(String string) {
 
         createLibraries();
         fillLibrary(string);
@@ -70,24 +70,31 @@ public class LempelZivWelchAlgo {
 //       for(char ch : string.toCharArray()){
 //           String ach = a+ch;
             if (library.containsKey(ab)) {
+                //System.out.println("Library contained key " + ab);
                 a = ab;
             } else {
+
                 encoded.add(library.get(a));
                 library.put(ab, size++);
                 a = "" + b;
             }
         }
         encoded.add(library.get(a));
+
     }
-    
-    
+
     /**
-     * Metodi dekoodaa encodeString-metodin tekemän listan ja palauttaa alkuperäisen Stringin. Käyttää apumetodina decodeLoop-metodia.
-     * @return 
+     * Metodi dekoodaa encodeString-metodin tekemän listan ja palauttaa
+     * alkuperäisen Stringin. Käyttää apumetodina decodeLoop-metodia.
+     *
+     * @return
      */
     public String decodeString() {
 
-        int first = encoded.remove(0);
+        Integer firstOne = encoded.getFirst();
+       // encoded.remove(firstOne);
+        int first = (int) firstOne;
+
         String answer = "" + (char) first;
         StringBuilder builder = new StringBuilder(answer);
         decodeLoop(builder, answer);
@@ -95,22 +102,27 @@ public class LempelZivWelchAlgo {
     }
 
     /**
-     * Metodi toimii apumetodina decodeString-metodille ja nimensä mukaisesti hoitaa enkoodatun listan läpikäynnin.
+     * Metodi toimii apumetodina decodeString-metodille ja nimensä mukaisesti
+     * hoitaa enkoodatun listan läpikäynnin.
+     *
      * @param builder
-     * @param answer 
+     * @param answer
      */
     public void decodeLoop(StringBuilder builder, String answer) {
         int size = SIZE;
-        for (int number : encoded) {
+        System.out.println("Encoded: "+ encoded);
+       // for (int number : encoded) {
+        for(int i=1; i<encoded.size();i++){
+            Integer number = encoded.get(i);
             String s = "";
             if (libraryDecoded.containsKey(number)) {
                 s = libraryDecoded.get(number);
             } else if (number == size) {
                 s = answer + answer.charAt(0);
             }
-
+            //System.out.println("Number: "+ number+ " S: "+s);
             builder.append(s);
-            String string = answer+s.charAt(0);
+            String string = answer + s.charAt(0);
             libraryDecoded.put(size++, string);
             answer = s;
         }
@@ -124,7 +136,7 @@ public class LempelZivWelchAlgo {
         return libraryDecoded;
     }
 
-    public List<Integer> getEncoded() {
+    public DiyArrayList getEncoded() {
         return encoded;
     }
 
