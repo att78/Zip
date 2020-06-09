@@ -17,7 +17,7 @@ import java.util.Set;
  */
 public class HuffmanAlgo {
 
-    public HashMap<Character, String> huffmanTree = new HashMap();
+    public HashMap<Character, String> huffmanTree = new HashMap();//käännetty publiciksi suorituskykytestauksen suorittamiseksi. Ei muita syitä
     private HuffmanNode root;
 
     /**
@@ -133,7 +133,7 @@ public class HuffmanAlgo {
             position.put(string.charAt(i), position.get(string.charAt(i)) + 1);
 
         }
-        System.out.println(position.toString() + " size: " + position.size());
+       // System.out.println(position.toString() + " size: " + position.size());
         return position;
     }
 

@@ -9,7 +9,7 @@ import com.nallezip.app.util.DiyContent;
 
 /**
  * Luokan tarkoitus on olla Do-it-yourself HashMap, joka korvaa sovelluksessa
- * käytetyn javan HashMapin
+ * käytetyn javan HashMapin. Put, get, containsKey ja size-metodit ovat metodeja, joita käytetään javan HashMap-luokan metodien tavoin.
  *
  * @author tallbera
  */
@@ -32,7 +32,7 @@ public class DiyHashMap<Key, Value> {
     }
 
     /**
-     * Palauttaa annetun avaimen takana olevan sisällön DiyContentin.
+     * Palauttaa annetun avaimen takana olevan Valuen.
      *
      * @param key
      * @return
@@ -57,7 +57,7 @@ public class DiyHashMap<Key, Value> {
 
     /**
      * Javan Hashmapin put-metodia vastaava put-metodi. Käyttää apumetodeja
-     * createNewContent ja loopAfter
+     * createNewContent ja loopAfter 
      *
      * @param key
      * @param value
@@ -117,7 +117,7 @@ public class DiyHashMap<Key, Value> {
 
         for (DiyContent content : table) {
             if (content != null) {
-                if (content.getKey().equals(key)) {//tällä rivillä virhe koodissa?
+                if (content.getKey().equals(key)) {
                     // System.out.println("avain löytyi");
                     return true;
                 }
@@ -128,7 +128,7 @@ public class DiyHashMap<Key, Value> {
     }
 
     /**
-     * Kertoo DiyHashMapin tablen koon.
+     * Kertoo DiyHashMapin tablen koon. Kannattaa huomata, että DiyHashMapin koko määräytyy ennalta tablen kokona.
      *
      * @return
      */
