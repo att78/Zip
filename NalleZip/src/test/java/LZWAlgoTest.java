@@ -5,7 +5,7 @@
  */
 
 import com.nallezip.app.lempelziv.LempelZivWelchAlgo;
-import java.util.HashMap;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
