@@ -27,6 +27,21 @@ public class DiyArrayList {
      */
     private Integer[] diyArray = new Integer[512];
 
+    /**
+     * tyhjä konstruktori
+     */
+    public DiyArrayList() {
+    }
+
+    /**
+     * Testausta varten toinen konstruktori.
+     *
+     * @param testing
+     */
+    public DiyArrayList(int testing) {
+        this.amount = testing;
+    }
+
     private boolean tableIsFull() {
         boolean full = false;
         if (this.diyArray.length == this.amount) {
@@ -53,6 +68,10 @@ public class DiyArrayList {
         this.diyArray = cache;
     }
 
+    public Integer[] getDiyArray() {
+        return diyArray;
+    }
+
     public void add(Integer number) {
 
         if (tableIsFull()) {
@@ -69,18 +88,17 @@ public class DiyArrayList {
         return amount;
     }
 
-    // remove-toimii väärin. Onneksi sitä ei tarvitse käyttää.
-    public void remove(Integer number) {
-
-        for (int i = 0; i < this.amount; i++) {
-            if (number.equals(this.diyArray[i])) {
-                this.diyArray[i] = null;
-                this.amount--;
-                return;
-            }
-        }
-    }
-
+//    // remove-toimii väärin. Onneksi sitä ei tarvitse käyttää.
+//    public void remove(Integer number) {
+//
+//        for (int i = 0; i < this.amount; i++) {
+//            if (number.equals(this.diyArray[i])) {
+//                this.diyArray[i] = null;
+//                this.amount--;
+//                return;
+//            }
+//        }
+//    }
     public Integer getFirst() {
         Integer diy = null;
         diy = this.diyArray[0];
@@ -91,19 +109,19 @@ public class DiyArrayList {
         Integer diy = null;
         diy = this.diyArray[n];
         int answer;
-        if(diy!=null){
+        if (diy != null) {
             answer = (int) diy;
             return answer;
-        }
+        } else 
 
-        return -1;
+            return -1;
+        
     }
 
     // toString lause puuttuu
-
     @Override
     public String toString() {
         return "DiyArrayList{" + "amount=" + amount + ", diyArray=" + Arrays.toString(diyArray) + '}';
     }
-    
+
 }
