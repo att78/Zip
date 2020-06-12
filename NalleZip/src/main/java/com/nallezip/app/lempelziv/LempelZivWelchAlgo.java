@@ -110,7 +110,7 @@ public class LempelZivWelchAlgo {
      */
     public void decodeLoop(StringBuilder builder, String answer) {
         int size = SIZE;
-        System.out.println("Encoded: "+ encoded);
+        //System.out.println("Encoded: "+ encoded);
        // for (int number : encoded) {
         for(int i=1; i<encoded.size();i++){
             Integer number = encoded.get(i);
