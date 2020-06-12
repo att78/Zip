@@ -42,6 +42,11 @@ public class DiyArrayList {
         this.amount = testing;
     }
 
+    /**
+     * apumetodi, jota käytetään tarkistamaan tarvitseeko taulukon kokoa kasvattaa add-metodissa.
+     * 
+     * @return 
+     */
     private boolean tableIsFull() {
         boolean full = false;
         if (this.diyArray.length == this.amount) {
@@ -50,6 +55,10 @@ public class DiyArrayList {
         return full;
     }
 
+    /**
+     * apumetodi, joka hoitaa taulukon kasvatuksen, jos add-metodi huomaa taulukon olevan täynnä eikä siten pysty lisäämään uutta lukua.
+     * @param doubleSize 
+     */    
     private void doubleTable(int doubleSize) {
 
         Integer[] cache = new Integer[doubleSize];
@@ -72,6 +81,10 @@ public class DiyArrayList {
         return diyArray;
     }
 
+    /**
+     * metodi, jolla lisätä parametrina annetun luvun.
+     * @param number 
+     */
     public void add(Integer number) {
 
         if (tableIsFull()) {
@@ -84,6 +97,10 @@ public class DiyArrayList {
 
     }
 
+    /**
+     * metodi, joka kertoo diyArrayListin pituuden.
+     * @return 
+     */    
     public int size() {
         return amount;
     }
@@ -99,12 +116,22 @@ public class DiyArrayList {
 //            }
 //        }
 //    }
+    
+    /**
+     * palauttaa aina listan ensimmäisen alkion.
+     * @return 
+     */
     public Integer getFirst() {
         Integer diy = null;
         diy = this.diyArray[0];
         return diy;
     }
-
+    
+    /**
+     * palauttaa aina parametrina annetun sijainnin mukaisen alkion.
+     * @param n
+     * @return 
+     */
     public int get(int n) {
         Integer diy = null;
         diy = this.diyArray[n];
@@ -118,7 +145,10 @@ public class DiyArrayList {
         
     }
 
-    // toString lause puuttuu
+    /**
+     * toString-lause on muokattu käyttötarkoitukseen sopivaksi
+     * @return 
+     */
     @Override
     public String toString() {
         return "DiyArrayList{" + "amount=" + amount + ", diyArray=" + Arrays.toString(diyArray) + '}';

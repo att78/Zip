@@ -18,9 +18,9 @@ public class DiyHeap {
     private HuffmanNode[] diyHeap = new HuffmanNode[512]; // pitäiskö olla 513 eli indeksille yksi paikka?
     private int maxSize = 512;
 
-    private void diyHeapify(int index) {
-
-    }
+//    private void diyHeapify(int index) {
+//
+//    }
 
     private int mom(int number) {
 
