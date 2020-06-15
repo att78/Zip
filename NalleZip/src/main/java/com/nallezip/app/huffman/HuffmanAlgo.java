@@ -27,7 +27,7 @@ public class HuffmanAlgo {
      * @return
      */
     public HuffmanNode findRootNode(HashMap<Character, Integer> position) {
-        Set<Character> keys = position.keySet();
+        //Set<Character> keys = position.keySet();
         PriorityQueue<HuffmanNode> nodeQueue = new PriorityQueue();
 
         if (position.size() > 0) {
@@ -133,7 +133,7 @@ public class HuffmanAlgo {
             position.put(string.charAt(i), position.get(string.charAt(i)) + 1);
 
         }
-       // System.out.println(position.toString() + " size: " + position.size());
+        // System.out.println(position.toString() + " size: " + position.size());
         return position;
     }
 
@@ -144,7 +144,7 @@ public class HuffmanAlgo {
      * @param string
      * @return
      */
-    public String encodeString(String string) {
+    public byte[] encodeString(String string) {
         HashMap<Character, Integer> position = createPosition(string);
         //System.out.println("Tämä on position:" +position);
         root = findRootNode(position);
@@ -160,8 +160,88 @@ public class HuffmanAlgo {
             builder.append(huffmanTree.get(ch));
 
         }
-        return builder.toString();
+        //lasketaan binääristä integeriksi bitti kerrallaan
+        String total = builder.toString();
 
+        byte[] resultBytes = binaryStringToBytes(total);
+
+        return resultBytes;
+
+    }
+
+    public byte[] binaryStringToBytes(String total) {
+
+        int lastByteLength = total.length() % 8;
+
+        int size = (total.length() / 8);
+        if (total.length() % 8 > 0) {
+            size++;
+        }
+
+        byte[] resultBytes = new byte[size + 1];
+        int byteIndex = 1;
+        int value = 0;
+        resultBytes[0] = (byte) lastByteLength;
+        for (int i = 0; i < total.length(); i++) {
+            if (i % 8 == 0 && i > 0) {
+                resultBytes[byteIndex] = (byte) value;
+                value = 0;
+                byteIndex++;
+            }
+            value *= 2;
+            char ch = total.charAt(i);
+            if (ch == '1') {
+                value++;
+            }
+        }
+        if (byteIndex == size - 1) {
+            resultBytes[byteIndex] = (byte) value;
+        }
+        return resultBytes;
+    }
+
+    //boolean taulukko
+    public Boolean[] byteToBoolean(byte[] resultBytes) {
+        Boolean[] zerosAndOnes = new Boolean[resultBytes.length * 8];
+        int max = 128;
+        int j = 0;
+        int lastByteLength = (int) resultBytes[0] & 0xFF;
+
+        for (int i = 1; i < resultBytes.length - 1; i++) {
+
+            byte a = resultBytes[i];
+            int number = (int) a & 0xFF;
+            j = zerosAndOnesRecursion(zerosAndOnes, number, j, max);
+        }
+
+        int rounds = 8 - lastByteLength;
+
+        if (rounds < 8) {
+            for (int i = 0; i < rounds; i++) {
+                max = max / 2;
+            }
+        }
+        int number = (int) resultBytes[resultBytes.length - 1] & 0xFF;
+        zerosAndOnesRecursion(zerosAndOnes, number, j, max);
+
+        return zerosAndOnes;
+    }
+
+    public int zerosAndOnesRecursion(Boolean[] zerosAndOnes, int number, int j, int max) {
+
+        if (number > max) {
+            zerosAndOnes[j] = true;
+            number = number - max;
+        } else {
+            zerosAndOnes[j] = false;
+
+        }
+        j++;
+        max = max / 2;
+        if (max > 0) {
+            j = zerosAndOnesRecursion(zerosAndOnes, number, j, max);
+        }
+        return j;
     }
 
     /**

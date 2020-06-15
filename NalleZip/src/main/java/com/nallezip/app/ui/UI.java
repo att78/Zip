@@ -5,6 +5,8 @@
  */
 package com.nallezip.app.ui;
 
+import com.nallezip.app.lempelziv.LempelZivWelchAlgo;
+import com.nallezip.app.util.DiyArrayList;
 import java.util.Scanner;
 
 /**
@@ -34,8 +36,12 @@ public class UI {
                 String packedOne = scanner.nextLine();                
                 
                 if(packedOne.equals("Lempel")){
-                
-                
+                    System.out.println("Please write String you want to pack: ");
+                    String packThis = scanner.nextLine();
+                    LempelZivWelchAlgo algo = new LempelZivWelchAlgo();
+                    DiyArrayList packed =algo.encodeString(packThis);                    
+                    //mitäs sitten? Kerrotaanko paljonko pakkasi?
+                    
                 }
                 
 

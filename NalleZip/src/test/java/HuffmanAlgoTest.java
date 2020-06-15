@@ -96,27 +96,62 @@ public class HuffmanAlgoTest {
         
     }
     
-    @Test 
-    public void testEncodeString(){
-    String nalle = "Nalle";
-    HuffmanAlgo huff = new HuffmanAlgo();
-    String encoded = huff.encodeString(nalle);
-    
-    assertEquals(encoded,"1111100010");
-    
-    }
+//    @Test 
+//    public void testEncodeString(){
+//    String nalle = "Nalle";
+//    HuffmanAlgo huff = new HuffmanAlgo();
+//    String encoded = huff.encodeString(nalle);
+//    
+//    assertEquals(encoded,"1111100010");
+//    
+//    }
+//    
+//    @Test
+//    public void testDecodeString(){
+//        
+//    HuffmanAlgo huff = new HuffmanAlgo();
+//    
+//    String encoded= huff.encodeString("Nalle");
+//    String decoded= huff.decodeString(encoded);
+//    
+//    assertEquals(decoded,"Nalle");
+//    
+//    }
     
     @Test
-    public void testDecodeString(){
+    public void testBinaryStringToBytes(){
+        String test = "100";
+        HuffmanAlgo algo = new HuffmanAlgo();
+        byte[] resultBytes=algo.binaryStringToBytes(test);
         
-    HuffmanAlgo huff = new HuffmanAlgo();
-    
-    String encoded= huff.encodeString("Nalle");
-    String decoded= huff.decodeString(encoded);
-    
-    assertEquals(decoded,"Nalle");
-    
+        assertEquals(resultBytes.length,1);
+        int answer = (int)resultBytes[0] & 0xFF;
+        assertEquals(answer,4);
+
+        test = "00100";
+        resultBytes=algo.binaryStringToBytes(test);
+        
+        assertEquals(resultBytes.length,1);
+        answer = (int)resultBytes[0] & 0xFF;
+        assertEquals(answer,4);
+        
+
+        String test2= "10001000100010";
+        byte[] resultBytes2 = algo.binaryStringToBytes(test2);
+//        for(int i=0;i<resultBytes2.length;i++){
+//            int number =(int)resultBytes2[i];
+//            System.out.println(number);        
+//        }
+        
+        assertEquals(2,resultBytes2.length);
+        answer = (int)resultBytes2[0] & 0xFF;
+        assertEquals(answer,136);
+        answer = (int)resultBytes2[1] & 0xFF;
+        assertEquals(answer,34);
+               
     }
+    
+    
     
 
 }
