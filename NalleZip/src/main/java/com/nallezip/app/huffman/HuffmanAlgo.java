@@ -200,7 +200,11 @@ public class HuffmanAlgo {
         return resultBytes;
     }
 
-    //boolean taulukko
+    /**
+     * Metodin tarkoitus on muuttaa enkoodattu byte-taulukko booleantaulukoksi, jota käytetään dekoodauksessa.
+     * @param resultBytes
+     * @return 
+     */
     public Boolean[] byteToBoolean(byte[] resultBytes) {
         Boolean[] zerosAndOnes = new Boolean[resultBytes.length * 8];
         int max = 128;
@@ -226,7 +230,15 @@ public class HuffmanAlgo {
 
         return zerosAndOnes;
     }
-
+    
+    /**
+     * Apumetodi bytesToBoolean-metodille, tämä metodi hoitaa rekursio-osan booleantaulukon muodostamisesta.
+     * @param zerosAndOnes
+     * @param number
+     * @param j
+     * @param max
+     * @return 
+     */
     public int zerosAndOnesRecursion(Boolean[] zerosAndOnes, int number, int j, int max) {
 
         if (number > max) {
