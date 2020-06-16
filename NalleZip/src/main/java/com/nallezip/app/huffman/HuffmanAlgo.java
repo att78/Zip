@@ -5,6 +5,7 @@
  */
 package com.nallezip.app.huffman;
 
+import com.nallezip.app.util.DiySet;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
@@ -201,9 +202,11 @@ public class HuffmanAlgo {
     }
 
     /**
-     * Metodin tarkoitus on muuttaa enkoodattu byte-taulukko booleantaulukoksi, jota käytetään dekoodauksessa.
+     * Metodin tarkoitus on muuttaa enkoodattu byte-taulukko booleantaulukoksi,
+     * jota käytetään dekoodauksessa.testaamatta
+     *
      * @param resultBytes
-     * @return 
+     * @return
      */
     public Boolean[] byteToBoolean(byte[] resultBytes) {
         Boolean[] zerosAndOnes = new Boolean[resultBytes.length * 8];
@@ -230,18 +233,20 @@ public class HuffmanAlgo {
 
         return zerosAndOnes;
     }
-    
+
     /**
-     * Apumetodi bytesToBoolean-metodille, tämä metodi hoitaa rekursio-osan booleantaulukon muodostamisesta.
+     * Apumetodi bytesToBoolean-metodille, tämä metodi hoitaa rekursio-osan
+     * booleantaulukon muodostamisesta.
+     *
      * @param zerosAndOnes
      * @param number
      * @param j
      * @param max
-     * @return 
+     * @return
      */
     public int zerosAndOnesRecursion(Boolean[] zerosAndOnes, int number, int j, int max) {
 
-        if (number > max) {
+        if (number >= max) {
             zerosAndOnes[j] = true;
             number = number - max;
         } else {
@@ -263,12 +268,22 @@ public class HuffmanAlgo {
      * @param string Syöte on ykkösiä ja nollia sisältävä String.
      * @return
      */
-    public String decodeString(String string) {
+    public String decodeString(byte[] packed) {
         StringBuilder builder = new StringBuilder();
         HuffmanNode node = root;
-        for (int i = 0; i < string.length(); i++) {
+        Boolean[] decompressed = byteToBoolean(packed);
 
-            int j = Integer.parseInt(String.valueOf(string.charAt(i)));
+        for (int i = 0; i < decompressed.length; i++) {
+            int j = 0;
+            if(decompressed[i]==null){
+                break;
+            }
+            
+            else if (decompressed[i]) {
+                j = 1;
+            }
+            
+            
             if (j == 0) {
                 node = node.getLeft();
 

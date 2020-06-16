@@ -143,4 +143,16 @@ public class DiyHashMap<Key, Value> {
         return table.length;
     }
 
+    public DiySet keySet(){
+        
+        DiySet diySet = new DiySet();
+        
+        for(int i=0; i<table.length;i++){
+            diySet.getTable()[i]=table[i].getKey();
+            
+        }
+        return diySet;
+    }
+    
+    
 }

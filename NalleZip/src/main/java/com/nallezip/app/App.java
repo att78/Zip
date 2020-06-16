@@ -30,8 +30,8 @@ public class App {
         byte[] encoded = huff.encodeString(string);
         System.out.println("Encoded length: " + encoded.length);
         System.out.println("Original length: "+ string.length());
-//        String decoded = huff.decodeString(encoded);
-//        System.out.println("Decoded: " + decoded);
+        String decoded = huff.decodeString(encoded);
+        System.out.println("Decoded: " + decoded);
 //        String test = "1111100010";
 //        String decoded2=huff.decodeString(test);
 //        System.out.println("decoded2: "+decoded2);
