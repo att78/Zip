@@ -5,11 +5,10 @@
  */
 package com.nallezip.app.huffman;
 
+import com.nallezip.app.util.DiyHashMap;
 import com.nallezip.app.util.DiySet;
-import java.util.HashMap;
-import java.util.Map;
+
 import java.util.PriorityQueue;
-import java.util.Set;
 
 /**
  * Huffman algoritmin toteuttava luokka
@@ -18,7 +17,7 @@ import java.util.Set;
  */
 public class HuffmanAlgo {
 
-    public HashMap<Character, String> huffmanTree = new HashMap();//käännetty publiciksi suorituskykytestauksen suorittamiseksi. Ei muita syitä
+    public DiyHashMap<Character, String> huffmanTree = new DiyHashMap();//käännetty publiciksi suorituskykytestauksen suorittamiseksi. Ei muita syitä
     private HuffmanNode root;
 
     /**
@@ -27,7 +26,7 @@ public class HuffmanAlgo {
      * @param position
      * @return
      */
-    public HuffmanNode findRootNode(HashMap<Character, Integer> position) {
+    public HuffmanNode findRootNode(DiyHashMap<Character, Integer> position) {
         //Set<Character> keys = position.keySet();
         PriorityQueue<HuffmanNode> nodeQueue = new PriorityQueue();
 
@@ -62,21 +61,25 @@ public class HuffmanAlgo {
      * @param keys
      * @return
      */
-    public PriorityQueue<HuffmanNode> createNodes(HashMap<Character, Integer> position) {
-        Set<Character> keys = position.keySet();
+    public PriorityQueue<HuffmanNode> createNodes(DiyHashMap<Character, Integer> position) {
+        DiySet keys = position.keySetForCharacters();
         PriorityQueue<HuffmanNode> nodeQueue = new PriorityQueue();
 
-        for (Character c : keys) {
+        //for (Character c : keys) {
+        for (int i = 0; i < keys.length(); i++) {
             //HuffmanNode node = new HuffmanNode(null, null, c, position.get(c));
-            HuffmanNode node = new HuffmanNode();
-            node.setLeft(null);
-            node.setRight(null);
-            node.setCh(c);
+            if (keys.getTable()[i] != null) {
+                Character c = (char) keys.getTable()[i];
+                HuffmanNode node = new HuffmanNode();
+                node.setLeft(null);
+                node.setRight(null);
+                node.setCh(c);
 
-            //System.out.println(position.get(c));
-            int weight = position.get(c);
-            node.setPosition(weight);
-            nodeQueue.add(node);
+                //System.out.println(position.get(c));
+                int weight = position.get(c);
+                node.setPosition(weight);
+                nodeQueue.add(node);
+            }
         }
         //System.out.println("Tämä on nodequeue: " +nodeQueue.toString());
         return nodeQueue;
@@ -124,8 +127,8 @@ public class HuffmanAlgo {
      * @param string
      * @return
      */
-    public HashMap<Character, Integer> createPosition(String string) {
-        HashMap<Character, Integer> position = new HashMap();
+    public DiyHashMap<Character, Integer> createPosition(String string) {
+        DiyHashMap<Character, Integer> position = new DiyHashMap();
         for (int i = 0; i < string.length(); i++) {
             // if-else-rakenteessa potentiaalisesti vikaa
             if (!position.containsKey(string.charAt(i))) {
@@ -146,7 +149,7 @@ public class HuffmanAlgo {
      * @return
      */
     public byte[] encodeString(String string) {
-        HashMap<Character, Integer> position = createPosition(string);
+        DiyHashMap<Character, Integer> position = createPosition(string);
         //System.out.println("Tämä on position:" +position);
         root = findRootNode(position);
         //System.out.println("Tämä on juuri: " +root);
@@ -175,7 +178,7 @@ public class HuffmanAlgo {
         int lastByteLength = total.length() % 8;
 
         int size = (total.length() / 8);
-        if (total.length() % 8 > 0) {
+        if (lastByteLength > 0) {
             size++;
         }
 
@@ -195,7 +198,8 @@ public class HuffmanAlgo {
                 value++;
             }
         }
-        if (byteIndex == size - 1) {
+        if (byteIndex == size) {
+            System.out.println("Setting last byte to " + value);
             resultBytes[byteIndex] = (byte) value;
         }
         return resultBytes;
@@ -221,17 +225,25 @@ public class HuffmanAlgo {
             j = zerosAndOnesRecursion(zerosAndOnes, number, j, max);
         }
 
+        lastByte(zerosAndOnes, j, max, lastByteLength, resultBytes);
+
+        return zerosAndOnes;
+    }
+
+    public void lastByte(Boolean[] zerosAndOnes, int j, int max, int lastByteLength, byte[] resultBytes) {
         int rounds = 8 - lastByteLength;
+
+        byte a = resultBytes[resultBytes.length - 1];
+        int number = (int) a & 0xFF;
 
         if (rounds < 8) {
             for (int i = 0; i < rounds; i++) {
                 max = max / 2;
             }
         }
-        int number = (int) resultBytes[resultBytes.length - 1] & 0xFF;
+        int result = (int) resultBytes[resultBytes.length - 1] & 0xFF;
         zerosAndOnesRecursion(zerosAndOnes, number, j, max);
 
-        return zerosAndOnes;
     }
 
     /**
@@ -275,15 +287,12 @@ public class HuffmanAlgo {
 
         for (int i = 0; i < decompressed.length; i++) {
             int j = 0;
-            if(decompressed[i]==null){
+            if (decompressed[i] == null) {
                 break;
-            }
-            
-            else if (decompressed[i]) {
+            } else if (decompressed[i]) {
                 j = 1;
             }
-            
-            
+
             if (j == 0) {
                 node = node.getLeft();
 
@@ -326,86 +335,5 @@ public class HuffmanAlgo {
 //    public HuffmanAlgo(String s){
 //    this.s = s;   
 //    }
-//    
-//    public  void compress(){
-//                
-//    //muutetaan input char-taulukoksi
-//    char[] input = s.toCharArray();
-//    int[]positions=buildPositionsTable();
-//    HuffmanNode root = findRootNode(positions);
-//    buildStringTable(root, "");
-//    
-//    
-//
-//    
-//    }
-//    
-//    
-//    
-//    public static void buildStringTable(HuffmanNode a, String string){       
-//    stringTable = new String[256];
-//    
-//    if(!a.isItLeaf()){        
-//        buildStringTable(a.getLeft(), string+'0');
-//        buildStringTable(a.getRight(), string+'1');    
-//    }else{
-//        stringTable[a.getCh()]=string;
-//    }
-//    }
-//    
-//    // seuraavaksi pitäisi rakentaa positions-taulukko algoa varten
-//    /**
-//     * Metodi palauttaa solmujen position-ominaisuuteen liittyvän taulukon. Palautettavaa taulukkoa käytetään
-//     * compress-metodin yhteydessä.
-//     * 
-//     * @return 
-//     */
-//    
-//    public int[] buildPositionsTable(){
-//    int[] positions = new int[256];
-//    char[] input = s.toCharArray();
-//    for(int i=0; i<s.length();i++){
-//        positions[input[i]]++;    
-//    }
-//    
-//     return positions;
-//    }
-//    
-//    
-//    /**
-//     * Metodilla selvitetään juurisolmu
-//     * @param positions
-//     * @return 
-//     */
-//    public HuffmanNode findRootNode(int[] positions){
-//        PriorityQueue<HuffmanNode> queue = createQueue(positions);
-//    // kahden pienen puun mergeäminen
-//        while(queue.size()>1){
-//            HuffmanNode left = queue.poll();
-//            HuffmanNode right = queue.poll();
-//            HuffmanNode mom = new HuffmanNode(left,right, '\0', left.getPosition()+right.getPosition());
-//            queue.add(mom);
-//        }
-//        return queue.poll();
-//    }
-//    
-//    /**
-//     * Metodilla luodaan prioriteettijono
-//     * @param positions
-//     * @return 
-//     */
-//    public PriorityQueue createQueue(int[]positions){
-//                PriorityQueue<HuffmanNode> queue = new PriorityQueue();        
-//        for(int i = 0;i<256; i++){
-//                if(positions[i]>0){
-//                    char ch = (char)i;
-//                    queue.add(new HuffmanNode(null, null,ch,positions[i]));
-//                }           
-//        }
-//    
-//    
-//    }
-//    
-//        
 //    
 }

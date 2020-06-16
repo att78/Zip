@@ -9,7 +9,8 @@ import com.nallezip.app.util.DiyContent;
 
 /**
  * Luokan tarkoitus on olla Do-it-yourself HashMap, joka korvaa sovelluksessa
- * käytetyn javan HashMapin. Put, get, containsKey ja size-metodit ovat metodeja, joita käytetään javan HashMap-luokan metodien tavoin.
+ * käytetyn javan HashMapin. Put, get, containsKey ja size-metodit ovat
+ * metodeja, joita käytetään javan HashMap-luokan metodien tavoin.
  *
  * @author tallbera
  */
@@ -41,7 +42,7 @@ public class DiyHashMap<Key, Value> {
     public Value get(Key key) {
         int hashValue = getHashInt(key);
         DiyContent content = table[hashValue];
-        
+
         //table pitäis käydä jotenkin järkevästi läpi. For-loop, while loop? jotain...loop
         // kylläpä tänään tökkii. Takas javan peruskurssille.       
         for (int i = 0; i < table.length; i++) {
@@ -54,13 +55,13 @@ public class DiyHashMap<Key, Value> {
                 content = content.getNextOne();
             }
         }
-        
+
         return null;
     }
 
     /**
      * Javan Hashmapin put-metodia vastaava put-metodi. Käyttää apumetodeja
-     * createNewContent ja loopAfter 
+     * createNewContent ja loopAfter
      *
      * @param key
      * @param value
@@ -119,7 +120,7 @@ public class DiyHashMap<Key, Value> {
     public boolean containsKey(Key key) {
         int hashValue = getHashInt(key);
         DiyContent content = table[hashValue];
-        
+
         //table pitäis käydä jotenkin järkevästi läpi. For-loop, while loop? jotain...loop
         // kylläpä tänään tökkii. Takas javan peruskurssille.       
         for (int i = 0; i < table.length; i++) {
@@ -130,12 +131,13 @@ public class DiyHashMap<Key, Value> {
                 content = content.getNextOne();
             }
         }
-        
+
         return false;
     }
 
     /**
-     * Kertoo DiyHashMapin tablen koon. Kannattaa huomata, että DiyHashMapin koko määräytyy ennalta tablen kokona.
+     * Kertoo DiyHashMapin tablen koon. Kannattaa huomata, että DiyHashMapin
+     * koko määräytyy ennalta tablen kokona.
      *
      * @return
      */
@@ -143,16 +145,19 @@ public class DiyHashMap<Key, Value> {
         return table.length;
     }
 
-    public DiySet keySet(){
-        
+    public DiySet keySetForCharacters() {
+
         DiySet diySet = new DiySet();
-        
-        for(int i=0; i<table.length;i++){
-            diySet.getTable()[i]=table[i].getKey();
-            
+
+        for (int i = 0; i < table.length; i++) {
+            if (table[i] != null) {
+                DiyContent content = table[i];
+                Character c = (char) content.getKey();
+                diySet.add(c);
+
+            }
         }
         return diySet;
     }
-    
-    
+
 }
