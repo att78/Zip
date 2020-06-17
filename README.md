@@ -33,6 +33,10 @@ Viidennen viikon viikkoraportti:
 
 [Viikko5](https://github.com/att78/NalleZip/blob/master/documentation/week5.md)
 
+Kuudennen viikon viikkoraportti:
+
+[Viikko6](https://github.com/att78/NalleZip/blob/master/documentation/week6.md)
+
 
 Komentoja sovelluksen testaukseen liittyen:
 
