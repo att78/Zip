@@ -1,4 +1,4 @@
-Viikko 6
+## Viikko 6
 
 Ma 15.6 2-3h Huffmanin vemppausta+ynnä muuta
 
