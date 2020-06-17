@@ -164,7 +164,7 @@ public class DiyArrayList {
     public String toString() {
 
         String string = "{";
-        for (int i = 0; i < diyArray.length - 1; i++) {
+        for (int i = 0; i < diyArray.length; i++) {
             if (diyArray[i] == null) {
                 break;
             }
@@ -173,10 +173,7 @@ public class DiyArrayList {
                 string += ", ";
             }
         }
-        if (diyArray[diyArray.length - 1] != null) {
-            string += diyArray[diyArray.length - 1];
 
-        }
         string += "}";
         return "DiyArrayList amount= " + amount + " diyArray: " + string;
     }

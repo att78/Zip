@@ -93,7 +93,12 @@ public class HuffmanAlgoTest {
         position.put('a', 1);
         DiyHeap testQueue = huff.createNodes(position);
         assertEquals(testQueue.size(),2);
-        
+        HuffmanNode first = testQueue.poll();
+        boolean real = false;
+        if(first!=null){
+            real = true;           
+        }
+        assertTrue(real);
     }
     
     @Test 
