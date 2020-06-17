@@ -27,10 +27,11 @@ public class DiyHeap {
     public DiyHeap() {
 
     }
-    
+
     /**
      * Minimikeon konstruktori. Vielä tekeillä
-     * @param maxSize 
+     *
+     * @param maxSize
      */
     public DiyHeap(int maxSize) {
         this.maxSize = maxSize;
@@ -43,46 +44,48 @@ public class DiyHeap {
 
     /**
      * Noden vasemmanpuoleisen lapsen noden positio-arvon palauttava metodi
+     *
      * @param mom Position-arvo nodelle, jolle tämä arvo lasketaan
-     * @return 
+     * @return
      */
     public int leftChild(int mom) {
 
         return (2 * mom);
     }
-    
+
     /**
      * Noden oikeanpuoleisen lapsen noden positio-arvon palauttava metodi
+     *
      * @param mom
-     * @return 
+     * @return
      */
     public int rightChild(int mom) {
 
         return (2 * mom) + 1;
 
     }
-    
-    
+
     /**
      * palauttaa vanhempi-noden positio-arvon
+     *
      * @param number
-     * @return 
+     * @return
      */
     public int mom(int number) {
 
         return number / 2;
     }
 
-    
     public int getSize() {
         return size;
     }
-    
+
     /**
      * lisää kekoon yhden huffmanNoden
-     * @param node 
+     *
+     * @param node
      */
-    public void add(HuffmanNode node) {
+    public void offer(HuffmanNode node) {
 
         if (size >= maxSize) {
             return;
@@ -94,10 +97,15 @@ public class DiyHeap {
             swapNodes(now, mom(now));
             now = mom(now);
         }
+
     }
-    
-    
+
     public void swapNodes(int first, int second) {
+
+        if (first == second) {
+            return;
+        }
+
         HuffmanNode firstNode = diyHeap[first];
         HuffmanNode secondNode = diyHeap[second];
 
@@ -118,44 +126,76 @@ public class DiyHeap {
     }
 
     //
-    private boolean isItLeaf(HuffmanNode node) {
-        int pos = node.getPosition();
+    private boolean isItLeaf(int index) {
 
-        if (pos <= size && pos >= (size / 2)) {
+        if (index <= size && index > (size / 2)) {
             return true;
         }
         return false;
     }
 
-    private void diyHeapify(HuffmanNode node) {
+    private void diyHeapify(int index) {
 
-        if (!isItLeaf(node)) {
-            HuffmanNode Leftie = node.getLeft();
-            HuffmanNode Rightie = node.getRight();
-            int mom = node.getPosition();
-            int childLeft = leftChild(mom);
-            int childRight = rightChild(mom);
-            if (mom > childRight || mom > childLeft) {
-                if (childLeft < childRight) {
-                    swapNodes(mom, childLeft);
-                    diyHeapify(Leftie);
-                } else {
-                    swapNodes(mom, childRight);
-                    diyHeapify(Rightie);
-                }
-            }
+//        if (!isItLeaf(index)) {
+        int mom = diyHeap[index].getPosition();
 
+        if (index > size) {
+            return;
         }
 
+        int minimumIndex = index;
+        int childLeftIndex = leftChild(index);
+        HuffmanNode leftChild = diyHeap[childLeftIndex];
+        int childRightIndex = rightChild(index);
+        HuffmanNode rightChild = diyHeap[childRightIndex];
+        HuffmanNode minNode = diyHeap[minimumIndex];
+        //toisenlainen iffittely, mutta ei näytä toimivan tämäkään.
+        //jostain tulee nulleja? Nullien 
+        if (leftChild != null && rightChild != null && rightChild != null) {
+            if ((diyHeap[minimumIndex].getPosition() > diyHeap[childLeftIndex].getPosition()) && childLeftIndex <= size) {
+                minimumIndex = childLeftIndex;
+            }
+
+            if (diyHeap[minimumIndex].getPosition() > diyHeap[childRightIndex].getPosition() && childRightIndex <= size) {
+                minimumIndex = childRightIndex;
+            }
+
+            if (index != minimumIndex) {
+                swapNodes(index, minimumIndex);
+                diyHeapify(minimumIndex);
+            }
+        }
+
+//vanha iffittely
+//            if (mom > rightChild.getPosition() || mom > leftChild.getPosition()) {
+//                if (leftChild.getPosition() < rightChild.getPosition()) {
+//                    swapNodes(index, childLeftIndex);
+//                    diyHeapify(childLeftIndex);
+//                } else {
+//                    swapNodes(index, childRightIndex);
+//                    diyHeapify(childRightIndex);
+//                }
+//            }
+//        }
     }
 
     public HuffmanNode poll() {
 
         HuffmanNode polled = diyHeap[1];
         diyHeap[1] = diyHeap[size--];
-        diyHeapify(diyHeap[1]);
+        if (size > 2) {
+            diyHeapify(1);
+        } else if (size == 2) {
+            if (diyHeap[1].getPosition() > diyHeap[2].getPosition()) {
+                swapNodes(1, 2);
+            }
+        }
 
         return polled;
     }
 
+    public int size() {
+
+        return size;
+    }
 }

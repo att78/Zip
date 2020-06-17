@@ -6,7 +6,7 @@
 package com.nallezip.app.util;
 
 /**
- *
+ *Luokka toimii Huffman-algo-luokassa Character-tyyppiset avaimet kokoavana "Settinä", joskaan ei ole varsinaisesti toiminnaltaan javan Set-luokan tyyppinen.
  * @author tallbera
  */
 public class DiySet {
@@ -14,6 +14,7 @@ public class DiySet {
     private static final int SIZE = 512;
     private Character table[];
     private int amount = 0;
+    
     
     public DiySet() {
         this.table = new Character[SIZE];
@@ -25,8 +26,12 @@ public class DiySet {
         return table;
     }
     
+    /**
+     * palauttaa Setin pituuden
+     * @return 
+     */
     public int length(){
-        return table.length;
+        return amount;
     }
     
  
@@ -66,7 +71,8 @@ public class DiySet {
         this.table = cache;
     }
 
- 
+        
+    //Add-metodin toimintaa voisi vielä parantaa. Annetaanko setin koko suoraan HashMapin kokona tms? vai pitääkö ola valmius setin kasvattamiseen?
 
     /**
      * metodi, jolla lisätä parametrina annetun luvun.

@@ -13,32 +13,25 @@ package com.nallezip.app.util;
 public class DiyContent<Key,Value> {
     
     
-    private Key key;
-    private Value value;        
-    private DiyContent nextOne;
-// vielä hieman pohdintaa, millaisia rakenteita tämän kanssa tekisi..    
-    private int numberKey;
-    
-    
-    
+    private Key key; // DiyHashMapin avain
+    private Value value;//DiyHashMappiin tallennettu arvo        
+    private DiyContent nextOne; //viittaus seuraavaan HashMapissa olevaan DiyContentiin.
 
+    
     public DiyContent getNextOne() {
         return nextOne;
     }
 
-    
+    /**
+     * DiyContentin konstruktori ottaa parametreina aina DiyHashMapin tallentamiseen käytetyn avaimen ja tallennettavan arvon.
+     * @param key DiyHashMapin avain-arvo
+     * @param value tallennettava arvo
+     */
     public DiyContent (Key key, Value value){
         this.key = key;
         this.setValue(value);
     }
-    
-//    public DiyContent(Integer key, String value){
-//        this.numberKey = key;
-//        this.value = value;
-//    }
-    
-        
-
+   
     public Key getKey() {
         return key;
     }

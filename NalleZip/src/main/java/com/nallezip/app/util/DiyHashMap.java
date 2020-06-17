@@ -24,32 +24,29 @@ public class DiyHashMap<Key, Value> {
      * Metodi, joka palauttaa avaimelle hash-coden. Metodin avulla hashcode
      * hoituu kaikille metodeille tässä luokassa
      *
-     * @param key
-     * @return
+     * @param key avain-arvo, jonka avulla DiyHashMapista haetaan tietoja.
+     * @return avaimen hashcoden.
      */
     private int getHashInt(Key key) {
-        // onko riittävän uniikki. Millä tämä kannattaisi laskea?
-        //System.out.println("Haskcode for key " + key.toString() + " is " + (key.hashCode() % SIZE));
+        //onko riittävän uniikki ja saako valmista hashcodea käyttää
         return key.hashCode() % SIZE;
     }
 
     /**
-     * Palauttaa annetun avaimen takana olevan Valuen.
+     * Palauttaa annetun avaimen takana olevan Valuen, ja huomionarvoista on, ettei tämä get-metodi ole generoitu metodi.
      *
-     * @param key
-     * @return
+     * @param key DiyHashMapissa käytetty avain
+     * @return palauttaa avaimen perusteella haetun DiyHashMapiin tallennetun arvon.
      */
     public Value get(Key key) {
         int hashValue = getHashInt(key);
         DiyContent content = table[hashValue];
-
-        //table pitäis käydä jotenkin järkevästi läpi. For-loop, while loop? jotain...loop
-        // kylläpä tänään tökkii. Takas javan peruskurssille.       
+     
         for (int i = 0; i < table.length; i++) {
             if (content != null) {
                 if (content.getKey().equals(key)) {
                     Value answer = (Value) content.getValue();
-                    //System.out.println("Key:" + key.toString()+ " answer "+answer.toString());
+
                     return answer;
                 }
                 content = content.getNextOne();
@@ -60,11 +57,11 @@ public class DiyHashMap<Key, Value> {
     }
 
     /**
-     * Javan Hashmapin put-metodia vastaava put-metodi. Käyttää apumetodeja
+     * Javan Hashmapin put-metodia vastaava put-metodi. Käyttää apumetodeja createNewContent ja loopNextOne.
      * createNewContent ja loopAfter
      *
-     * @param key
-     * @param value
+     * @param key avain, jonka perusteella tallennettava tieto löytyy.
+     * @param value tallennettava tieto.
      */
     public void put(Key key, Value value) {
         int hashValue = getHashInt(key);
@@ -83,12 +80,12 @@ public class DiyHashMap<Key, Value> {
     }
 
     /**
-     * Luo uuden DiyContent-olion ja asettaa sen tableen hashvaluen osoittamaan
+     * Put-metodin apumetodi, joka luo uuden DiyContent-olion ja asettaa sen tableen hashvaluen osoittamaan
      * paikkaan
      *
-     * @param key
-     * @param value
-     * @param hashValue
+     * @param key Hashmapin avain-arvo
+     * @param value HashMapiin avaimen taakse tallennettu tieto
+     * @param hashValue parametrina annettuun key:hin liittyvä hashcode.
      */
     private void createNewContent(Key key, Value value, int hashValue) {
         DiyContent content = new DiyContent(key, value);
@@ -99,9 +96,9 @@ public class DiyHashMap<Key, Value> {
      * Metodi käy läpi DiyContent-olion "after"-listauksen. Metodi toimii
      * put-metodin apumetodina.
      *
-     * @param content
-     * @param key
-     * @param value
+     * @param content Diy-content-olio, joka on tarkoitus tallentaa DiyHashMapiin.
+     * @param key Tallennuksessa käytetty avain-arvo
+     * @param value tallennettava arvo.
      */
     private void loopNextOne(DiyContent content, Key key, Value value) {
         while (content.getNextOne() != null) {
@@ -114,15 +111,12 @@ public class DiyHashMap<Key, Value> {
     /**
      * metodia voi käyttää HashMapin containsKey-metodia vastaavalla tavalla
      *
-     * @param key
-     * @return
+     * @param key avain, jonka olemassa olo DiyHashMapissa tarkastetaan.
+     * @return arvo, joka on "true", jos avain on listalla ja "false", jos avain ei ole listalla.
      */
     public boolean containsKey(Key key) {
         int hashValue = getHashInt(key);
-        DiyContent content = table[hashValue];
-
-        //table pitäis käydä jotenkin järkevästi läpi. For-loop, while loop? jotain...loop
-        // kylläpä tänään tökkii. Takas javan peruskurssille.       
+        DiyContent content = table[hashValue];      
         for (int i = 0; i < table.length; i++) {
             if (content != null) {
                 if (content.getKey().equals(key)) {
@@ -131,7 +125,6 @@ public class DiyHashMap<Key, Value> {
                 content = content.getNextOne();
             }
         }
-
         return false;
     }
 
@@ -139,12 +132,18 @@ public class DiyHashMap<Key, Value> {
      * Kertoo DiyHashMapin tablen koon. Kannattaa huomata, että DiyHashMapin
      * koko määräytyy ennalta tablen kokona.
      *
-     * @return
+     * @return DiyHashMapin koko
      */
     public int size() {
         return table.length;
     }
 
+    
+    
+    /**
+     * metodi, joka palauttaa "<Character, Value>"-tyypitetyn DiyHashMapin avaimet DiySettinä.
+     * @return DiySet, jossa on Character-tyyppiset avaimet.
+     */
     public DiySet keySetForCharacters() {
 
         DiySet diySet = new DiySet();

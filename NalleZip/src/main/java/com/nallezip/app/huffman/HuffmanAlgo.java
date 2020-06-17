@@ -6,6 +6,7 @@
 package com.nallezip.app.huffman;
 
 import com.nallezip.app.util.DiyHashMap;
+import com.nallezip.app.util.DiyHeap;
 import com.nallezip.app.util.DiySet;
 
 import java.util.PriorityQueue;
@@ -28,14 +29,21 @@ public class HuffmanAlgo {
      */
     public HuffmanNode findRootNode(DiyHashMap<Character, Integer> position) {
         //Set<Character> keys = position.keySet();
-        PriorityQueue<HuffmanNode> nodeQueue = new PriorityQueue();
-
+        DiyHeap nodeQueue = new DiyHeap();
+        System.out.println("Position metodin alussa: "+position.size());
+        System.out.println("Root metodin alussa: "+root);
+        System.out.println("Nodejonon koko ennen nodejen luontia: "+nodeQueue.getSize());
         if (position.size() > 0) {
             nodeQueue = createNodes(position);
         }
+        System.out.println("Nodejonon koko luonnin jälkeen: "+ nodeQueue.getSize());
+        
         while (nodeQueue.size() > 1) {
             HuffmanNode mom = new HuffmanNode();
+           // System.out.println("Root: "+root);
+           
             HuffmanNode firstBorn = nodeQueue.poll();
+            System.out.println("Eka: "+firstBorn.toString());
             HuffmanNode secondBorn = nodeQueue.poll();
             //HuffmanNode mom = new HuffmanNode(firstBorn, secondBorn, '-', firstBorn.getPosition() + secondBorn.getPosition());
 
@@ -43,7 +51,9 @@ public class HuffmanAlgo {
             mom.setRight(secondBorn);
             mom.setCh('-');
             mom.setPosition(firstBorn.getPosition() + secondBorn.getPosition());
+           // System.out.println("Mom: "+mom);
             root = mom;
+            
             nodeQueue.offer(mom);
         }
         //System.out.println("Peekataan nodejono "+ nodeQueue.peek());
@@ -61,10 +71,12 @@ public class HuffmanAlgo {
      * @param keys
      * @return
      */
-    public PriorityQueue<HuffmanNode> createNodes(DiyHashMap<Character, Integer> position) {
+    public DiyHeap createNodes(DiyHashMap<Character, Integer> position) {
         DiySet keys = position.keySetForCharacters();
-        PriorityQueue<HuffmanNode> nodeQueue = new PriorityQueue();
+        DiyHeap nodeQueue = new DiyHeap(512);
+        //System.out.println("Keyset koko: "+keys.length());
 
+        
         //for (Character c : keys) {
         for (int i = 0; i < keys.length(); i++) {
             //HuffmanNode node = new HuffmanNode(null, null, c, position.get(c));
@@ -78,7 +90,10 @@ public class HuffmanAlgo {
                 //System.out.println(position.get(c));
                 int weight = position.get(c);
                 node.setPosition(weight);
-                nodeQueue.add(node);
+                //System.out.println("Offer node with weight: "+weight);
+
+                nodeQueue.offer(node);
+                
             }
         }
         //System.out.println("Tämä on nodequeue: " +nodeQueue.toString());
@@ -172,7 +187,13 @@ public class HuffmanAlgo {
         return resultBytes;
 
     }
-
+    
+    
+    /**
+     * metodi muuttaa enkoodatun ykkösiä ja nollia sisältävän String byte-tauluksi.
+     * @param total
+     * @return 
+     */
     public byte[] binaryStringToBytes(String total) {
 
         int lastByteLength = total.length() % 8;
@@ -207,7 +228,7 @@ public class HuffmanAlgo {
 
     /**
      * Metodin tarkoitus on muuttaa enkoodattu byte-taulukko booleantaulukoksi,
-     * jota käytetään dekoodauksessa.testaamatta
+     * jota käytetään dekoodauksessa.
      *
      * @param resultBytes
      * @return
@@ -230,6 +251,14 @@ public class HuffmanAlgo {
         return zerosAndOnes;
     }
 
+    /**
+     * metodi on byteToBoolean-metodin apumetodi, joka käsittelee bytetaulukon viimeisen byten.
+     * @param zerosAndOnes
+     * @param j
+     * @param max
+     * @param lastByteLength
+     * @param resultBytes 
+     */
     public void lastByte(Boolean[] zerosAndOnes, int j, int max, int lastByteLength, byte[] resultBytes) {
         int rounds = 8 - lastByteLength;
 
@@ -282,27 +311,28 @@ public class HuffmanAlgo {
      */
     public String decodeString(byte[] packed) {
         StringBuilder builder = new StringBuilder();
+        System.out.println("Juuri: " +root);
         HuffmanNode node = root;
+        
         Boolean[] decompressed = byteToBoolean(packed);
 
         for (int i = 0; i < decompressed.length; i++) {
-            int j = 0;
+
             if (decompressed[i] == null) {
                 break;
-            } else if (decompressed[i]) {
-                j = 1;
-            }
+            } 
 
-            if (j == 0) {
+            if (!decompressed[i]) {
+                
                 node = node.getLeft();
-
+                
                 if (node.getLeft() == null && node.getRight() == null) {
                     builder.append(node.getCh());
                     node = root;
                 }
 
                 //  appendInDecode(node);
-            } else if (j == 1) {
+            } else if (decompressed[i]) {
                 node = node.getRight();
 
                 if (node.getLeft() == null && node.getRight() == null) {
@@ -315,25 +345,20 @@ public class HuffmanAlgo {
         return builder.toString();
     }
 
-    /**
-     * Metodi on apumetodi decodeString-metodille. Ongelmien vuoksi ei tällä
-     * hetkellä käytössä.
-     *
-     * @param node
-     */
-    public void appendInDecode(HuffmanNode node) {
-        StringBuilder builder = new StringBuilder();
-        if (node.getLeft() == null && node.getRight() == null) {
-            builder.append(node.getCh());
-            node = root;
-        }
-    }
-
-//    private static String[]stringTable; 
-//    private static String s;
-//    
-//    public HuffmanAlgo(String s){
-//    this.s = s;   
+//    /**
+//     * Metodi on apumetodi decodeString-metodille. Ongelmien vuoksi ei tällä
+//     * hetkellä käytössä.
+//     *
+//     * @param node
+//     */
+//    public void appendInDecode(HuffmanNode node) {
+//        StringBuilder builder = new StringBuilder();
+//        if (node.getLeft() == null && node.getRight() == null) {
+//            builder.append(node.getCh());
+//            node = root;
+//        }
 //    }
-//    
+//
+
+    
 }
