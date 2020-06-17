@@ -6,7 +6,10 @@
 package com.nallezip.app.util;
 
 /**
- *Luokka toimii Huffman-algo-luokassa Character-tyyppiset avaimet kokoavana "Settinä", joskaan ei ole varsinaisesti toiminnaltaan javan Set-luokan tyyppinen.
+ * Luokka toimii Huffman-algo-luokassa Character-tyyppiset avaimet kokoavana
+ * "Settinä", joskaan ei ole varsinaisesti toiminnaltaan javan Set-luokan
+ * tyyppinen.
+ *
  * @author tallbera
  */
 public class DiySet {
@@ -14,32 +17,29 @@ public class DiySet {
     private static final int SIZE = 512;
     private Character table[];
     private int amount = 0;
-    
-    
+
     public DiySet() {
         this.table = new Character[SIZE];
     }
 
- 
-
     public Object[] getTable() {
         return table;
     }
-    
+
     /**
      * palauttaa Setin pituuden
-     * @return 
+     *
+     * @return
      */
-    public int length(){
+    public int length() {
         return amount;
     }
-    
- 
-    
-        /**
-     * apumetodi, jota käytetään tarkistamaan tarvitseeko taulukon kokoa kasvattaa add-metodissa.
-     * 
-     * @return 
+
+    /**
+     * apumetodi, jota käytetään tarkistamaan tarvitseeko taulukon kokoa
+     * kasvattaa add-metodissa.
+     *
+     * @return
      */
     private boolean tableIsFull() {
         boolean full = false;
@@ -50,9 +50,11 @@ public class DiySet {
     }
 
     /**
-     * apumetodi, joka hoitaa taulukon kasvatuksen, jos add-metodi huomaa taulukon olevan täynnä eikä siten pysty lisäämään uutta lukua.
-     * @param doubleSize 
-     */    
+     * apumetodi, joka hoitaa taulukon kasvatuksen, jos add-metodi huomaa
+     * taulukon olevan täynnä eikä siten pysty lisäämään uutta lukua.
+     *
+     * @param doubleSize
+     */
     private void doubleTable(int doubleSize) {
 
         Character[] cache = new Character[doubleSize];
@@ -71,12 +73,11 @@ public class DiySet {
         this.table = cache;
     }
 
-        
     //Add-metodin toimintaa voisi vielä parantaa. Annetaanko setin koko suoraan HashMapin kokona tms? vai pitääkö ola valmius setin kasvattamiseen?
-
     /**
      * metodi, jolla lisätä parametrina annetun luvun.
-     * @param number 
+     *
+     * @param number
      */
     public void add(Character ch) {
 //
@@ -88,6 +89,26 @@ public class DiySet {
         this.table[this.amount] = ch;
         this.amount++;
 
+    }
+
+    public String toString() {
+
+        String string = "{";
+        for (int i = 0; i < table.length -1 ; i++) {
+            if (table[i] == null) {
+                break;
+            }
+            if (table[i] != null) {
+                string += table[i];
+                string += ", ";
+            }
+        }
+        if (table[table.length - 1] != null) {
+            string += table[table.length - 1];
+        }
+        string += "}";
+
+        return string;
     }
 
 }

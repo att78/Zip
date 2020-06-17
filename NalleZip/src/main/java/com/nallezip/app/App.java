@@ -51,12 +51,12 @@ public class App {
 //        System.out.println(testQueue);
 //
 //
-//        LempelZivWelchAlgo algo = new LempelZivWelchAlgo();
-//        DiyArrayList testing = algo.encodeString(string);
-//        System.out.println("Alkuperäinen koko on "+string.length());
-//        System.out.println("Pakattu koko on: " +testing.size());
-//        String answer = algo.decodeString();
-//        System.out.println(answer);
+        LempelZivWelchAlgo algo = new LempelZivWelchAlgo();
+        DiyArrayList testing = algo.encodeString(string);
+        System.out.println("Alkuperäinen koko on "+string.length());
+        System.out.println("Pakattu koko on: " +testing.size());
+        String answer = algo.decodeString();
+        System.out.println(answer);
 //        
 //        DiyHashMap<String,String> diy = new DiyHashMap();
 //        String nalle = "Nalle";

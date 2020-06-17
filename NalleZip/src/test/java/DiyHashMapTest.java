@@ -6,6 +6,7 @@
 
 import com.nallezip.app.util.DiyHashMap;
 import com.nallezip.app.util.DiyContent;
+import com.nallezip.app.util.DiySet;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -70,17 +71,30 @@ public class DiyHashMapTest {
         DiyHashMap<Integer, Integer> diy = new DiyHashMap();
         assertEquals(512, diy.size());
     }
-    
-    
+
     @Test
-    public void testContainsKey(){
+    public void testContainsKey() {
         DiyHashMap<String, String> diy = new DiyHashMap();
         String key = "key";
         String value = "value";
-        diy.put(key, value);       
-        boolean answer = diy.containsKey(key);        
+        diy.put(key, value);
+        boolean answer = diy.containsKey(key);
         assertTrue(answer);
         answer = diy.containsKey(value);
         assertFalse(answer);
     }
+
+    @Test
+    public void testKeySetForCharacters() {
+        DiyHashMap<Character, Integer> diy = new DiyHashMap();
+        char c = 'c';
+        char d = 'd';
+        diy.put(c, 1);
+        diy.put(d, 2);
+
+        DiySet set = diy.keySetForCharacters();
+        assertEquals(set.length(),2);
+        assertEquals("{c, d, }",set.toString());
+    }
+
 }

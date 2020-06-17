@@ -283,7 +283,7 @@ public class HuffmanAlgo {
      */
     public String decodeString(byte[] packed) {
         StringBuilder builder = new StringBuilder();
-        System.out.println("Juuri: " + root);
+
         HuffmanNode node = root;
 
         Boolean[] decompressed = byteToBoolean(packed);

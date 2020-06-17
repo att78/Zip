@@ -7,6 +7,7 @@
 import com.nallezip.app.huffman.HuffmanAlgo;
 import com.nallezip.app.huffman.HuffmanNode;
 import com.nallezip.app.util.DiyHashMap;
+import com.nallezip.app.util.DiyHeap;
 
 import java.util.PriorityQueue;
 import org.junit.After;
@@ -41,11 +42,7 @@ public class HuffmanAlgoTest {
     public void tearDown() {
     }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+
     
     //rampa testi tällä hetkellä
     @Test
@@ -53,9 +50,9 @@ public class HuffmanAlgoTest {
         HuffmanAlgo algo = new HuffmanAlgo();
         String nalle = "Nalle";
         DiyHashMap<Character, Integer> position = algo.createPosition(nalle);
-        String compare = "{a=1, e=1, l=2, N=1}";
-        //assertEquals(compare, position.toString());
-        //assertEquals(4, position.size());
+        String compare = "{N=1 ,a=1 ,e=1 ,l=2 ,}";
+        assertEquals(compare, position.toString());
+
     }
 
     @Test
@@ -76,16 +73,16 @@ public class HuffmanAlgoTest {
         assertEquals(before, after);
     }
 
-//    @Test
-//    public void testFindRootNode() {
-//        DiyHashMap<Character, Integer> position = new DiyHashMap();
-//        HuffmanAlgo huff = new HuffmanAlgo();
-//        position.put('a', 1);
-//        position.put('b', 1);
-//        position.put('a', 1);
-//        HuffmanNode node = huff.findRootNode(position);
-//        assertEquals("Character of the node is " + '-' + " position of the node is " + 2, node.toString());
-//    }
+    @Test
+    public void testFindRootNode() {
+        DiyHashMap<Character, Integer> position = new DiyHashMap();
+        HuffmanAlgo huff = new HuffmanAlgo();
+        position.put('a', 1);
+        position.put('b', 1);
+        position.put('a', 1);
+        HuffmanNode node = huff.findRootNode(position);
+        assertEquals("Character of the node is " + '-' + " position of the node is " + 2, node.toString());
+    }
 
     @Test
     public void testCreateNodes() {
@@ -94,32 +91,22 @@ public class HuffmanAlgoTest {
         position.put('a', 1);
         position.put('b', 1);
         position.put('a', 1);
-//        PriorityQueue<HuffmanNode> testQueue = huff.createNodes(position);
-//        assertEquals("[Character of the node is a position of the node is 1, Character of the node is b position of the node is 1]",testQueue.toString());
+        DiyHeap testQueue = huff.createNodes(position);
+        assertEquals(testQueue.size(),2);
         
     }
     
-//    @Test 
-//    public void testEncodeString(){
-//    String nalle = "Nalle";
-//    HuffmanAlgo huff = new HuffmanAlgo();
-//    String encoded = huff.encodeString(nalle);
-//    
-//    assertEquals(encoded,"1111100010");
-//    
-//    }
-//    
-//    @Test
-//    public void testDecodeString(){
-//        
-//    HuffmanAlgo huff = new HuffmanAlgo();
-//    
-//    String encoded= huff.encodeString("Nalle");
-//    String decoded= huff.decodeString(encoded);
-//    
-//    assertEquals(decoded,"Nalle");
-//    
-//    }
+    @Test 
+    public void testEncodeAndDecodeString(){
+    String nalle = "Nalle";
+    HuffmanAlgo huff = new HuffmanAlgo();
+    byte[] testing = huff.encodeString(nalle);
+    String answer = huff.decodeString(testing);
+    
+    assertEquals(nalle,answer);
+    }
+    
+
     
     @Test
     public void testBinaryStringToBytes(){
@@ -144,10 +131,6 @@ public class HuffmanAlgoTest {
 
         String test2= "10001000100010";
         byte[] resultBytes2 = algo.binaryStringToBytes(test2);
-//        for(int i=0;i<resultBytes2.length;i++){
-//            int number =(int)resultBytes2[i];
-//            System.out.println(number);        
-//        }
         
         assertEquals(3,resultBytes2.length);
         answer = (int)resultBytes2[1] & 0xFF;
@@ -157,15 +140,15 @@ public class HuffmanAlgoTest {
                
     }
     
-//    @Test
-//    public void testLastBye(){
-//        HuffmanAlgo huff = new HuffmanAlgo();
-//        byte[] buggedDot=huff.encodeString(".");
-//        for (byte b : buggedDot) {
-//            System.out.println("Byte: " + b);
-//        }
-//        
-//        
+    @Test
+    public void testLastBye(){
+        HuffmanAlgo huff = new HuffmanAlgo();
+        byte[] buggedDot=huff.encodeString(".");
+        for (byte b : buggedDot) {
+            System.out.println("Byte: " + b);
+        }
+        
+    }
 //        
 //        Boolean[] zerosAndOnes = new Boolean[16];//minkäkokoinen
 //        int max = 128;

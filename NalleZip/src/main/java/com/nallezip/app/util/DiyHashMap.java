@@ -19,6 +19,8 @@ public class DiyHashMap<Key, Value> {
     //vielä tyhjä eli motivointiluokka. Lukutuokio hashmappeihin käynnissä...
     private static final int SIZE = 512;
     private DiyContent table[] = new DiyContent[SIZE];
+    //private int amount =0;
+       
 
     /**
      * Metodi, joka palauttaa avaimelle hash-coden. Metodin avulla hashcode
@@ -71,6 +73,7 @@ public class DiyHashMap<Key, Value> {
 
         if (content == null) {
             createNewContent(key, value, hashValue);
+      //      amount++;
         } else {
             if (content.getKey().equals(key)) {
                 content.setValue(value);
@@ -163,4 +166,16 @@ public class DiyHashMap<Key, Value> {
         return diySet;
     }
 
+    public String toString(){
+    String answer = "{";
+        for(int i=0; i<table.length-1;i++){
+            DiyContent content = table[i];
+            if(content!=null){
+                answer+= content.getKey()+"="+content.getValue()+" ,";
+            }        
+        }
+        answer+="}";
+    
+        return answer;
+    }
 }

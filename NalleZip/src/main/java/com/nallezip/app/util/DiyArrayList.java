@@ -5,7 +5,6 @@
  */
 package com.nallezip.app.util;
 
-import java.util.Arrays;
 
 /**
  * Tarkoituksena on tehdä luokka, joka pystyy korvaamaan LempelZivwelchAlgossa
@@ -36,16 +35,17 @@ public class DiyArrayList {
     /**
      * Testausta varten toinen konstruktori.
      *
-     * @param testing
+     * @param testing //testausta varten annettu koko listalle.
      */
     public DiyArrayList(int testing) {
         this.amount = testing;
     }
 
     /**
-     * apumetodi, jota käytetään tarkistamaan tarvitseeko taulukon kokoa kasvattaa add-metodissa.
-     * 
-     * @return 
+     * apumetodi, jota käytetään tarkistamaan tarvitseeko taulukon kokoa
+     * kasvattaa add-metodissa.
+     *
+     * @return boolean-arvon, joka on true, jos taulu on täynnä.
      */
     private boolean tableIsFull() {
         boolean full = false;
@@ -56,9 +56,11 @@ public class DiyArrayList {
     }
 
     /**
-     * apumetodi, joka hoitaa taulukon kasvatuksen, jos add-metodi huomaa taulukon olevan täynnä eikä siten pysty lisäämään uutta lukua.
-     * @param doubleSize 
-     */    
+     * apumetodi, joka hoitaa taulukon kasvatuksen, jos add-metodi huomaa
+     * taulukon olevan täynnä eikä siten pysty lisäämään uutta lukua.
+     *
+     * @param doubleSize parametrina annettava taulukon uusi koko
+     */
     private void doubleTable(int doubleSize) {
 
         Integer[] cache = new Integer[doubleSize];
@@ -83,7 +85,8 @@ public class DiyArrayList {
 
     /**
      * metodi, jolla lisätä parametrina annetun luvun.
-     * @param number 
+     *
+     * @param number lisättävä luku
      */
     public void add(Integer number) {
 
@@ -99,8 +102,10 @@ public class DiyArrayList {
 
     /**
      * metodi, joka kertoo diyArrayListin pituuden.
-     * @return 
-     */    
+     *
+     * @return palauttaa luokkamuuttujan, jossa diyArrayListin koko on
+     * kiinnitettynä.
+     */
     public int size() {
         return amount;
     }
@@ -116,42 +121,64 @@ public class DiyArrayList {
 //            }
 //        }
 //    }
-    
     /**
      * palauttaa aina listan ensimmäisen alkion.
-     * @return 
+     *
+     * @return palauttaa listan ensimmäisen alkion
      */
     public Integer getFirst() {
         Integer diy = null;
         diy = this.diyArray[0];
         return diy;
     }
-    
+
     /**
      * palauttaa aina parametrina annetun sijainnin mukaisen alkion.
-     * @param n
-     * @return 
+     *
+     * @param n sijainti listalla
+     * @return palautettava luku.
      */
     public int get(int n) {
+        if (n > size()) {
+            return -1;
+        }
         Integer diy = null;
         diy = this.diyArray[n];
         int answer;
         if (diy != null) {
             answer = (int) diy;
             return answer;
-        } else 
+        } else {
 
             return -1;
-        
+        }
     }
 
     /**
-     * toString-lause on muokattu käyttötarkoitukseen sopivaksi
-     * @return 
+     * toString-metodi on muokattu testaukseen ja kehitystyöhön sopivaksi.
+     *
+     * @return palauttaa testaamisessa ja sovelluksen kehityksessä auttavan
+     * toStringin.
      */
     @Override
     public String toString() {
-        return "DiyArrayList{" + "amount=" + amount + ", diyArray=" + Arrays.toString(diyArray) + '}';
+
+        String string = "{";
+        for (int i = 0; i < diyArray.length - 1; i++) {
+            if (diyArray[i] == null) {
+                break;
+            }
+            if (diyArray[i] != null) {
+                string += diyArray[i];
+                string += ", ";
+            }
+        }
+        if (diyArray[diyArray.length - 1] != null) {
+            string += diyArray[diyArray.length - 1];
+
+        }
+        string += "}";
+        return "DiyArrayList amount= " + amount + " diyArray: " + string;
     }
 
 }

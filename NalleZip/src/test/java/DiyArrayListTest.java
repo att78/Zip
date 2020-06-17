@@ -61,9 +61,20 @@ public class DiyArrayListTest {
     public void testGet(){
         DiyArrayList list = new DiyArrayList();
         list.add(1);
-//        int answer = list.get(550);
-//        assertEquals(answer, -1);
+        int answer = list.get(550);
+        assertEquals(answer, -1);
+        Integer test = null;
+        list.add(test);
+        Integer answer2 = list.get(1);
+        Integer compare = -1;
+        assertEquals(compare, answer2);
+    }
+    
+    @Test
+    public void testToString(){
+        DiyArrayList list = new DiyArrayList();
+        list.add(1);
+        assertEquals("DiyArrayList amount= 1 diyArray: {1, }", list.toString());
     
     }
-
 }
