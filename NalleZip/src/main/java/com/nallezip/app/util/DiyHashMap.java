@@ -33,15 +33,17 @@ public class DiyHashMap<Key, Value> {
     }
 
     /**
-     * Palauttaa annetun avaimen takana olevan Valuen, ja huomionarvoista on, ettei tämä get-metodi ole generoitu metodi.
+     * Palauttaa annetun avaimen takana olevan Valuen, ja huomionarvoista on,
+     * ettei tämä get-metodi ole generoitu metodi.
      *
      * @param key DiyHashMapissa käytetty avain
-     * @return palauttaa avaimen perusteella haetun DiyHashMapiin tallennetun arvon.
+     * @return palauttaa avaimen perusteella haetun DiyHashMapiin tallennetun
+     * arvon.
      */
     public Value get(Key key) {
         int hashValue = getHashInt(key);
         DiyContent content = table[hashValue];
-     
+
         for (int i = 0; i < table.length; i++) {
             if (content != null) {
                 if (content.getKey().equals(key)) {
@@ -57,8 +59,8 @@ public class DiyHashMap<Key, Value> {
     }
 
     /**
-     * Javan Hashmapin put-metodia vastaava put-metodi. Käyttää apumetodeja createNewContent ja loopNextOne.
-     * createNewContent ja loopAfter
+     * Javan Hashmapin put-metodia vastaava put-metodi. Käyttää apumetodeja
+     * createNewContent ja loopNextOne. createNewContent ja loopAfter
      *
      * @param key avain, jonka perusteella tallennettava tieto löytyy.
      * @param value tallennettava tieto.
@@ -80,8 +82,8 @@ public class DiyHashMap<Key, Value> {
     }
 
     /**
-     * Put-metodin apumetodi, joka luo uuden DiyContent-olion ja asettaa sen tableen hashvaluen osoittamaan
-     * paikkaan
+     * Put-metodin apumetodi, joka luo uuden DiyContent-olion ja asettaa sen
+     * tableen hashvaluen osoittamaan paikkaan
      *
      * @param key Hashmapin avain-arvo
      * @param value HashMapiin avaimen taakse tallennettu tieto
@@ -96,7 +98,8 @@ public class DiyHashMap<Key, Value> {
      * Metodi käy läpi DiyContent-olion "after"-listauksen. Metodi toimii
      * put-metodin apumetodina.
      *
-     * @param content Diy-content-olio, joka on tarkoitus tallentaa DiyHashMapiin.
+     * @param content Diy-content-olio, joka on tarkoitus tallentaa
+     * DiyHashMapiin.
      * @param key Tallennuksessa käytetty avain-arvo
      * @param value tallennettava arvo.
      */
@@ -112,11 +115,12 @@ public class DiyHashMap<Key, Value> {
      * metodia voi käyttää HashMapin containsKey-metodia vastaavalla tavalla
      *
      * @param key avain, jonka olemassa olo DiyHashMapissa tarkastetaan.
-     * @return arvo, joka on "true", jos avain on listalla ja "false", jos avain ei ole listalla.
+     * @return arvo, joka on "true", jos avain on listalla ja "false", jos avain
+     * ei ole listalla.
      */
     public boolean containsKey(Key key) {
         int hashValue = getHashInt(key);
-        DiyContent content = table[hashValue];      
+        DiyContent content = table[hashValue];
         for (int i = 0; i < table.length; i++) {
             if (content != null) {
                 if (content.getKey().equals(key)) {
@@ -138,10 +142,10 @@ public class DiyHashMap<Key, Value> {
         return table.length;
     }
 
-    
-    
     /**
-     * metodi, joka palauttaa "<Character, Value>"-tyypitetyn DiyHashMapin avaimet DiySettinä.
+     * metodi, joka palauttaa "<Character, Value>"-tyypitetyn DiyHashMapin
+     * avaimet DiySettinä.
+     *
      * @return DiySet, jossa on Character-tyyppiset avaimet.
      */
     public DiySet keySetForCharacters() {

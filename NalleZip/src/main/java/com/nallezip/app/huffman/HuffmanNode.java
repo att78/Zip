@@ -17,39 +17,20 @@ public class HuffmanNode implements Comparable<HuffmanNode> {
     private char ch;
     private int position;
 
-//    public HuffmanNode(){
-//    }
-//    public HuffmanNode(HuffmanNode left, HuffmanNode right, char ch, int position) {
-//        this.left = left;
-//        this.right = right;
-//        this.ch = ch;
-//        this.position = position;
-//    }
+
     /**
      * compareTo-metodi palauttaa kahden solmun vertailutuloksen
      *
-     * @param second
-     * @return
+     * @param second HuffmanNode, johon verrataan
+     * @return vertailutulos: jos tämän HuffmanNoden position-arvo on korkeampi kuin parametrina annetun verrattavan, luku on positiivinen. päinvastaisessa 
+     * tilanteessa vertailuluku on negatiivinen.
      */
     public int compareTo(HuffmanNode second) {
 
         return this.position - second.position;
     }
 
-    /**
-     * Metodi palauttaa true, jos solmu on lehti ja false, jos solmu ei ole
-     * lehti
-     *
-     * @return
-     */
-//    public boolean isItLeaf() {
-//
-//        if ((left == null) && (right == null)) {
-//            return true;
-//        } else {
-//            return false;
-//        }
-//    }
+
     public HuffmanNode getLeft() {
         return left;
     }
@@ -82,6 +63,10 @@ public class HuffmanNode implements Comparable<HuffmanNode> {
         this.position = position;
     }
 
+    /**
+     * toString-metodi on muokattu antamaan informaatiota, joka on sovelluksen kehityksessä ja testaamisessa hyödyllistä.
+     * @return Kustomoidun Stringin, joka kertoo noden Character arvon ja position-arvon.
+     */
     public String toString() {
 
         return "Character of the node is " + ch + " position of the node is " + position;

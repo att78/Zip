@@ -9,8 +9,6 @@ import com.nallezip.app.util.DiyHashMap;
 import com.nallezip.app.util.DiyHeap;
 import com.nallezip.app.util.DiySet;
 
-import java.util.PriorityQueue;
-
 /**
  * Huffman algoritmin toteuttava luokka
  *
@@ -22,89 +20,68 @@ public class HuffmanAlgo {
     private HuffmanNode root;
 
     /**
-     * asettaa luokkamuuttujaan root Huffman-puun juurisolmun.
+     * Asettaa luokkamuuttujaan root Huffman-puun juurisolmun.
      *
-     * @param position
-     * @return
+     * @param position DiyHashMap-olio, jonka avaimet ovat Character ja arvot
+     * Integer-tyyppisiä
+     * @return Huffman puun juurisolmun
      */
     public HuffmanNode findRootNode(DiyHashMap<Character, Integer> position) {
-        //Set<Character> keys = position.keySet();
+
         DiyHeap nodeQueue = new DiyHeap();
-        System.out.println("Position metodin alussa: "+position.size());
-        System.out.println("Root metodin alussa: "+root);
-        System.out.println("Nodejonon koko ennen nodejen luontia: "+nodeQueue.getSize());
+
         if (position.size() > 0) {
             nodeQueue = createNodes(position);
         }
-        System.out.println("Nodejonon koko luonnin jälkeen: "+ nodeQueue.getSize());
-        
+
         while (nodeQueue.size() > 1) {
             HuffmanNode mom = new HuffmanNode();
-           // System.out.println("Root: "+root);
-           
             HuffmanNode firstBorn = nodeQueue.poll();
-            System.out.println("Eka: "+firstBorn.toString());
+            System.out.println("Eka: " + firstBorn.toString());
             HuffmanNode secondBorn = nodeQueue.poll();
-            //HuffmanNode mom = new HuffmanNode(firstBorn, secondBorn, '-', firstBorn.getPosition() + secondBorn.getPosition());
-
             mom.setLeft(firstBorn);
             mom.setRight(secondBorn);
             mom.setCh('-');
             mom.setPosition(firstBorn.getPosition() + secondBorn.getPosition());
-           // System.out.println("Mom: "+mom);
             root = mom;
-            
             nodeQueue.offer(mom);
         }
-        //System.out.println("Peekataan nodejono "+ nodeQueue.peek());
-        //System.out.println("peekkauksen kanssa mom Tsekkaus "+root);
-        //System.out.println("Solmujonon pituus: "+ nodeQueue.size());
-        //HuffmanNode testiNode = nodeQueue.peek();
-        //System.out.println("Solmujonon pituus: "+testiNode.toString());
         return nodeQueue.poll();
     }
 
     /**
-     * Luo prioriteettijonon, jossa on HuffmanNodeja Ottaa parametrina Setin,
-     * jossa on HashMapin avaimia
+     * Luo prioriteettijonon, jossa on HuffmanNodeja ottaa parametritrina
+     * DiyHashMapin.
      *
-     * @param keys
-     * @return
+     * @param position DiyHashMap, jossa on avaimena Charactereja ja arvoina
+     * Integerejä.
+     * @return DiyHeapin, joka on siis minimikeko.
      */
     public DiyHeap createNodes(DiyHashMap<Character, Integer> position) {
         DiySet keys = position.keySetForCharacters();
         DiyHeap nodeQueue = new DiyHeap(512);
-        //System.out.println("Keyset koko: "+keys.length());
 
-        
-        //for (Character c : keys) {
         for (int i = 0; i < keys.length(); i++) {
-            //HuffmanNode node = new HuffmanNode(null, null, c, position.get(c));
+
             if (keys.getTable()[i] != null) {
                 Character c = (char) keys.getTable()[i];
                 HuffmanNode node = new HuffmanNode();
                 node.setLeft(null);
                 node.setRight(null);
                 node.setCh(c);
-
-                //System.out.println(position.get(c));
                 int weight = position.get(c);
                 node.setPosition(weight);
-                //System.out.println("Offer node with weight: "+weight);
-
                 nodeQueue.offer(node);
-                
             }
         }
-        //System.out.println("Tämä on nodequeue: " +nodeQueue.toString());
         return nodeQueue;
     }
 
     /**
-     * metodi asettaa silmuja HuffmanTreehen(jona HashMap toimii)
+     * metodi asettaa silmuja HuffmanTreehen
      *
-     * @param node
-     * @param builder
+     * @param node asetettava HuffmanNode
+     * @param builder stringBuilder
      */
     public void setHuffmanTree(HuffmanNode node, StringBuilder builder) {
         //System.out.println("Builder on: "+builder);
@@ -123,8 +100,8 @@ public class HuffmanAlgo {
      * rekursio on pilkottu kahteen metodiin. Muuten olisi muodostunut yksi
      * jättiläinen.
      *
-     * @param node
-     * @param builder
+     * @param node lisättävä HuffmanNode
+     * @param builder binääriStringiä keräävä Olio.
      */
     public void builderAppends(HuffmanNode node, StringBuilder builder) {
         builder.append('0');
@@ -145,14 +122,12 @@ public class HuffmanAlgo {
     public DiyHashMap<Character, Integer> createPosition(String string) {
         DiyHashMap<Character, Integer> position = new DiyHashMap();
         for (int i = 0; i < string.length(); i++) {
-            // if-else-rakenteessa potentiaalisesti vikaa
+
             if (!position.containsKey(string.charAt(i))) {
                 position.put(string.charAt(i), 0);
             }
             position.put(string.charAt(i), position.get(string.charAt(i)) + 1);
-
         }
-        // System.out.println(position.toString() + " size: " + position.size());
         return position;
     }
 
@@ -160,26 +135,21 @@ public class HuffmanAlgo {
      * metodi on enkoodausta varten. Metodi käyttää apumetodeita createPosition
      * ja buildTree().
      *
-     * @param string
-     * @return
+     * @param string pakattava viesti
+     * @return byte-taulukko, johon viesti on pakattu.
      */
     public byte[] encodeString(String string) {
         DiyHashMap<Character, Integer> position = createPosition(string);
-        //System.out.println("Tämä on position:" +position);
         root = findRootNode(position);
-        //System.out.println("Tämä on juuri: " +root);
         setHuffmanTree(root, new StringBuilder());
-        //System.out.println("Tämä on puu: "+ huffmanTree);
         StringBuilder builder = new StringBuilder();
 
         for (int i = 0; i < string.length(); i++) {
             char ch = string.charAt(i);
-            //System.out.println(ch);
-            //System.out.println(huffmanTree);
-            builder.append(huffmanTree.get(ch));
 
+            builder.append(huffmanTree.get(ch));
         }
-        //lasketaan binääristä integeriksi bitti kerrallaan
+
         String total = builder.toString();
 
         byte[] resultBytes = binaryStringToBytes(total);
@@ -187,12 +157,13 @@ public class HuffmanAlgo {
         return resultBytes;
 
     }
-    
-    
+
     /**
-     * metodi muuttaa enkoodatun ykkösiä ja nollia sisältävän String byte-tauluksi.
-     * @param total
-     * @return 
+     * metodi muuttaa enkoodatun ykkösiä ja nollia sisältävän String
+     * byte-tauluksi.
+     *
+     * @param total binaariString- joka pakataan.
+     * @return byte-taulukko,jossa viesti on pakattuna
      */
     public byte[] binaryStringToBytes(String total) {
 
@@ -230,8 +201,8 @@ public class HuffmanAlgo {
      * Metodin tarkoitus on muuttaa enkoodattu byte-taulukko booleantaulukoksi,
      * jota käytetään dekoodauksessa.
      *
-     * @param resultBytes
-     * @return
+     * @param resultBytes pakattu viesti
+     * @return boolean taulukko pakatusta viestistä.
      */
     public Boolean[] byteToBoolean(byte[] resultBytes) {
         Boolean[] zerosAndOnes = new Boolean[resultBytes.length * 8];
@@ -252,12 +223,14 @@ public class HuffmanAlgo {
     }
 
     /**
-     * metodi on byteToBoolean-metodin apumetodi, joka käsittelee bytetaulukon viimeisen byten.
-     * @param zerosAndOnes
-     * @param j
-     * @param max
-     * @param lastByteLength
-     * @param resultBytes 
+     * metodi on byteToBoolean-metodin apumetodi, joka käsittelee bytetaulukon
+     * viimeisen byten.
+     *
+     * @param zerosAndOnes Boolean-taulukko, johon purkamistiedot kerätään
+     * @param j Boolean taulukon zerosAndOnes indeksi eli kohta jota operoidaan.
+     * @param max tavun arvo
+     * @param lastByteLength viimeisen tavun pituus
+     * @param resultBytes pakattu viesti
      */
     public void lastByte(Boolean[] zerosAndOnes, int j, int max, int lastByteLength, byte[] resultBytes) {
         int rounds = 8 - lastByteLength;
@@ -270,7 +243,6 @@ public class HuffmanAlgo {
                 max = max / 2;
             }
         }
-        int result = (int) resultBytes[resultBytes.length - 1] & 0xFF;
         zerosAndOnesRecursion(zerosAndOnes, number, j, max);
 
     }
@@ -279,10 +251,10 @@ public class HuffmanAlgo {
      * Apumetodi bytesToBoolean-metodille, tämä metodi hoitaa rekursio-osan
      * booleantaulukon muodostamisesta.
      *
-     * @param zerosAndOnes
-     * @param number
-     * @param j
-     * @param max
+     * @param zerosAndOnes muodostettava Boolean-taulukko
+     * @param number pakkauksessa ollut arvo integer-tyyppisenä numerona
+     * @param j boolean-taulukon indeksi
+     * @param max tavun maksimi arvo
      * @return
      */
     public int zerosAndOnesRecursion(Boolean[] zerosAndOnes, int number, int j, int max) {
@@ -306,32 +278,31 @@ public class HuffmanAlgo {
      * metodi palauttaa encodeString-metodilla koodatun Stringin alkuperäiseen
      * muotoon.
      *
-     * @param string Syöte on ykkösiä ja nollia sisältävä String.
-     * @return
+     * @param byte[] pakattu viesti
+     * @return purettu viesti
      */
     public String decodeString(byte[] packed) {
         StringBuilder builder = new StringBuilder();
-        System.out.println("Juuri: " +root);
+        System.out.println("Juuri: " + root);
         HuffmanNode node = root;
-        
+
         Boolean[] decompressed = byteToBoolean(packed);
 
         for (int i = 0; i < decompressed.length; i++) {
 
             if (decompressed[i] == null) {
                 break;
-            } 
+            }
 
             if (!decompressed[i]) {
-                
+
                 node = node.getLeft();
-                
+
                 if (node.getLeft() == null && node.getRight() == null) {
                     builder.append(node.getCh());
                     node = root;
                 }
 
-                //  appendInDecode(node);
             } else if (decompressed[i]) {
                 node = node.getRight();
 
@@ -339,26 +310,9 @@ public class HuffmanAlgo {
                     builder.append(node.getCh());
                     node = root;
                 }
-                //   appendInDecode(node);
             }
         }
         return builder.toString();
     }
 
-//    /**
-//     * Metodi on apumetodi decodeString-metodille. Ongelmien vuoksi ei tällä
-//     * hetkellä käytössä.
-//     *
-//     * @param node
-//     */
-//    public void appendInDecode(HuffmanNode node) {
-//        StringBuilder builder = new StringBuilder();
-//        if (node.getLeft() == null && node.getRight() == null) {
-//            builder.append(node.getCh());
-//            node = root;
-//        }
-//    }
-//
-
-    
 }
