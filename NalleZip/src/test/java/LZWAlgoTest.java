@@ -5,6 +5,7 @@
  */
 
 import com.nallezip.app.lempelziv.LempelZivWelchAlgo;
+import com.nallezip.app.util.DiyStringBuilder;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -77,7 +78,7 @@ public class LZWAlgoTest {
     @Test
     public void testDecodeLoop(){
     LempelZivWelchAlgo algo = new LempelZivWelchAlgo();
-    StringBuilder builder = new StringBuilder();
+    DiyStringBuilder builder = new DiyStringBuilder();
     String string = "Nalle";
     algo.encodeString(string);
     algo.decodeLoop(builder, string);

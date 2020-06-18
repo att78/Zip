@@ -26,12 +26,12 @@ public class App {
         String string = "Nalle on soma ja haluaa kovasti hunajaa. Nalle kiipeää puuhun. Siellä on mehiläisillä pesä. Nalle kurkottaa kohti hunajaa. Nalle kurkotti liian pitkälle ja tömähtää maahan."
                 + "Nallea tömähti onneksi pehmeään heinäkasaan.";
         System.out.println("Original: " + string);
-        HuffmanAlgo huff = new HuffmanAlgo();
-        byte[] encoded = huff.encodeString(string);
-        System.out.println("Encoded length: " + encoded.length);
-        System.out.println("Original length: "+ string.length());
-        String decoded = huff.decodeString(encoded);
-        System.out.println("Decoded: " + decoded);
+//        HuffmanAlgo huff = new HuffmanAlgo();
+//        byte[] encoded = huff.encodeString(string);
+//        System.out.println("Encoded length: " + encoded.length);
+//        System.out.println("Original length: "+ string.length());
+//        String decoded = huff.decodeString(encoded);
+//        System.out.println("Decoded: " + decoded);
 //        String test = "1111100010";
 //        String decoded2=huff.decodeString(test);
 //        System.out.println("decoded2: "+decoded2);

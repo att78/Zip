@@ -15,7 +15,7 @@ public class DiyStringBuilder {
     private static final int BUFFER_SIZE = 16;
     private static final int BUFFER_MULTI=2;
     
-    private int size;
+    //private int size=16;
     private char[] table; 
     
     private int count; //merkkien määrä
@@ -25,7 +25,7 @@ public class DiyStringBuilder {
      */
     public DiyStringBuilder(){
         this.table= new char[BUFFER_SIZE];
-        this.size = BUFFER_SIZE;
+        //this.size = BUFFER_SIZE;
     }
     
     /**
@@ -47,7 +47,7 @@ public class DiyStringBuilder {
 
     public int getSize(){
     
-        return size;
+        return this.table.length;
     }
 
 //
@@ -57,6 +57,7 @@ public class DiyStringBuilder {
      */
     public DiyStringBuilder(String initial) {
         this.table = initial.toCharArray();
+        this.count =initial.length();
     }
     
     
@@ -72,9 +73,9 @@ public class DiyStringBuilder {
     
     public void increaseBuffer(String string){
         
-        int tooSmall = this.size;
+        int tooSmall = this.table.length;
         int newSize =tooSmall*BUFFER_MULTI;
-        this.size = newSize;
+      //  this.size = newSize;
         char[] cache = new char[newSize];
  //       int cacheNumber = 0;
 
@@ -94,7 +95,7 @@ public class DiyStringBuilder {
     }
     
     public boolean tableIsFull(String input){
-        return this.count+input.length()>this.size;
+        return this.count+input.length()>this.table.length;
     }
     
 //    public void updateCount(int count){
@@ -107,6 +108,7 @@ public class DiyStringBuilder {
         char[] toBuilder= input.toCharArray();        
         for(int i=0; i<toBuilder.length;i++){        
             table[count++]= toBuilder[i];
+            
         }
         
 //        for(int i=0;i<input.length();i++){

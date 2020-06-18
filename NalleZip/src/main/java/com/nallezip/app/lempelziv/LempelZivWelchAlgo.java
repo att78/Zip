@@ -7,6 +7,7 @@ package com.nallezip.app.lempelziv;
 
 import com.nallezip.app.util.DiyArrayList;
 import com.nallezip.app.util.DiyHashMap;
+import com.nallezip.app.util.DiyStringBuilder;
 
 /**
  * Luokka toteuttaa Lempel-Ziv-Welch-algoritmin, joka on yksi niistä Lempel
@@ -87,7 +88,7 @@ public class LempelZivWelchAlgo {
         Integer firstOne = encoded.getFirst();
         int first = (int) firstOne;
         String answer = "" + (char) first;
-        StringBuilder builder = new StringBuilder(answer);
+        DiyStringBuilder builder = new DiyStringBuilder(answer);
         decodeLoop(builder, answer);
         return builder.toString();
     }
@@ -99,7 +100,7 @@ public class LempelZivWelchAlgo {
      * @param builder palautettavan viestin kasaaja
      * @param answer pakkauksen ensimmäinen
      */
-    public void decodeLoop(StringBuilder builder, String answer) {
+    public void decodeLoop(DiyStringBuilder builder, String answer) {
         int size = SIZE;
 
         for (int i = 1; i < encoded.size(); i++) {
