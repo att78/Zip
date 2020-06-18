@@ -9,4 +9,6 @@ siivouksella ja kommentoinnin parantelulla.
 
 To 18.6 4h Huonosti nukuttu yö. StringBuilder->DiyStringBuilderiksi ukonilman aikana. Bugitestausta, virheiden kartoittamista. DiyStringBuilder otettu käyttöön LZW algoritmissa. So far- so good. Käyttöönotto Huffmanissa on sitten seuraava askel.
 
+Viikon saldo Ma-To 19h. Perjantaille voi osua jokunen hajatunti, mutta tuskin kummia.
+
 Viimeiselle viikolle jää IO-luokan parantelu, käyttöliittymän tekeminen. Dokumentoinnin parantelua, suorituskykytestausta, testausraportin ajantasalle saattamista, koodin siivoamist yms. Mahdollisesti vielä yleistä viilausta yms. Kaikenlaista tekemistä vielä on jäljellä, mutta eiköhän tuosta ihan siedettävä lopputulos tule.
