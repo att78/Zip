@@ -6,11 +6,11 @@ käyttöliittymällä ei voi saavuttaa merkittävää etua tekstikäyttöliittym
 
 ## Huffman
 
-Huffman-koodaus käyttää luokkia Huffmantree, HuffmanNode ja itsetehtyjä tietorakenteita DiyHashMap, DiyPriorityQueue(ei vielä toteutettu) ja DiyStringBuilder(ei vielä totetutettu). Huffman-algoritmi tuottaa periaatteessa dynaamisesti annetusta syötteestä pakkauksen.
+Huffman-koodaus käyttää luokkia Huffmantree, HuffmanNode ja itsetehtyjä tietorakenteita DiyHashMap, DiyPriorityQueue. Käytössä on myös itsetehty luokka DiyStringBuilder, joka korvaa javan StringBuilder-luokan. Huffman-algoritmi tuottaa periaatteessa dynaamisesti annetusta syötteestä pakkauksen.
 
 ## Lempel Ziv Welch
 
-Lempel Ziv Welch-algoritmi toimii luokalla LempelZivWelchAlgo. Luokan createLibraries-metodilla luodaan pakkaamisessa ja purkamisessa käytetyt kirjastot. Vasta sen jälkeen käytetään niitä syötteille.
+Lempel Ziv Welch-algoritmi toimii luokalla LempelZivWelchAlgo. Algoritmi käyttää itsetehtyjä tietorakenteita DiyArrayList ja DiyHashMap. Tämän lisäksi luokassa käytetään itsetehtyä luokkaa DiyStringBuilder. Luokan createLibraries-metodilla luodaan pakkaamisessa ja purkamisessa käytetyt kirjastot. Vasta sen jälkeen käytetään niitä syötteille.
 
 
 
