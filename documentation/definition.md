@@ -1,10 +1,9 @@
 # NalleZip
 
-Projektin tavoitteena on tutkia pakkausalgoritmien toimintaa. Tavoitteena on rakentaa tietoa hävittämätön pakkausalgoritmi. Pakkausalgoritmit ovat mielenkiintoisia, sillä ennen tätä harjoitustyötä minulla ei ole niiden toiminnasta mitään käsitystä.
+Projektin toteutuskieli on java. Työssä toteutetaan 2 algoritmia: Huffman algoritmi ja Lempel Ziv Welch. Ensimmäinen työn alle otettava algoritmi on Huffman, mikä valikoitui kurssin aihevinkkien perusteella. Huffman-algoritmi käyttää tallentamiseen kirjastolle puurakennetta. Tieto puretaan puusta kekorakenteen avulla. Oikein toimiessaan Huffman-algoritmi pakkaa tiedon hävittämättä sitä. Huffman-algoritmin aikavaatimus on O(nlogn).
 
-Projektin toteutuskieli on java. Ensimmäinen työn alle otettava algoritmi on Huffman, mikä valikoitui kurssin aihevinkkien perusteella. Huffman-algoritmi käyttää tallentamiseen kirjastolle puurakennetta. Tieto puretaan puusta kekorakenteen avulla. Oikein toimiessaan tämä pakkaa tiedon hävittämättä sitä. Eli kaikki pakattu on palautettavissa alkuperäistä vastaavaan muotoon. Huffman-algoritmin aikavaatimus on O(nlogn).
-
-Toinen toteutettava algoritmi on Lempel Ziv Welch. Lempel Ziv Welchin aikavaatimus on O(n), sillä kirjasto on etukäteen koodattu. Alla on esitelty alustava luokkakaavio. Siinä ei ole esitelty mitään luokkien sisäisestä olemuksesta, sillä harjoitustyön edetessä luokkien sisällä tapahtuu rajua myllerrystä javan valmiiden rakenteiden korvautuessa omilla rakenteilla. Ainakin se on tavoitteena. Alkuvaiheessa ei ole varmaa käsitystä siitä, millaisia ne omat rakenteet tulevat olemaan. Siksipä tässä on esiteltynä lähinnä konseptuaalisella tasolla se, millaisia luokkia sovelluksessa tullee olemaan.
+Toinen toteutettava algoritmi on Lempel Ziv Welch. Lempel Ziv Welchissa on kiinteä kirjasto, joka rakennetaan ennen pakkausta. 
+Lempel Ziv Welchin aikavaatimus on O(n), sillä kirjasto on etukäteen koodattu. Alla on esitelty alustava luokkakaavio. Siinä ei ole esitelty mitään luokkien sisäisestä olemuksesta, eikä luokkakaaviossa käsitellä itsetehtyjä tietorakenteita. Tässä on esiteltynä lähinnä konseptuaalisella tasolla se, millaisia luokkia sovelluksessa tullee olemaan.
 Alustava Luokkakaavio:
 
 ![Alustava luokkakaavio](https://github.com/att78/NalleZip/blob/master/documentation/NalleZipUpdate1.jpg)
