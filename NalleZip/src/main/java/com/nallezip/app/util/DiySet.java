@@ -24,10 +24,11 @@ public class DiySet {
     public DiySet() {
         this.table = new Character[SIZE];
     }
-    
+
     /**
      * metodi palauttaa tablen objektimuotoisena.
-     * @return 
+     *
+     * @return
      */
     public Object[] getTable() {
         return table;
@@ -55,7 +56,6 @@ public class DiySet {
 //        }
 //        return full;
 //    }
-
 //    /**
 //     * apumetodi, joka hoitaa taulukon kasvatuksen, jos add-metodi huomaa
 //     * taulukon olevan täynnä eikä siten pysty lisäämään uutta lukua.
@@ -79,7 +79,6 @@ public class DiySet {
 //        this.table = new Character[cache.length];
 //        this.table = cache;
 //    }
-
     //Add-metodin toimintaa voisi vielä parantaa. Annetaanko setin koko suoraan HashMapin kokona tms? vai pitääkö ola valmius setin kasvattamiseen?
     /**
      * metodi, jolla lisätä parametrina annetun luvun.
@@ -97,15 +96,16 @@ public class DiySet {
         this.amount++;
 
     }
-    
+
     /**
      * DiySetin toString-metodi on muoattu kehitystyötä varten sopivaksi.
+     *
      * @return muokattu kuvaus luokasta
      */
     public String toString() {
 
         String string = "{";
-        for (int i = 0; i < table.length  ; i++) {
+        for (int i = 0; i < table.length; i++) {
             if (table[i] == null) {
                 break;
             }

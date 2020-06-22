@@ -47,11 +47,11 @@ public class DiyHashMapTest {
     @Test
     public void testPut() {
         DiyHashMap<Integer, Integer> diy = new DiyHashMap();
-        assertEquals(diy.size(), 512);//  tarkistus, koska diyHashMapin koon ei tule olla nolla tässä
+        assertEquals(diy.size(), 0);//  tarkistus, koska diyHashMapin koon ei tule olla nolla tässä
         int test = 1;
         int test2 = 2;
         diy.put(test, test2);
-        assertEquals(diy.size(), 512);
+        assertEquals(diy.size(), 1);
         int answer = diy.get(test);
         assertEquals(test2, answer);
     }
@@ -69,7 +69,9 @@ public class DiyHashMapTest {
     @Test
     public void testSize() {
         DiyHashMap<Integer, Integer> diy = new DiyHashMap();
-        assertEquals(512, diy.size());
+        assertEquals(0, diy.size());
+        diy.put(1, 1);
+        assertEquals(1,diy.size());
     }
 
     @Test

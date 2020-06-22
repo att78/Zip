@@ -19,23 +19,23 @@ import static org.junit.Assert.*;
  * @author tallbera
  */
 public class LZWAlgoTest {
-    
+
     public LZWAlgoTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
-        
+
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -46,35 +46,40 @@ public class LZWAlgoTest {
     // @Test
     // public void hello() {}
     @Test
-    public void testCreateLibraries(){
+    public void testCreateLibraries() {
         LempelZivWelchAlgo algo = new LempelZivWelchAlgo();
         algo.createEncodeLibrary();
-                
-        assertEquals(512,algo.getLibrary().size());
-        assertEquals(512, algo.getLibraryDecoded().size());
+
+        int value = algo.getLibrary().size();
+//        int value2= algo.getLibraryDecoded().size();
+        assertEquals(512, value);
+
+        algo.createDecodeLibrary();
+        int value2 = algo.getLibraryDecoded().size();
+        assertEquals(512, value2);
+
     }
-    
-    
+
     @Test
-    public void testFillLibrary(){
+    public void testFillLibrary() {
         LempelZivWelchAlgo algo = new LempelZivWelchAlgo();
         algo.createEncodeLibrary();
         String s = "Nalle";
         algo.fillLibrary(s);
-       // assertEquals("[78, 97, 108, 108, 101]", algo.getEncoded().toString());
-       // huom- diyArrayListin käyttöönotto rikkoitestin
+        // assertEquals("[78, 97, 108, 108, 101]", algo.getEncoded().toString());
+        // huom- diyArrayListin käyttöönotto rikkoitestin
     }
-    
+
     @Test
-    public void testDecodeString(){
-    LempelZivWelchAlgo algo = new LempelZivWelchAlgo();
-    String string = "Nalle";
-    byte[] encoded = algo.encodeString(string);
-    String answer = algo.decodeString(encoded);
-    
-    assertEquals("Nalle", answer);
+    public void testDecodeString() {
+        LempelZivWelchAlgo algo = new LempelZivWelchAlgo();
+        String string = "Nalle";
+        byte[] encoded = algo.encodeString(string);
+        String answer = algo.decodeString(encoded);
+
+        assertEquals("Nalle", answer);
     }
-    
+
 //    @Test
 //    public void testDecodeLoop(){
 //    LempelZivWelchAlgo algo = new LempelZivWelchAlgo();
@@ -86,5 +91,4 @@ public class LZWAlgoTest {
 //    //assertEquals("Nalle", builder.toString());
 //    // huom diyArrayListin käyttöönotto rikkoi testin
 //    }
-           
 }

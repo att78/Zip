@@ -12,8 +12,6 @@ import com.nallezip.app.ui.UI;
 import com.nallezip.app.util.DiyArrayList;
 import com.nallezip.app.util.DiyHashMap;
 
-
-
 import java.util.PriorityQueue;
 
 /**
@@ -25,24 +23,24 @@ public class App {
     public static void main(String[] args) {
         //Test overrides parameters
         if (args == null || args.length == 0) {
-            args = new String[] {"encrypt", "huffman", "test.txt", "test.huff"};
+            args = new String[]{"encrypt", "huffman", "test.txt", "test.huff"};
             new UI(args);
 
-            args = new String[] {"decrypt",  "huffman",  "test.huff",  "test-decrypted-huff.txt"};
+            args = new String[]{"decrypt", "huffman", "test.huff", "test-decrypted-huff.txt"};
             new UI(args);
 
-            args = new String[] {"encrypt", "lzw", "test.txt", "test.lzw"};
+            args = new String[]{"encrypt", "lzw", "test.txt", "test.lzw"};
             new UI(args);
 
-            args = new String[] {"decrypt",  "lzw",  "test.lzw",  "test-decrypted-lzw.txt"};
+            args = new String[]{"decrypt", "lzw", "test.lzw", "test-decrypted-lzw.txt"};
             new UI(args);
 
         } else {
             new UI(args);
         }
-        
+
     }
-    
+
     public static void test() {
 
         String string = "Nalle on soma ja haluaa kovasti hunajaa. Nalle kiipeää puuhun. Siellä on mehiläisillä pesä. Nalle kurkottaa kohti hunajaa. Nalle kurkotti liian pitkälle ja tömähtää maahan."
@@ -75,8 +73,8 @@ public class App {
 //
         LempelZivWelchAlgo algo = new LempelZivWelchAlgo();
         byte[] testing = algo.encodeString(string);
-        System.out.println("Alkuperäinen koko on "+string.length());
-        System.out.println("Pakattu koko on: " +testing.length);
+        System.out.println("Alkuperäinen koko on " + string.length());
+        System.out.println("Pakattu koko on: " + testing.length);
         String answer = algo.decodeString(testing);
         System.out.println(answer);
 //        

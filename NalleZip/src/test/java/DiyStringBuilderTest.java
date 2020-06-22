@@ -52,9 +52,9 @@ public class DiyStringBuilderTest {
     public void tableIsFullTest(){
         String string = "012345678901234567890";
         DiyStringBuilder builder = new  DiyStringBuilder(); //oletuskoko 16
-        assertEquals(16,builder.getSize());//palauttaa taulukon koon
+        assertEquals(0,builder.length());//palauttaa taulukon koon
         builder.append(string);
-        assertEquals(32, builder.getSize());//palauttaa taulukon koon
+        assertEquals(21, builder.length());//palauttaa taulukon koon
         
         
     }

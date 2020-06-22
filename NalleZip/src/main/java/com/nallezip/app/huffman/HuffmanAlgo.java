@@ -11,6 +11,7 @@ import com.nallezip.app.util.DiyByteArrayReader;
 import com.nallezip.app.util.DiyHashMap;
 import com.nallezip.app.util.DiyHeap;
 import com.nallezip.app.util.DiySet;
+import com.nallezip.app.util.DiyStringBuilder;
 
 /**
  * Huffman algoritmin toteuttava luokka
@@ -19,7 +20,8 @@ import com.nallezip.app.util.DiySet;
  */
 public class HuffmanAlgo {
 
-    public DiyHashMap<Character, String> huffmanTree = new DiyHashMap();//käännetty publiciksi suorituskykytestauksen suorittamiseksi. Ei muita syitä
+    public DiyHashMap<Character, String> huffmanTree = new DiyHashMap();
+//käännetty publiciksi suorituskykytestauksen suorittamiseksi. Ei muita syitä
     private HuffmanNode root;
 
     /**
@@ -72,7 +74,7 @@ public class HuffmanAlgo {
                 node.setLeft(null);
                 node.setRight(null);
                 node.setCh(c);
-                System.out.println("Create new leaf node " + c);
+                //System.out.println("Create new leaf node " + c);
                 int weight = position.get(c);
                 node.setPosition(weight);
                 nodeQueue.offer(node);
@@ -87,8 +89,7 @@ public class HuffmanAlgo {
      * @param node asetettava HuffmanNode
      * @param builder stringBuilder
      */
-    public void setHuffmanTree(HuffmanNode node, StringBuilder builder) {
-
+    public void setHuffmanTree(HuffmanNode node, DiyStringBuilder builder) {
         if (node != null) {
             if (node.getLeft() == null && node.getRight() == null) {
                 huffmanTree.put(node.getCh(), builder.toString());
@@ -107,7 +108,7 @@ public class HuffmanAlgo {
      * @param node lisättävä HuffmanNode
      * @param builder binääriStringiä keräävä Olio.
      */
-    public void builderAppends(HuffmanNode node, StringBuilder builder) {
+    public void builderAppends(HuffmanNode node, DiyStringBuilder builder) {
         builder.append('0');
         setHuffmanTree(node.getLeft(), builder);
         builder.deleteCharAt(builder.length() - 1);
@@ -145,8 +146,8 @@ public class HuffmanAlgo {
     public byte[] encodeString(String string) {
         DiyHashMap<Character, Integer> position = createPosition(string);
         root = findRootNode(position);
-        setHuffmanTree(root, new StringBuilder());
-        StringBuilder builder = new StringBuilder();
+        setHuffmanTree(root, new DiyStringBuilder());
+        DiyStringBuilder builder = new DiyStringBuilder();
 
         for (int i = 0; i < string.length(); i++) {
             char ch = string.charAt(i);
@@ -166,19 +167,18 @@ public class HuffmanAlgo {
     private byte[] addTreeToBytes(byte[] resultBytes) {
         DiyByteArray treeBytesArray = new DiyByteArray(huffmanTree.size() * 2);
         DiyByteArray treeBitsArray = new DiyByteArray(huffmanTree.size() * 2);
-
         writeTree(treeBytesArray, treeBitsArray, root);
 
-        byte[] combined = new byte[resultBytes.length + treeBytesArray.getSize() + treeBitsArray.getSize() + 4];
-        //Merkkien koko
-        //System.out.println("Write byte size of " + treeBytesArray.getSize());
-        byte[] byteSize = intToByteArray(treeBytesArray.getSize());
-        for (int i = 0; i < 4; i++) {
-            combined[i] = byteSize[i];
-        }
+//        byte[] combined = new byte[resultBytes.length + treeBytesArray.getSize() + treeBitsArray.getSize() + 4];
+//        //Merkkien koko
+//        //System.out.println("Write byte size of " + treeBytesArray.getSize());
+//        byte[] byteSize = intToByteArray(treeBytesArray.getSize());
+//        for (int i = 0; i < 4; i++) {
+//            combined[i] = byteSize[i];
+//        }
+        byte[] combined = createCombined(resultBytes, treeBytesArray, treeBitsArray);
 
         int i = 4;
-
         //merkit
         byte[] treeBytes = treeBytesArray.getBytes();
         int maxSize = treeBytes.length + 4;
@@ -186,7 +186,6 @@ public class HuffmanAlgo {
         for (int j = 0; i < maxSize; i++, j++) {
             combined[i] = treeBytes[j];
         }
-
         //puun rakenne
         byte[] treeBits = treeBitsArray.getBytes();
         maxSize += treeBits.length;
@@ -198,6 +197,27 @@ public class HuffmanAlgo {
         maxSize += resultBytes.length;
 
         //
+        combined = finalizeCombined(resultBytes, combined, maxSize, i);
+//        for (int j = 0; i < maxSize; i++, j++) {
+//            combined[i] = resultBytes[j];
+//        }
+
+        return combined;
+    }
+
+    private byte[] createCombined(byte[] resultBytes, DiyByteArray treeBytesArray, DiyByteArray treeBitsArray) {
+        byte[] combined = new byte[resultBytes.length + treeBytesArray.getSize() + treeBitsArray.getSize() + 4];
+        //Merkkien koko
+        //System.out.println("Write byte size of " + treeBytesArray.getSize());
+        byte[] byteSize = intToByteArray(treeBytesArray.getSize());
+        for (int i = 0; i < 4; i++) {
+            combined[i] = byteSize[i];
+        }
+
+        return combined;
+    }
+
+    private byte[] finalizeCombined(byte[] resultBytes, byte[] combined, int maxSize, int i) {
         for (int j = 0; i < maxSize; i++, j++) {
             combined[i] = resultBytes[j];
         }
@@ -242,13 +262,12 @@ public class HuffmanAlgo {
     public byte[] binaryStringToBytes(String total) {
 
         int lastByteLength = total.length() % 8;
-
         int size = (total.length() / 8);
         if (lastByteLength > 0) {
             size++;
         }
-
         byte[] resultBytes = new byte[size + 1];
+        //byte[] resultBytes = getResultBytes(total);
         int byteIndex = 1;
         int value = 0;
         resultBytes[0] = (byte) lastByteLength;
@@ -258,17 +277,38 @@ public class HuffmanAlgo {
                 value = 0;
                 byteIndex++;
             }
-            value *= 2;
-            char ch = total.charAt(i);
-            if (ch == '1') {
-                value++;
-            }
+//            value *= 2;
+//            char ch = total.charAt(i);
+//            if (ch == '1') {
+//                value++;
+//            }
+            value = increaseValue(total, value, i);
         }
         if (byteIndex == size) {
             // System.out.println("Setting last byte to " + value);
             resultBytes[byteIndex] = (byte) value;
         }
         return resultBytes;
+    }
+
+
+
+    /**
+     * apumetodi binaryStringToBytes-metodille
+     *
+     * @param total
+     * @param value
+     * @param i
+     * @return
+     */
+    private int increaseValue(String total, int value, int i) {
+        value *= 2;
+        char ch = total.charAt(i);
+        if (ch == '1') {
+            value++;
+        }
+
+        return value;
     }
 
     /**
@@ -356,7 +396,7 @@ public class HuffmanAlgo {
      * @return purettu viesti
      */
     public String decodeString(byte[] packed) {
-        StringBuilder builder = new StringBuilder();
+        DiyStringBuilder builder = new DiyStringBuilder();
 
         packed = readTree(packed);
 
@@ -420,7 +460,7 @@ public class HuffmanAlgo {
         boolean leaf = bitReader.readBit();
         if (leaf) {
             char c = (char) byteReader.readByte();
-            System.out.println("Create new leaf node " + c);
+            //System.out.println("Create new leaf node " + c);
             node.setCh(c);
         } else {
             //System.out.println("Create new node");

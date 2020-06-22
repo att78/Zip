@@ -31,7 +31,7 @@ public class DiyHashMap<Key, Value> {
     private int getHashInt(Key key) {
         //onko riittävän uniikki ja saako valmista hashcodea käyttää
         int hashCode = key.hashCode();
-        if (hashCode < 0 ) {
+        if (hashCode < 0) {
             hashCode *= -1;
         }
         return hashCode % SIZE;

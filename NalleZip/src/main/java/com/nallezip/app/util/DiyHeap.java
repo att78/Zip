@@ -18,7 +18,6 @@ public class DiyHeap {
     private HuffmanNode[] diyHeap = new HuffmanNode[512]; // pitäiskö olla 513 eli indeksille yksi paikka?
     private int maxSize; //= 512;
 
-
     /**
      * Tyhjä konstruktori testausta varten
      */
@@ -27,7 +26,7 @@ public class DiyHeap {
     }
 
     /**
-     * Minimikeon konstruktori. 
+     * Minimikeon konstruktori.
      *
      * @param maxSize konstruktorille annetaan keon maksimi koko parametrina.
      */
@@ -44,7 +43,8 @@ public class DiyHeap {
      * Noden vasemmanpuoleisen lapsen noden positio-arvon palauttava metodi
      *
      * @param mom Position-arvo nodelle, jolle tämä arvo lasketaan
-     * @return palauttaa keossa noden alempana olevan vasemmanpuoleisen noden arvon
+     * @return palauttaa keossa noden alempana olevan vasemmanpuoleisen noden
+     * arvon
      */
     public int leftChild(int mom) {
 
@@ -55,7 +55,8 @@ public class DiyHeap {
      * Noden oikeanpuoleisen lapsen noden positio-arvon palauttava metodi
      *
      * @param mom sijainti, johon suhteessa palautusarvo lasketaan
-     * @return palauttaa keossa noden alempana olevan oikeanpuoleisen noden arvon.
+     * @return palauttaa keossa noden alempana olevan oikeanpuoleisen noden
+     * arvon.
      */
     public int rightChild(int mom) {
 
@@ -66,7 +67,8 @@ public class DiyHeap {
     /**
      * palauttaa vanhempi-noden positio-arvon
      *
-     * @param number arvo nodelle, jonka yläpuolella sijaitsevan noden arvo halutaan selvittää
+     * @param number arvo nodelle, jonka yläpuolella sijaitsevan noden arvo
+     * halutaan selvittää
      * @return ylempänä sijaitsevan noden arvo.
      */
     public int mom(int number) {
@@ -100,6 +102,7 @@ public class DiyHeap {
 
     /**
      * metodi vaihtaa kahden noden paikkaa taulukossa.
+     *
      * @param first ensimmäisen noden taulukkoindeksi
      * @param second toisen noden taulukkoindeksi
      */
@@ -130,10 +133,10 @@ public class DiyHeap {
 
     /**
      * menee keon läpi annetun taulukkoindeksin suhteen.
-     * @param index 
+     *
+     * @param index
      */
     private void diyHeapify(int index) {
-
 
         int mom = diyHeap[index].getPosition();
 
@@ -147,7 +150,7 @@ public class DiyHeap {
         int childRightIndex = rightChild(index);
         HuffmanNode rightChild = diyHeap[childRightIndex];
         HuffmanNode minNode = diyHeap[minimumIndex];
- 
+
         if (leftChild != null && rightChild != null && rightChild != null) {
             if ((diyHeap[minimumIndex].getPosition() > diyHeap[childLeftIndex].getPosition()) && childLeftIndex <= size) {
                 minimumIndex = childLeftIndex;
@@ -166,6 +169,7 @@ public class DiyHeap {
 
     /**
      * etsii pienimmän arvon omaavan HuffmanNoden
+     *
      * @return palauttaa pienimmän HuffmanNoden
      */
     public HuffmanNode poll() {
@@ -184,6 +188,7 @@ public class DiyHeap {
 
     /**
      * metodi palauttaa keon koon.
+     *
      * @return keon koko
      */
     public int size() {

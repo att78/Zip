@@ -24,7 +24,7 @@ public class DiyBitArrayReader {
         //System.out.println("Read bit " + (bitIndex+1) + " from byte with value " + value);
         int max = 128;
         for (int i = 0; i < bitIndex; i++) {
-            if (value>=max) {
+            if (value >= max) {
                 value -= max;
             }
             max = max / 2;
@@ -40,7 +40,7 @@ public class DiyBitArrayReader {
             //System.out.println("Bit value = true");
             return true;
         }
-            //System.out.println("Bit value = false");
+        //System.out.println("Bit value = false");
         return false;
     }
 

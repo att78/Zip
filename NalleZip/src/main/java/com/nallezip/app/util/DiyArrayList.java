@@ -24,7 +24,7 @@ public class DiyArrayList {
     /**
      * Arrayhin kerätään Integerejä
      */
-    private Integer[] diyArray = new Integer[512];
+    private Short[] diyArray = new Short[512];
 
     /**
      * tyhjä konstruktori
@@ -32,7 +32,7 @@ public class DiyArrayList {
     public DiyArrayList() {
     }
 
-    public DiyArrayList(Integer[] existingArray) {
+    public DiyArrayList(Short[] existingArray) {
         diyArray = existingArray;
         amount = existingArray.length;
     }
@@ -68,11 +68,11 @@ public class DiyArrayList {
      */
     private void doubleTable(int doubleSize) {
 
-        Integer[] cache = new Integer[doubleSize];
+        Short[] cache = new Short[doubleSize];
         int cacheNumber = 0;
 
         for (int i = 0; i < this.diyArray.length; i++, cacheNumber++) {
-            Integer number = diyArray[i];
+            Short number = diyArray[i];
             if (number == null) {
                 cacheNumber--;
                 continue;
@@ -80,11 +80,11 @@ public class DiyArrayList {
             cache[cacheNumber] = diyArray[i];
         }
         this.diyArray = null;
-        this.diyArray = new Integer[cache.length];
+        this.diyArray = new Short[cache.length];
         this.diyArray = cache;
     }
 
-    public Integer[] getDiyArray() {
+    public Short[] getDiyArray() {
         return diyArray;
     }
 
@@ -93,7 +93,7 @@ public class DiyArrayList {
      *
      * @param number lisättävä luku
      */
-    public void add(Integer number) {
+    public void add(Short number) {
 
         if (tableIsFull()) {
             int doubleSize = size() * 2;
@@ -131,8 +131,8 @@ public class DiyArrayList {
      *
      * @return palauttaa listan ensimmäisen alkion
      */
-    public Integer getFirst() {
-        Integer diy = null;
+    public Short getFirst() {
+        Short diy = null;
         diy = this.diyArray[0];
         return diy;
     }
@@ -143,15 +143,15 @@ public class DiyArrayList {
      * @param n sijainti listalla
      * @return palautettava luku.
      */
-    public int get(int n) {
+    public short get(int n) {
         if (n > size()) {
             return -1;
         }
-        Integer diy = null;
+        Short diy = null;
         diy = this.diyArray[n];
-        int answer;
+        short answer;
         if (diy != null) {
-            answer = (int) diy;
+            answer = (short) diy;
             return answer;
         } else {
 

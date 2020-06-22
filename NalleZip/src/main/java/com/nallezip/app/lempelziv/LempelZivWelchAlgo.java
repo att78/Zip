@@ -18,9 +18,9 @@ import com.nallezip.app.util.DiyStringBuilder;
 public class LempelZivWelchAlgo {
 
     private DiyArrayList encoded = new DiyArrayList();
-    private DiyHashMap<String, Integer> library = new DiyHashMap();
-    private DiyHashMap<Integer, String> libraryDecoded = new DiyHashMap();
-    private final int SIZE = 512;
+    private DiyHashMap<String, Short> library = new DiyHashMap();
+    private DiyHashMap<Short, String> libraryDecoded = new DiyHashMap();
+    private final short SIZE = 512;
 
     public LempelZivWelchAlgo() {
     }
@@ -39,13 +39,13 @@ public class LempelZivWelchAlgo {
         byte[] result = listToBytes();
         return result;
     }
-    
+
     private byte[] listToBytes() {
-        byte[] result = new byte[encoded.size()*4];
-        Integer[] numbers = encoded.getDiyArray();
-        for (int i=0, j=0;i<encoded.size();i++) {
-            byte[] bytes = intToByteArray(numbers[i]);
-            for (int k=0;k<4;k++) {
+        byte[] result = new byte[encoded.size() * 2];
+        Short[] numbers = encoded.getDiyArray();
+        for (int i = 0, j = 0; i < encoded.size(); i++) {
+            byte[] bytes = shortToByteArray(numbers[i]);
+            for (int k = 0; k < 2; k++) {
                 result[j++] = bytes[k];
             }
         }
@@ -59,23 +59,23 @@ public class LempelZivWelchAlgo {
      */
     public void createEncodeLibrary() {
         library = new DiyHashMap();
-        for (int i = 0; i < SIZE; i++) {
+        for (short i = 0; i < SIZE; i++) {
             library.put("" + (char) i, i);
         }
     }
 
-        /**
+    /**
      * Luodaan dekoodauksessa käytetty kirjastot.
      *
      *
      */
     public void createDecodeLibrary() {
         libraryDecoded = new DiyHashMap();
-        for (int i = 0; i < SIZE; i++) {
+        for (short i = 0; i < SIZE; i++) {
             libraryDecoded.put(i, "" + (char) i);
         }
     }
-    
+
     /**
      * Enkoodauksessa käytettävän kirjaston täyttäminen annetun syötteen
      * pohjalta
@@ -84,7 +84,7 @@ public class LempelZivWelchAlgo {
      */
     public void fillLibrary(String string) {
         String a = string.substring(0, 1);
-        int size = SIZE;
+        short size = SIZE;
         for (int i = 1; i < string.length(); i++) {
             String b = string.substring(i, i + 1);
             String ab = a + b;
@@ -110,18 +110,18 @@ public class LempelZivWelchAlgo {
     public String decodeString(byte[] encodedBytes) {
         createDecodeLibrary();
         setEncodedList(encodedBytes);
-        Integer firstOne = encoded.getFirst();
+        Short firstOne = encoded.getFirst();
         int first = (int) firstOne;
         String answer = "" + (char) first;
         DiyStringBuilder builder = new DiyStringBuilder(answer);
         decodeLoop(builder, answer);
         return builder.toString();
     }
-    
+
     private void setEncodedList(byte[] encodedBytes) {
         encoded = new DiyArrayList();
-        for (int i=0;i<encodedBytes.length;i++) {
-            int number = bytesToInt(encodedBytes[i], encodedBytes[++i], encodedBytes[++i], encodedBytes[++i]);
+        for (int i = 0; i < encodedBytes.length; i++) {
+            short number = bytesToShort(encodedBytes[i], encodedBytes[++i]);
             encoded.add(number);
         }
 
@@ -135,10 +135,10 @@ public class LempelZivWelchAlgo {
      * @param answer pakkauksen ensimmäinen
      */
     public void decodeLoop(DiyStringBuilder builder, String answer) {
-        int size = SIZE;
+        short size = SIZE;
 
         for (int i = 1; i < encoded.size(); i++) {
-            Integer number = encoded.get(i);
+            Short number = encoded.get(i);
             String s = "";
             if (libraryDecoded.containsKey(number)) {
                 s = libraryDecoded.get(number);
@@ -152,32 +152,31 @@ public class LempelZivWelchAlgo {
         }
     }
 
-    public DiyHashMap<String, Integer> getLibrary() {
+    public DiyHashMap<String, Short> getLibrary() {
         return library;
     }
 
-    public DiyHashMap<Integer, String> getLibraryDecoded() {
+    public DiyHashMap<Short, String> getLibraryDecoded() {
         return libraryDecoded;
     }
 
     public DiyArrayList getEncoded() {
         return encoded;
     }
-    
-    
-    private byte[] intToByteArray(int number) {
+
+    private byte[] shortToByteArray(int number) {
         return new byte[]{
-            (byte) ((number >> 24) & 0xff),
-            (byte) ((number >> 16) & 0xff),
+            //            (byte) ((number >> 24) & 0xff),
+            //            (byte) ((number >> 16) & 0xff),
             (byte) ((number >> 8) & 0xff),
             (byte) (number)};
     }
 
-    private int bytesToInt(byte byte1, byte byte2, byte byte3, byte byte4) {
-        return (int) ((0xff & byte1) << 24
-                | (0xff & byte2) << 16
-                | (0xff & byte3) << 8
-                | (0xff & byte4));
+    private short bytesToShort(byte byte1, byte byte2) {
+        return (short) ((0xff & byte1) << 8
+                | (0xff & byte2));
+//                | (0xff & byte3) << 8
+//                | (0xff & byte4));
     }
 
 }

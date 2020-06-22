@@ -8,6 +8,7 @@ import com.nallezip.app.huffman.HuffmanAlgo;
 import com.nallezip.app.huffman.HuffmanNode;
 import com.nallezip.app.util.DiyHashMap;
 import com.nallezip.app.util.DiyHeap;
+import com.nallezip.app.util.DiyStringBuilder;
 
 import java.util.PriorityQueue;
 import org.junit.After;
@@ -61,7 +62,7 @@ public class HuffmanAlgoTest {
         HuffmanNode node = new HuffmanNode();
         HuffmanNode right = new HuffmanNode();
         HuffmanNode left = new HuffmanNode();
-        StringBuilder builder = new StringBuilder();
+        DiyStringBuilder builder = new DiyStringBuilder();
         DiyHashMap<Character, String> huffmanTree = new DiyHashMap();
         node.setCh('a');
         node.setPosition(1);
