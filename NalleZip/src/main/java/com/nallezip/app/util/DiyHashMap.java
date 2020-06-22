@@ -173,7 +173,11 @@ public class DiyHashMap<K, V> {
         }
         return diySet;
     }
-
+    
+    /**
+     * toString-metodi, jota on tarpeen mukaan käytetty testauksessa.
+     * @return 
+     */
     public String toString() {
         String answer = "{";
         for (int i = 0; i < table.length - 1; i++) {

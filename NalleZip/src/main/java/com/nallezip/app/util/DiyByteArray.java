@@ -6,6 +6,7 @@
 package com.nallezip.app.util;
 
 /**
+ * itsetehty ByteArray-luokka
  *
  * @author tallbera
  */
@@ -19,15 +20,18 @@ public class DiyByteArray {
         bytes = new byte[size];
     }
 
+    /**
+     * kirjoittaa bitin taulukkoon.
+     *
+     * @param value
+     */
     public void writeBit(boolean value) {
         int byteValue = bytes[byteIndex] & 0xFF;
-        //System.out.println("Add bit " + value + " to value " + byteValue + " bit index is " + bitIndex);
         byteValue *= 2;
         if (value) {
             byteValue++;
         }
         bytes[byteIndex] = (byte) byteValue;
-        //System.out.println("Result value: " + byteValue);
         if (bitIndex == 7) {
             bitIndex = 0;
             byteIndex++;
@@ -36,10 +40,20 @@ public class DiyByteArray {
         }
     }
 
+    /**
+     * kirjoittaa byten taulukkoon.
+     *
+     * @param byteValue
+     */
     public void writeByte(byte byteValue) {
         bytes[byteIndex++] = byteValue;
     }
 
+    /**
+     * metodi tutkii DiyByteArray:n koon
+     *
+     * @return DiyByteArrayn pituus
+     */
     public int getSize() {
         int size = byteIndex;
         if (bitIndex > 0) {
@@ -48,6 +62,11 @@ public class DiyByteArray {
         return size;
     }
 
+    /**
+     * palauttaa byte-taulukon.
+     *
+     * @return
+     */
     public byte[] getBytes() {
         byte[] result = new byte[getSize()];
         int i = 0;

@@ -12,6 +12,7 @@ import java.nio.file.Paths;
 
 //import sun.security.util.IOUtils;
 /**
+ * Tiedostojen käsittelyluokka
  *
  * @author tallbera
  */
@@ -23,12 +24,24 @@ public class FileIO {
         this.filename = filename;
     }
 
+    /**
+     * lukee tiedoston
+     *
+     * @return
+     * @throws IOException
+     */
     public byte[] readFile() throws IOException {
         Path route = Paths.get(filename);
         return Files.readAllBytes(route);
 
     }
 
+    /**
+     * kirjoittaa tiedostoon
+     *
+     * @param bytes
+     * @throws IOException
+     */
     public void writeFile(byte[] bytes) throws IOException {
         Path route = Paths.get(filename);
         Files.write(route, bytes);

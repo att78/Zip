@@ -40,9 +40,14 @@ public class LempelZivWelchAlgo {
         return result;
     }
 
+    /**
+     * Muuttaa pakkauksessa käytetyn DiyArrayListin byte-taulukoksi
+     *
+     * @return byte-taulukon, joka vastaa pakattua listaa.
+     */
     private byte[] listToBytes() {
         byte[] result = new byte[encoded.size() * 2];
-        Short[] numbers = encoded.getDiyArray();
+        short[] numbers = encoded.getDiyArray();
         for (int i = 0, j = 0; i < encoded.size(); i++) {
             byte[] bytes = shortToByteArray(numbers[i]);
             for (int k = 0; k < 2; k++) {
@@ -110,7 +115,7 @@ public class LempelZivWelchAlgo {
     public String decodeString(byte[] encodedBytes) {
         createDecodeLibrary();
         setEncodedList(encodedBytes);
-        Short firstOne = encoded.getFirst();
+        short firstOne = encoded.getFirst();
         int first = (int) firstOne;
         String answer = "" + (char) first;
         DiyStringBuilder builder = new DiyStringBuilder(answer);
@@ -118,6 +123,11 @@ public class LempelZivWelchAlgo {
         return builder.toString();
     }
 
+    /**
+     * decodeString-metodin apumetodi. Käyttää apumetodia bytesToShort.
+     *
+     * @param encodedBytes
+     */
     private void setEncodedList(byte[] encodedBytes) {
         encoded = new DiyArrayList();
         for (int i = 0; i < encodedBytes.length; i++) {
@@ -164,19 +174,30 @@ public class LempelZivWelchAlgo {
         return encoded;
     }
 
-    private byte[] shortToByteArray(int number) {
+    /**
+     * Muuttaa parametrina annetun luvun byte[]-taulukoksi.
+     *
+     * @param number
+     * @return
+     */
+    private byte[] shortToByteArray(short number) {
         return new byte[]{
-            //            (byte) ((number >> 24) & 0xff),
-            //            (byte) ((number >> 16) & 0xff),
             (byte) ((number >> 8) & 0xff),
             (byte) (number)};
     }
 
+    /**
+     * Muuttaa parametreina annetut bytet short-tyyppisiksi numeroiksi.
+     * SetEncoded-metodin apumetodi.
+     *
+     * @param byte1
+     * @param byte2
+     * @return
+     */
     private short bytesToShort(byte byte1, byte byte2) {
         return (short) ((0xff & byte1) << 8
                 | (0xff & byte2));
-//                | (0xff & byte3) << 8
-//                | (0xff & byte4));
+
     }
 
 }

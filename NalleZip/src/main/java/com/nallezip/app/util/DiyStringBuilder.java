@@ -17,17 +17,15 @@ public class DiyStringBuilder {
     private static final int BUFFER_SIZE = 16;
     private static final int BUFFER_MULTI = 2;
 
-    //private int size=16;
     private char[] table;
 
-    private int count = 0; //merkkien määrä
+    private int count = 0;
 
     /**
      * Konstruktori oletusarvoilla
      */
     public DiyStringBuilder() {
         this.table = new char[BUFFER_SIZE];
-        //this.size = BUFFER_SIZE;
     }
 
     /**
@@ -41,20 +39,11 @@ public class DiyStringBuilder {
 
     }
 
-    /**
-     * Konstruktori, joka ottaa sisäänsä DiyStringBuilderin halutun koon
-     *
-     * @param size
-     */
-//    public DiyStringBuilder(int size){
-//        this.size=size;    
-//    }
     public int length() {
 
         return this.count;
     }
 
-//
     /**
      * Konstruktori, joka ottaa sisäänsä aloittavan Stringin.
      *
@@ -65,47 +54,51 @@ public class DiyStringBuilder {
         this.count = initial.length();
     }
 
+    /**
+     * metodi,joka lisää DiyStringBuilderiin syötteen, kun syöte on String
+     *
+     * @param input
+     * @return
+     */
     public DiyStringBuilder append(String input) {
         while (tableIsFull(input.length())) {
             increaseBuffer();
         }
-        //    updateCount(input.length()); //voiks tää olla tässä
+
         addInput(input);
 
         return this;
     }
 
+    /**
+     * metodi, joka lisää DiyStringBuilderiin syötteen, kun syöte on char
+     *
+     * @param input
+     * @return
+     */
     public DiyStringBuilder append(char input) {
         while (tableIsFull(1)) {
             increaseBuffer();
         }
-        //    updateCount(input.length()); //voiks tää olla tässä
         table[count++] = input;
 
         return this;
     }
 
+    /**
+     * kasvattaa DiyStringBuilderin taulukkoa.
+     */
     public void increaseBuffer() {
         if (this.table.length == 0) {
-            //palautta oletustaulukko jos edellinen tyhjeni
+            //palauttaa oletustaulukon, jos edellinen tyhjeni
             this.table = new char[BUFFER_SIZE];
             return;
         }
-        
+
         int tooSmall = this.table.length;
         int newSize = tooSmall * BUFFER_MULTI;
-        //  this.size = newSize;
         char[] cache = new char[newSize];
-        //       int cacheNumber = 0;
-
         for (int i = 0; i < this.table.length; i++) {
-            //, cacheNumber++) {
-            char ch = table[i];
-//            if (ch == null) {
-//                cacheNumber--;
-//                continue;
-//            }
-//            cache[cacheNumber] = table[i];
             cache[i] = table[i];
         }
         this.table = null;
@@ -113,27 +106,34 @@ public class DiyStringBuilder {
         this.table = cache;
     }
 
+    /**
+     * tarkistaa onko taulukko jo täynnä.
+     *
+     * @param inputLength
+     * @return
+     */
     public boolean tableIsFull(int inputLength) {
         return this.count + inputLength >= this.table.length;
     }
 
-//    public void updateCount(int count){
-//        this.count +=count;
-//    }
+    /**
+     * Append-metodin apumetodi, joka lisää syötteen table-tauluun.
+     *
+     * @param input
+     */
     private void addInput(String input) {
 
         char[] toBuilder = input.toCharArray();
         for (int i = 0; i < toBuilder.length; i++) {
             table[count++] = toBuilder[i];
-
         }
-
-//        for(int i=0;i<input.length();i++){
-//            table[count+i]=input.charAt(i);            
-//        } 
-//        System.arraycopy(input.toCharArray(),0,this.table,this.count,table.length);
     }
 
+    /**
+     * toString-metodi, joka palauttaa DiyStringBuilderin keräämän Stringin.
+     *
+     * @return
+     */
     public String toString() {
 
         char[] characters = new char[count];
@@ -144,9 +144,14 @@ public class DiyStringBuilder {
         return answer;
     }
 
+    /**
+     * Javan StringBuilder-luokan deleteCharAt-metodia vastaava metodi. Poistaa
+     * char:in parametrina saadusta indeksistä.
+     *
+     * @param index
+     */
     public void deleteCharAt(int index) {
         char[] afterRemoval = new char[count - 1];
-
         for (int i = 0; i < count; i++) {
             if (i < index) {
                 afterRemoval[i] = table[i];

@@ -138,8 +138,6 @@ public class DiyHeap {
      */
     private void diyHeapify(int index) {
 
-        int mom = diyHeap[index].getPosition();
-
         if (index > size) {
             return;
         }
@@ -149,9 +147,8 @@ public class DiyHeap {
         HuffmanNode leftChild = diyHeap[childLeftIndex];
         int childRightIndex = rightChild(index);
         HuffmanNode rightChild = diyHeap[childRightIndex];
-        //HuffmanNode minNode = diyHeap[minimumIndex];
 
-        if (leftChild != null && rightChild != null && rightChild != null) {
+        if (leftChild != null && rightChild != null) {
             if ((diyHeap[minimumIndex].getPosition() > diyHeap[childLeftIndex].getPosition()) && childLeftIndex <= size) {
                 minimumIndex = childLeftIndex;
             }
@@ -161,14 +158,16 @@ public class DiyHeap {
             }
 
             compareIndexAndMinimumIndex(index, minimumIndex);
-
-//            if (index != minimumIndex) {
-//                swapNodes(index, minimumIndex);
-//                diyHeapify(minimumIndex);
-//            }
         }
     }
 
+    /**
+     * diyHeapidy-metodin apumetodi, joka pyörittää rekursiota jos vertailuehto
+     * rekursiolle täyttyy.
+     *
+     * @param index
+     * @param minimumIndex
+     */
     private void compareIndexAndMinimumIndex(int index, int minimumIndex) {
         if (index != minimumIndex) {
             swapNodes(index, minimumIndex);

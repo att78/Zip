@@ -5,7 +5,6 @@
  */
 package com.nallezip.app.util;
 
-
 /**
  * Tarkoituksena on tehdä luokka, joka pystyy korvaamaan LempelZivwelchAlgossa
  * käytetyt List- ja ArrayList rakenteet. Luokan ei ole edes tarkoitus olla ns.
@@ -22,9 +21,9 @@ public class DiyArrayList {
     private int amount = 0;
 
     /**
-     * Arrayhin kerätään Integerejä
+     * short-tyyppinen taulukko
      */
-    private Short[] diyArray = new Short[512];
+    private short[] diyArray = new short[512];
 
     /**
      * tyhjä konstruktori
@@ -32,11 +31,11 @@ public class DiyArrayList {
     public DiyArrayList() {
     }
 
-    public DiyArrayList(Short[] existingArray) {
+    public DiyArrayList(short[] existingArray) {
         diyArray = existingArray;
         amount = existingArray.length;
     }
-    
+
     /**
      * Testausta varten toinen konstruktori.
      *
@@ -68,23 +67,23 @@ public class DiyArrayList {
      */
     private void doubleTable(int doubleSize) {
 
-        Short[] cache = new Short[doubleSize];
+        short[] cache = new short[doubleSize];
         int cacheNumber = 0;
 
         for (int i = 0; i < this.diyArray.length; i++, cacheNumber++) {
-            Short number = diyArray[i];
-            if (number == null) {
-                cacheNumber--;
-                continue;
-            }
+            short number = diyArray[i];
+//            if (number == null) {
+//                cacheNumber--;
+//                continue;
+//            }
             cache[cacheNumber] = diyArray[i];
         }
         this.diyArray = null;
-        this.diyArray = new Short[cache.length];
+        this.diyArray = new short[cache.length];
         this.diyArray = cache;
     }
 
-    public Short[] getDiyArray() {
+    public short[] getDiyArray() {
         return diyArray;
     }
 
@@ -169,14 +168,14 @@ public class DiyArrayList {
     public String toString() {
 
         String string = "{";
-        for (int i = 0; i < diyArray.length; i++) {
-            if (diyArray[i] == null) {
-                break;
-            }
-            if (diyArray[i] != null) {
-                string += diyArray[i];
-                string += ", ";
-            }
+        for (int i = 0; i < amount; i++) {
+//            if (diyArray[i] == null) {
+//                break;
+//            }
+//            if (diyArray[i] != null) {
+            string += diyArray[i];
+            string += ", ";
+//            }
         }
 
         string += "}";
