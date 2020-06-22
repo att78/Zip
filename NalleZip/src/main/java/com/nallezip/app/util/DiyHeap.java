@@ -149,7 +149,7 @@ public class DiyHeap {
         HuffmanNode leftChild = diyHeap[childLeftIndex];
         int childRightIndex = rightChild(index);
         HuffmanNode rightChild = diyHeap[childRightIndex];
-        HuffmanNode minNode = diyHeap[minimumIndex];
+        //HuffmanNode minNode = diyHeap[minimumIndex];
 
         if (leftChild != null && rightChild != null && rightChild != null) {
             if ((diyHeap[minimumIndex].getPosition() > diyHeap[childLeftIndex].getPosition()) && childLeftIndex <= size) {
@@ -160,11 +160,21 @@ public class DiyHeap {
                 minimumIndex = childRightIndex;
             }
 
-            if (index != minimumIndex) {
-                swapNodes(index, minimumIndex);
-                diyHeapify(minimumIndex);
-            }
+            compareIndexAndMinimumIndex(index, minimumIndex);
+
+//            if (index != minimumIndex) {
+//                swapNodes(index, minimumIndex);
+//                diyHeapify(minimumIndex);
+//            }
         }
+    }
+
+    private void compareIndexAndMinimumIndex(int index, int minimumIndex) {
+        if (index != minimumIndex) {
+            swapNodes(index, minimumIndex);
+            diyHeapify(minimumIndex);
+        }
+
     }
 
     /**

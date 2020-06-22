@@ -14,7 +14,7 @@ import com.nallezip.app.util.DiyContent;
  *
  * @author tallbera
  */
-public class DiyHashMap<Key, Value> {
+public class DiyHashMap<K, V> {
 
     //vielä tyhjä eli motivointiluokka. Lukutuokio hashmappeihin käynnissä...
     private static final int SIZE = 512;
@@ -28,7 +28,7 @@ public class DiyHashMap<Key, Value> {
      * @param key avain-arvo, jonka avulla DiyHashMapista haetaan tietoja.
      * @return avaimen hashcoden.
      */
-    private int getHashInt(Key key) {
+    private int getHashInt(K key) {
         //onko riittävän uniikki ja saako valmista hashcodea käyttää
         int hashCode = key.hashCode();
         if (hashCode < 0) {
@@ -45,14 +45,14 @@ public class DiyHashMap<Key, Value> {
      * @return palauttaa avaimen perusteella haetun DiyHashMapiin tallennetun
      * arvon.
      */
-    public Value get(Key key) {
+    public V get(K key) {
         int hashValue = getHashInt(key);
         DiyContent content = table[hashValue];
 
         for (int i = 0; i < table.length; i++) {
             if (content != null) {
                 if (content.getKey().equals(key)) {
-                    Value answer = (Value) content.getValue();
+                    V answer = (V) content.getValue();
 
                     return answer;
                 }
@@ -70,7 +70,7 @@ public class DiyHashMap<Key, Value> {
      * @param key avain, jonka perusteella tallennettava tieto löytyy.
      * @param value tallennettava tieto.
      */
-    public void put(Key key, Value value) {
+    public void put(K key, V value) {
         int hashValue = getHashInt(key);
         DiyContent content = table[hashValue];
 
@@ -95,7 +95,7 @@ public class DiyHashMap<Key, Value> {
      * @param value HashMapiin avaimen taakse tallennettu tieto
      * @param hashValue parametrina annettuun key:hin liittyvä hashcode.
      */
-    private void createNewContent(Key key, Value value, int hashValue) {
+    private void createNewContent(K key, V value, int hashValue) {
         DiyContent content = new DiyContent(key, value);
         table[hashValue] = content;
     }
@@ -109,7 +109,7 @@ public class DiyHashMap<Key, Value> {
      * @param key Tallennuksessa käytetty avain-arvo
      * @param value tallennettava arvo.
      */
-    private void loopNextOne(DiyContent content, Key key, Value value) {
+    private void loopNextOne(DiyContent content, K key, V value) {
         while (content.getNextOne() != null) {
             content = content.getNextOne();
             if (content.getKey().equals(key)) {
@@ -129,7 +129,7 @@ public class DiyHashMap<Key, Value> {
      * @return arvo, joka on "true", jos avain on listalla ja "false", jos avain
      * ei ole listalla.
      */
-    public boolean containsKey(Key key) {
+    public boolean containsKey(K key) {
         int hashValue = getHashInt(key);
         DiyContent content = table[hashValue];
         for (int i = 0; i < table.length; i++) {

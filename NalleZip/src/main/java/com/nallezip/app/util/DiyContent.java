@@ -12,10 +12,10 @@ package com.nallezip.app.util;
  *
  * @author tallbera
  */
-public class DiyContent<Key, Value> {
+public class DiyContent<K, V> {
 
-    private Key key; // DiyHashMapin avain
-    private Value value;//DiyHashMappiin tallennettu arvo        
+    private K key; // DiyHashMapin avain
+    private V value; //DiyHashMappiin tallennettu arvo        
     private DiyContent nextOne; //viittaus seuraavaan HashMapissa olevaan DiyContentiin.
 
     public DiyContent getNextOne() {
@@ -29,20 +29,20 @@ public class DiyContent<Key, Value> {
      * @param key DiyHashMapin avain-arvo
      * @param value tallennettava arvo
      */
-    public DiyContent(Key key, Value value) {
+    public DiyContent(K key, V value) {
         this.key = key;
         this.setValue(value);
     }
 
-    public Key getKey() {
+    public K getKey() {
         return key;
     }
 
-    public Value getValue() {
+    public V getValue() {
         return value;
     }
 
-    public void setValue(Value value) {
+    public void setValue(V value) {
         this.value = value;
     }
 

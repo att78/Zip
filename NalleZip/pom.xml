@@ -50,7 +50,12 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.2</version>     
+                <version>0.8.2</version>
+                <configuration>
+                    <excludes>
+                        <exclude>com/nallezip/app/ui/*</exclude>                        
+                    </excludes>
+                </configuration>       
                 <executions>
                     <execution>
                         <id>default-prepare-agent</id>
@@ -59,7 +64,17 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>  
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.1.1</version>
+                <configuration>
+                    <javadocExecutable>${java.home}/bin/javadoc</javadocExecutable>
+                    <source>8</source>
+                </configuration>
+            </plugin>
+                
         </plugins>
     </build>
     

@@ -42,7 +42,6 @@ public class HuffmanAlgo {
         while (nodeQueue.size() > 1) {
             HuffmanNode mom = new HuffmanNode();
             HuffmanNode firstBorn = nodeQueue.poll();
-            //System.out.println("Eka: " + firstBorn.toString());
             HuffmanNode secondBorn = nodeQueue.poll();
             mom.setLeft(firstBorn);
             mom.setRight(secondBorn);
@@ -74,7 +73,6 @@ public class HuffmanAlgo {
                 node.setLeft(null);
                 node.setRight(null);
                 node.setCh(c);
-                //System.out.println("Create new leaf node " + c);
                 int weight = position.get(c);
                 node.setPosition(weight);
                 nodeQueue.offer(node);
@@ -121,7 +119,7 @@ public class HuffmanAlgo {
     /**
      * metodi on apumetodi encodeString-metodille. Luo positioille paikat.
      *
-     * @param string
+     * @param string Pakattava string
      * @return
      */
     public DiyHashMap<Character, Integer> createPosition(String string) {
@@ -164,29 +162,29 @@ public class HuffmanAlgo {
 
     }
 
+    /**
+     * Yhdistää pakkauksessa käytetyn kirjaston ja pakatun viestin tiedot samaan
+     * byte-taulukkoon. Ensin loopataan merkit ja sitten tehdään puun rakenne.
+     *
+     * @param resultBytes pakattu viesti
+     * @return
+     */
     private byte[] addTreeToBytes(byte[] resultBytes) {
         DiyByteArray treeBytesArray = new DiyByteArray(huffmanTree.size() * 2);
         DiyByteArray treeBitsArray = new DiyByteArray(huffmanTree.size() * 2);
         writeTree(treeBytesArray, treeBitsArray, root);
 
-//        byte[] combined = new byte[resultBytes.length + treeBytesArray.getSize() + treeBitsArray.getSize() + 4];
-//        //Merkkien koko
-//        //System.out.println("Write byte size of " + treeBytesArray.getSize());
-//        byte[] byteSize = intToByteArray(treeBytesArray.getSize());
-//        for (int i = 0; i < 4; i++) {
-//            combined[i] = byteSize[i];
-//        }
         byte[] combined = createCombined(resultBytes, treeBytesArray, treeBitsArray);
 
         int i = 4;
-        //merkit
+
         byte[] treeBytes = treeBytesArray.getBytes();
         int maxSize = treeBytes.length + 4;
 
         for (int j = 0; i < maxSize; i++, j++) {
             combined[i] = treeBytes[j];
         }
-        //puun rakenne
+
         byte[] treeBits = treeBitsArray.getBytes();
         maxSize += treeBits.length;
 
@@ -196,19 +194,22 @@ public class HuffmanAlgo {
 
         maxSize += resultBytes.length;
 
-        //
         combined = finalizeCombined(resultBytes, combined, maxSize, i);
-//        for (int j = 0; i < maxSize; i++, j++) {
-//            combined[i] = resultBytes[j];
-//        }
 
         return combined;
     }
 
+    /**
+     * apumetodi addTreeToBytes-metodille. Yhdistää kolme byte[]-taulukkoa.
+     *
+     * @param resultBytes pakattu viesti
+     * @param treeBytesArray
+     * @param treeBitsArray
+     * @return
+     */
     private byte[] createCombined(byte[] resultBytes, DiyByteArray treeBytesArray, DiyByteArray treeBitsArray) {
         byte[] combined = new byte[resultBytes.length + treeBytesArray.getSize() + treeBitsArray.getSize() + 4];
-        //Merkkien koko
-        //System.out.println("Write byte size of " + treeBytesArray.getSize());
+
         byte[] byteSize = intToByteArray(treeBytesArray.getSize());
         for (int i = 0; i < 4; i++) {
             combined[i] = byteSize[i];
@@ -217,6 +218,16 @@ public class HuffmanAlgo {
         return combined;
     }
 
+    /**
+     * apumetodi addTreeToBytes-metodille. Viimeistelee taulukoiden
+     * yhdistämisen.
+     *
+     * @param resultBytes pakattu viesti
+     * @param combined melkein valmis pakkauspuun ja viestien yhdistelmä
+     * @param maxSize maksimi
+     * @param i indeksiarvo
+     * @return
+     */
     private byte[] finalizeCombined(byte[] resultBytes, byte[] combined, int maxSize, int i) {
         for (int j = 0; i < maxSize; i++, j++) {
             combined[i] = resultBytes[j];
@@ -225,6 +236,12 @@ public class HuffmanAlgo {
         return combined;
     }
 
+    /**
+     * metodi muuttaa annetun int-tyyppisen luvun byteArrayksi
+     *
+     * @param number muutettava luku
+     * @return
+     */
     private byte[] intToByteArray(int number) {
         return new byte[]{
             (byte) ((number >> 24) & 0xff),
@@ -233,6 +250,12 @@ public class HuffmanAlgo {
             (byte) (number)};
     }
 
+    /**
+     * metodi kääntää annetun byte-taulukon int-tyyppiseksi luvuksi
+     *
+     * @param packed muutettava bytetaulukko
+     * @return
+     */
     private int bytesToInt(byte[] packed) {
         return (int) ((0xff & packed[0]) << 24
                 | (0xff & packed[1]) << 16
@@ -240,8 +263,17 @@ public class HuffmanAlgo {
                 | (0xff & packed[3]));
     }
 
+    /**
+     * metodi käy rekursiivisesti läpi puun ja kirjoittaa
+     * DiyByteArrayMuotoiseksi puun. Ensin tarkistetaan, onko HuffmanNode lehti
+     * vai ei.
+     *
+     * @param bytes
+     * @param treeBits
+     * @param node
+     */
     private void writeTree(DiyByteArray bytes, DiyByteArray treeBits, HuffmanNode node) {
-        //leaf
+
         if (node.getLeft() == null && node.getRight() == null) {
             bytes.writeByte((byte) node.getCh());
             treeBits.writeBit(true);
@@ -262,12 +294,9 @@ public class HuffmanAlgo {
     public byte[] binaryStringToBytes(String total) {
 
         int lastByteLength = total.length() % 8;
-        int size = (total.length() / 8);
-        if (lastByteLength > 0) {
-            size++;
-        }
+        int size = countSize(total);
         byte[] resultBytes = new byte[size + 1];
-        //byte[] resultBytes = getResultBytes(total);
+
         int byteIndex = 1;
         int value = 0;
         resultBytes[0] = (byte) lastByteLength;
@@ -277,24 +306,33 @@ public class HuffmanAlgo {
                 value = 0;
                 byteIndex++;
             }
-//            value *= 2;
-//            char ch = total.charAt(i);
-//            if (ch == '1') {
-//                value++;
-//            }
+
             value = increaseValue(total, value, i);
         }
         if (byteIndex == size) {
-            // System.out.println("Setting last byte to " + value);
             resultBytes[byteIndex] = (byte) value;
         }
         return resultBytes;
     }
 
-
+    /**
+     * metodi on binaryStringToBytes-metodin apumetodi, joka laskee käytettävän
+     * size:n parametrina annetun syötteen perusteella.
+     *
+     * @param total string-muotoinen syöte
+     * @return
+     */
+    private int countSize(String total) {
+        int lastByteLength = total.length() % 8;
+        int size = (total.length() / 8);
+        if (lastByteLength > 0) {
+            size++;
+        }
+        return size;
+    }
 
     /**
-     * apumetodi binaryStringToBytes-metodille
+     * apumetodi binaryStringToBytes-metodille, kasvattaa value-muuttujan arvoa.
      *
      * @param total
      * @param value
@@ -397,31 +435,23 @@ public class HuffmanAlgo {
      */
     public String decodeString(byte[] packed) {
         DiyStringBuilder builder = new DiyStringBuilder();
-
         packed = readTree(packed);
-
         HuffmanNode node = root;
-
         Boolean[] decompressed = byteToBoolean(packed);
 
         for (int i = 0; i < decompressed.length; i++) {
-            // System.out.println("Decompressing index " + i );
+
             if (decompressed[i] == null) {
                 break;
             }
-
             if (!decompressed[i]) {
-
                 node = node.getLeft();
-
                 if (node.getLeft() == null && node.getRight() == null) {
                     builder.append(node.getCh());
                     node = root;
                 }
-
             } else if (decompressed[i]) {
                 node = node.getRight();
-
                 if (node.getLeft() == null && node.getRight() == null) {
                     builder.append(node.getCh());
                     node = root;
@@ -431,9 +461,14 @@ public class HuffmanAlgo {
         return builder.toString();
     }
 
+    /**
+     * lukee tiedostoon pakatun huffmanPuun.
+     *
+     * @param packed pakattu viesti, joka sisältää myös puun.
+     * @return
+     */
     private byte[] readTree(byte[] packed) {
         int byteSize = bytesToInt(packed);
-        //System.out.println("Read byte size of " + byteSize);
         byte[] treeBytes = new byte[byteSize];
         int i = 4;
         for (int j = 0; i < byteSize + 4; i++, j++) {
@@ -443,11 +478,24 @@ public class HuffmanAlgo {
         DiyBitArrayReader bitReader = new DiyBitArrayReader(packed);
         bitReader.setByteIndex(i);
         root = reCreateNextNode(bitReader, byteReader);
-        //System.out.println("Set root to " +  root);
+
         i = bitReader.getByteIndex();
         if (bitReader.partialByte()) {
             i++;
         }
+
+        byte[] valueWithoutTree = valueWithoutTree(packed, i);
+        return valueWithoutTree;
+    }
+
+    /**
+     * apumetodi readTree-metodille. Luo ja palauttaa bytetaulukon.
+     *
+     * @param packed
+     * @param i
+     * @return
+     */
+    public byte[] valueWithoutTree(byte[] packed, int i) {
         byte[] valueWithoutTree = new byte[packed.length - i];
         for (int j = 0; i < packed.length; i++, j++) {
             valueWithoutTree[j] = packed[i];
@@ -455,20 +503,26 @@ public class HuffmanAlgo {
         return valueWithoutTree;
     }
 
+    /**
+     * apumetodi readTree-metodille. Selvittää seuraavan HuffmanNoden.
+     *
+     * @param bitReader
+     * @param byteReader
+     * @return Halutun HuffmanNoden
+     */
     private HuffmanNode reCreateNextNode(DiyBitArrayReader bitReader, DiyByteArrayReader byteReader) {
         HuffmanNode node = new HuffmanNode();
         boolean leaf = bitReader.readBit();
         if (leaf) {
             char c = (char) byteReader.readByte();
-            //System.out.println("Create new leaf node " + c);
+
             node.setCh(c);
         } else {
-            //System.out.println("Create new node");
+
             node.setLeft(reCreateNextNode(bitReader, byteReader));
             node.setRight(reCreateNextNode(bitReader, byteReader));
         }
         return node;
-
     }
 
 }
