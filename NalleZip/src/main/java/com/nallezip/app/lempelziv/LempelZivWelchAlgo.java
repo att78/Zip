@@ -32,26 +32,50 @@ public class LempelZivWelchAlgo {
      * @param string pakattava String
      * @return pakatun viestin
      */
-    public DiyArrayList encodeString(String string) {
+    public byte[] encodeString(String string) {
 
-        createLibraries();
+        createEncodeLibrary();
         fillLibrary(string);
-        return encoded;
+        byte[] result = listToBytes();
+        return result;
+    }
+    
+    private byte[] listToBytes() {
+        byte[] result = new byte[encoded.size()*4];
+        Integer[] numbers = encoded.getDiyArray();
+        for (int i=0, j=0;i<encoded.size();i++) {
+            byte[] bytes = intToByteArray(numbers[i]);
+            for (int k=0;k<4;k++) {
+                result[j++] = bytes[k];
+            }
+        }
+        return result;
     }
 
     /**
-     * Luodaan sekä enkoodauksessa että dekoodauksessa käytetyt kirjastot.
+     * Luodaan enkoodauksessa käytetty kirjastot.
      *
      *
      */
-    public void createLibraries() {
+    public void createEncodeLibrary() {
+        library = new DiyHashMap();
         for (int i = 0; i < SIZE; i++) {
-
             library.put("" + (char) i, i);
-            libraryDecoded.put(i, "" + (char) i);
         }
     }
 
+        /**
+     * Luodaan dekoodauksessa käytetty kirjastot.
+     *
+     *
+     */
+    public void createDecodeLibrary() {
+        libraryDecoded = new DiyHashMap();
+        for (int i = 0; i < SIZE; i++) {
+            libraryDecoded.put(i, "" + (char) i);
+        }
+    }
+    
     /**
      * Enkoodauksessa käytettävän kirjaston täyttäminen annetun syötteen
      * pohjalta
@@ -83,14 +107,24 @@ public class LempelZivWelchAlgo {
      *
      * @return puretun viestin
      */
-    public String decodeString() {
-
+    public String decodeString(byte[] encodedBytes) {
+        createDecodeLibrary();
+        setEncodedList(encodedBytes);
         Integer firstOne = encoded.getFirst();
         int first = (int) firstOne;
         String answer = "" + (char) first;
         DiyStringBuilder builder = new DiyStringBuilder(answer);
         decodeLoop(builder, answer);
         return builder.toString();
+    }
+    
+    private void setEncodedList(byte[] encodedBytes) {
+        encoded = new DiyArrayList();
+        for (int i=0;i<encodedBytes.length;i++) {
+            int number = bytesToInt(encodedBytes[i], encodedBytes[++i], encodedBytes[++i], encodedBytes[++i]);
+            encoded.add(number);
+        }
+
     }
 
     /**
@@ -128,6 +162,22 @@ public class LempelZivWelchAlgo {
 
     public DiyArrayList getEncoded() {
         return encoded;
+    }
+    
+    
+    private byte[] intToByteArray(int number) {
+        return new byte[]{
+            (byte) ((number >> 24) & 0xff),
+            (byte) ((number >> 16) & 0xff),
+            (byte) ((number >> 8) & 0xff),
+            (byte) (number)};
+    }
+
+    private int bytesToInt(byte byte1, byte byte2, byte byte3, byte byte4) {
+        return (int) ((0xff & byte1) << 24
+                | (0xff & byte2) << 16
+                | (0xff & byte3) << 8
+                | (0xff & byte4));
     }
 
 }

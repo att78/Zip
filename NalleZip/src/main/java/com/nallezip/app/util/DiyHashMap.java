@@ -19,8 +19,7 @@ public class DiyHashMap<Key, Value> {
     //vielä tyhjä eli motivointiluokka. Lukutuokio hashmappeihin käynnissä...
     private static final int SIZE = 512;
     private DiyContent table[] = new DiyContent[SIZE];
-    //private int amount =0;
-       
+    private int amount = 0;
 
     /**
      * Metodi, joka palauttaa avaimelle hash-coden. Metodin avulla hashcode
@@ -31,7 +30,11 @@ public class DiyHashMap<Key, Value> {
      */
     private int getHashInt(Key key) {
         //onko riittävän uniikki ja saako valmista hashcodea käyttää
-        return key.hashCode() % SIZE;
+        int hashCode = key.hashCode();
+        if (hashCode < 0 ) {
+            hashCode *= -1;
+        }
+        return hashCode % SIZE;
     }
 
     /**
@@ -73,7 +76,7 @@ public class DiyHashMap<Key, Value> {
 
         if (content == null) {
             createNewContent(key, value, hashValue);
-      //      amount++;
+            amount++;
         } else {
             if (content.getKey().equals(key)) {
                 content.setValue(value);
@@ -109,9 +112,14 @@ public class DiyHashMap<Key, Value> {
     private void loopNextOne(DiyContent content, Key key, Value value) {
         while (content.getNextOne() != null) {
             content = content.getNextOne();
+            if (content.getKey().equals(key)) {
+                content.setValue(value);
+                return;
+            }
         }
         DiyContent oldContent = new DiyContent(key, value);
         content.setNextOne(oldContent);
+        amount++;
     }
 
     /**
@@ -142,7 +150,7 @@ public class DiyHashMap<Key, Value> {
      * @return DiyHashMapin koko
      */
     public int size() {
-        return table.length;
+        return amount;
     }
 
     /**
@@ -166,16 +174,16 @@ public class DiyHashMap<Key, Value> {
         return diySet;
     }
 
-    public String toString(){
-    String answer = "{";
-        for(int i=0; i<table.length-1;i++){
+    public String toString() {
+        String answer = "{";
+        for (int i = 0; i < table.length - 1; i++) {
             DiyContent content = table[i];
-            if(content!=null){
-                answer+= content.getKey()+"="+content.getValue()+" ,";
-            }        
+            if (content != null) {
+                answer += content.getKey() + "=" + content.getValue() + " ,";
+            }
         }
-        answer+="}";
-    
+        answer += "}";
+
         return answer;
     }
 }

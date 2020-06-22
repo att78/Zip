@@ -32,6 +32,11 @@ public class DiyArrayList {
     public DiyArrayList() {
     }
 
+    public DiyArrayList(Integer[] existingArray) {
+        diyArray = existingArray;
+        amount = existingArray.length;
+    }
+    
     /**
      * Testausta varten toinen konstruktori.
      *

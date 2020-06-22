@@ -5,42 +5,34 @@
  */
 package com.nallezip.app.io;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-
 //import sun.security.util.IOUtils;
-
 /**
  *
  * @author tallbera
  */
 public class FileIO {
-    
-    private int inputLength;
-    private String input;
-    
-    
-    public FileIO(String filename){
+
+    String filename;
+
+    public FileIO(String filename) {
+        this.filename = filename;
+    }
+
+    public byte[] readFile() throws IOException {
         Path route = Paths.get(filename);
-       
-        try{
-            input = Files.readString(route);
-        
-        }catch(Exception e){
-        }    
+        return Files.readAllBytes(route);
+
     }
 
-    public int getInputLength() {
-        return input.length();
-    }
+    public void writeFile(byte[] bytes) throws IOException {
+        Path route = Paths.get(filename);
+        Files.write(route, bytes);
 
-    public String getInput() {
-        return input;
     }
-    
-    
-    
 
 }

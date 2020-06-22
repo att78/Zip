@@ -48,7 +48,7 @@ public class LZWAlgoTest {
     @Test
     public void testCreateLibraries(){
         LempelZivWelchAlgo algo = new LempelZivWelchAlgo();
-        algo.createLibraries();
+        algo.createEncodeLibrary();
                 
         assertEquals(512,algo.getLibrary().size());
         assertEquals(512, algo.getLibraryDecoded().size());
@@ -58,7 +58,7 @@ public class LZWAlgoTest {
     @Test
     public void testFillLibrary(){
         LempelZivWelchAlgo algo = new LempelZivWelchAlgo();
-        algo.createLibraries();
+        algo.createEncodeLibrary();
         String s = "Nalle";
         algo.fillLibrary(s);
        // assertEquals("[78, 97, 108, 108, 101]", algo.getEncoded().toString());
@@ -69,22 +69,22 @@ public class LZWAlgoTest {
     public void testDecodeString(){
     LempelZivWelchAlgo algo = new LempelZivWelchAlgo();
     String string = "Nalle";
-    algo.encodeString(string);
-    String answer = algo.decodeString();
+    byte[] encoded = algo.encodeString(string);
+    String answer = algo.decodeString(encoded);
     
     assertEquals("Nalle", answer);
     }
     
-    @Test
-    public void testDecodeLoop(){
-    LempelZivWelchAlgo algo = new LempelZivWelchAlgo();
-    DiyStringBuilder builder = new DiyStringBuilder();
-    String string = "Nalle";
-    algo.encodeString(string);
-    algo.decodeLoop(builder, string);
-    
-    //assertEquals("Nalle", builder.toString());
-    // huom diyArrayListin käyttöönotto rikkoi testin
-    }
+//    @Test
+//    public void testDecodeLoop(){
+//    LempelZivWelchAlgo algo = new LempelZivWelchAlgo();
+//    DiyStringBuilder builder = new DiyStringBuilder();
+//    String string = "Nalle";
+//    algo.encodeString(string);
+//    algo.decodeLoop(builder, string);
+//    
+//    //assertEquals("Nalle", builder.toString());
+//    // huom diyArrayListin käyttöönotto rikkoi testin
+//    }
            
 }
