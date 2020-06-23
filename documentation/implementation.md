@@ -8,11 +8,9 @@ Lempel Ziv Welch algoritmin toteuttaa yksi luokka, LempelZivWelchAlgo. Algoritmi
 
 Ohjelmaa on tarkoitus käyttää komentoriviltä eli käyttöliittymä on tekstikäyttöliittymä.
 
-Yleisenä huomiona voi myös todeta, että sovellus on pyritty toteuttamaan käyttäen checkstyle-vaatimuksia, joissa metodin pituus sallittu maksimipituus on 20, yksittäisen luokan tiedostopituus 600 ja muutoin noudatetaan perusmuotoiluja. Tähän on myös pääpiirteittäin päästy.
+Yleisenä huomiona voi myös todeta, että sovellus on pyritty toteuttamaan käyttäen checkstyle-vaatimuksia, joissa metodin pituus sallittu maksimipituus on 20, yksittäisen luokan tiedostopituus 600 ja muutoin noudatetaan perusmuotoiluja. Tähän on myös pääpiirteittäin päästy. Alla toteutuksen aikavaativuuksista arviot.
 
 
-
-O-analyyseja
 ## Huffman
 Huffmanin aikavaativuudesta. Huffman-algoritmin toteuttaa kaksi luokkaa, HuffmanAlgo ja HuffmanNode. Näistä luokista HuffmanNode ei ole aikavaatimuksen kannalta oleellinen, sillä se ei sisällä mitään sellaista, mikä aikavaativuuteen merkittävästi vaikuttaisi. Tässä tarkastellaan aikavaativuutta nimenomaisesti HuffmanAlgo-luokkaan keskittyen. Huffman-Algo on poikkeuksellisen laaja luokka. aikavaativuuden kannalta oleellisimpia ovat luokan lukuisat for-loopit ja DiyHeapin käyttö.
 
@@ -46,6 +44,10 @@ Enkoodaus tapahtuu siis kahden operaation, joiden aikavaatimus on O(n) avulla.  
 
 Dekoodaus toimii decodeString-metodin avulla. Päämetodilla on 3 aikavaatimuksen kannalta oleellista apumetodia. Ensimmäiseksi päämetodi käyttää puolestaan käyttää  apumetodia createDecodeLibrary. Tämä käyttää yksinkertaista for-loopia ensin luodessaan dekoodaus-kirjaston. Tämän jälkeen apumetodilla setEncodedList asetetaan enkoodattava lista toisella for-loopilla. Lopuksi decodeloop-apumetodilla rakennetaan DiyStringBuilderin avulla palautettava tiedosto kolmannella for-loopilla. Dekoodaus käyttää kolmea operaatiota, joiden kunkin aikavaatimus on O(n). Tästäkin voidaan katsoa, että koko purkamisoperaation aikavaatimus on lineaarinen ja aikaluokassa O(n). 
 
+
+## Parannusehdotukset
+
+Suurin parannuksen tarve on Huffman-algoritmissa. Algoritmi on aivan liian iso ja toteutettu kömpelöllä tavalla.Nythän algoritmi pakkaa syötteen ensin String-muotoiseksi jonoksi 101010 ja konvertoi tämän byte[]-taulukoksi. Tämän prosessin suoraviivaistaminen sellaiseksi, että syöte pakattaisiin suoraan byte[]-taulukoksi ainakin nopeuttaisi algoritmin toimintaa jonkin verran ja vähentäisi rivien määrää. Sen sijaan tiedostojen pakkaukseen tällä muutoksella ei välttämättä olisi mitään vaikutusta. Tämä poistaisi myös String-luokan maksimipituuden aiheuttamat potentiaaliset ongelmat isojen tiedostojen pakkauksissa.
 
 
 ## Lähteitä:
