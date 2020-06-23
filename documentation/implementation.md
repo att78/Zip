@@ -14,6 +14,24 @@ Yleisenä huomiona voi myös todeta, että sovellus on pyritty toteuttamaan käy
 
 O-analyyseja
 ## Huffman
+Huffmanin aikavaativuudesta. Huffman-algoritmin toteuttaa kaksi luokkaa, HuffmanAlgo ja HuffmanNode. Näistä luokista HuffmanNode ei ole aikavaatimuksen kannalta oleellinen, sillä se ei sisällä mitään sellaista, mikä aikavaativuuteen merkittävästi vaikuttaisi. Tässä tarkastellaan aikavaativuutta nimenomaisesti HuffmanAlgo-luokkaan keskittyen. Huffman-Algo on poikkeuksellisen laaja luokka. aikavaativuuden kannalta oleellisimpia ovat luokan lukuisat for-loopit ja DiyHeapin käyttö.
+
+Pakkaus tapahtuu encodeString-metodin avulla. Ensimmäiseksi päämetodi käyttää apumetodia createPosition, joka luo dynaamisesti pakkauskirjaston ja palauttaa sen päämetodin käytettäväksi. CreatePosition-metodi sisältää for-loopin, joka looppaa syötteen läpi ja asettaa sen DiyHashMapiin ajassa O(n). DiyHashMapin put-metodi toimii vakioajassa, joten se ei ole aikavaativuutta ajatellessa erityisen merkityksellinen.
+
+Seuraavaksi päämetodi encodeString käyttää apumetodia findRootNode.  Ensin findRootNode käyttää apumetodina createNodes-metodia. 
+CreateNodes-metodi taas luo ensimmäiseksi tarvitsemansa avainnipun käyttämällä DiyHashMapin keySetForCharacters-metodia, joka toimii ajassa O(n). Tämän jälkeen createNodes luo DiyHeapin ja looppaa avainnipun läpi asettaen tarvittavat tiedot kekoon. CreateNodesin osalta tapahtuu siis kaksi operaatiota, jotka ovat O(n). 
+
+Takaisin minimikeon juuren metsästykseen. FindRootNode käy läpi minimikeon DiyHeap ajassa O(log n). 
+
+Tämän jälkeen päämetodi käyttää apumetodia setHuffmanTree, joka toimii vakioajassa eikä siten vaikuta merkittävästi aikavaativuuteen.
+3 O(n)+ O(log n)
+Seuraavaksi on päämetodin oma for-loop, joka luo pakattavan tiedon 1010-String-muodossa.
+
+Tämän jälkeen String-muotoinen tiedosto konvertoidaan bytes[]-taulukoksi stringToBytes-metodilla, joka toimii ajassa O(n). Viimeiseksi vielä lisätään bytes-taulukon alkuun myös pakkauksessa käytetty Huffman-puu addTreeToBytes-metodilla. Tätä tietoa käytetään sitten purkamisessa hyödyksi. AddTreeToBytes-metodi käyttää kyllä for-looppia, mutta looppaa vain puun läpi. Tyypillisesti puu koko m on huomattavasti pienempi kuin n, joten looppaus tapahtuu ajassa O(m).
+
+Yhteensä tästä kaikesta tulee aikavaativuudeksi 5* O(n)+O(log n) +O(m). Tämän voinee ilmaista esim: O(m)+5(n log n).
+
+
 
 
 ## Lempel Ziv Welch
