@@ -38,6 +38,8 @@ Kuudennen viikon viikkoraportti:
 [Viikko6](https://github.com/att78/NalleZip/blob/master/documentation/week6.md)
 
 
+[Viikko7](https://github.com/att78/NalleZip/blob/master/documentation/week7.md)
+
 Komentoja sovelluksen testaukseen liittyen:
 
 Mavenilla testaus: mvn test
