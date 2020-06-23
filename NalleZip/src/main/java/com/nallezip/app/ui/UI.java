@@ -97,39 +97,39 @@ public class UI {
 
     }
 
-    public void start() {
-
-        while (true) {
-            Scanner scanner = new Scanner(System.in);
-
-            System.out.println("What do you want to do?");
-
-            System.out.println("x, if you want to quit");
-            System.out.println("write, if you want to write string, that we pack");
-            String answer = scanner.nextLine();
-
-            if (answer.equals("x")) {
-                break;
-            } else if (answer.equals("write")) {
-
-                System.out.println("Lempel, if you want to pack with Lempel Ziv Welch Algorithm");
-                System.out.println("Huffman, if you want to pack with Huffman Algorithm");
-                System.out.println("Compare, if you want to compare both algorithms");
-                String packedOne = scanner.nextLine();
-
-                if (packedOne.equals("Lempel")) {
-                    System.out.println("Please write String you want to pack: ");
-                    String packThis = scanner.nextLine();
-                    LempelZivWelchAlgo algo = new LempelZivWelchAlgo();
-                    byte[] packed = algo.encodeString(packThis);
-                    //mitäs sitten? Kerrotaanko paljonko pakkasi?
-
-                }
-
-            }
-
-        }
-    }
+//    public void start() {
+//
+//        while (true) {
+//            Scanner scanner = new Scanner(System.in);
+//
+//            System.out.println("What do you want to do?");
+//
+//            System.out.println("x, if you want to quit");
+//            System.out.println("write, if you want to write string, that we pack");
+//            String answer = scanner.nextLine();
+//
+//            if (answer.equals("x")) {
+//                break;
+//            } else if (answer.equals("write")) {
+//
+//                System.out.println("Lempel, if you want to pack with Lempel Ziv Welch Algorithm");
+//                System.out.println("Huffman, if you want to pack with Huffman Algorithm");
+//                System.out.println("Compare, if you want to compare both algorithms");
+//                String packedOne = scanner.nextLine();
+//
+//                if (packedOne.equals("Lempel")) {
+//                    System.out.println("Please write String you want to pack: ");
+//                    String packThis = scanner.nextLine();
+//                    LempelZivWelchAlgo algo = new LempelZivWelchAlgo();
+//                    byte[] packed = algo.encodeString(packThis);
+//                    //mitäs sitten? Kerrotaanko paljonko pakkasi?
+//
+//                }
+//
+//            }
+//
+//        }
+//    }
 
     private void outputInfo() {
         System.out.println("Usage: nallezip encrypt/decrypt algorithm input-file output-file.\nValid algorithm names: huffman, lzw");
