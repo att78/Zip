@@ -37,7 +37,7 @@ Kuudennen viikon viikkoraportti:
 
 [Viikko6](https://github.com/att78/NalleZip/blob/master/documentation/week6.md)
 
-
+Seitsemännen viikon viikkoraportti:
 [Viikko7](https://github.com/att78/NalleZip/blob/master/documentation/week7.md)
 
 Komentoja sovelluksen testaukseen liittyen:
@@ -45,3 +45,9 @@ Komentoja sovelluksen testaukseen liittyen:
 Mavenilla testaus: mvn test
 
 Mavenilla testikattavuusraportin generointi: mvn test jacoco:report
+
+Checkstyle raportin generointi: mvn jxr:jxr checkstyle:checkstyle
+
+javadocin apidocsien generointi: mvn javadoc:javadoc
+
+
