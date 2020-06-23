@@ -3,6 +3,8 @@
 NalleZipillä voi zipata tekstimuotoisia tiedostoja. Ohjelmaa on tarkoitus käyttää komentoriviltä. Sovelluksen toiminnallisuuden huomioonottaen graafisella
 käyttöliittymällä ei voi saavuttaa merkittävää etua tekstikäyttöliittymään verrattuna.
 
+![Luokkakaavio](https://github.com/att78/NalleZip/blob/master/documentation/NalleZip_toteutunut.png)
+
 
 ## Huffman
 
