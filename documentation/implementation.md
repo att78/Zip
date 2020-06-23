@@ -29,8 +29,12 @@ Seuraavaksi on päämetodin oma for-loop, joka luo pakattavan tiedon 1010-String
 
 Tämän jälkeen String-muotoinen tiedosto konvertoidaan bytes[]-taulukoksi stringToBytes-metodilla, joka toimii ajassa O(n). Viimeiseksi vielä lisätään bytes-taulukon alkuun myös pakkauksessa käytetty Huffman-puu addTreeToBytes-metodilla. Tätä tietoa käytetään sitten purkamisessa hyödyksi. AddTreeToBytes-metodi käyttää kyllä for-looppia, mutta looppaa vain puun läpi. Tyypillisesti puu koko m on huomattavasti pienempi kuin n, joten looppaus tapahtuu ajassa O(m).
 
-Yhteensä tästä kaikesta tulee aikavaativuudeksi 5* O(n)+O(log n) +O(m). Tämän voinee ilmaista esim: O(m)+5(n log n).
+Yhteensä tästä kaikesta tulee pakkauksen aikavaativuudeksi 5* O(n)+O(log n) +O(m). Tämän voinee ilmaista esim: O(m)+5(n log n).
 
+Purkamisen suorittaa päämetodi decodeString.Ensimmäiseksi käytetään apumetodia readTree, joka lukee pakatun tiedoston alusta tallennetun puun. ReadTreessa ensimmäinen for-loop, on niin lyhyt, että metodin voi katsoa toimivan käytännössä vakioajassa. ReadTreen käyttämässä apumetodissa valueWithoutTree:ssa on for-loop, joka toimii ajassa O(n).
+Sen jälkeen purettavaksi saatu bytetaulukko muutetaan boolean-taulukoksi byteToBoolean-taulukoksi. Tämä käyttää for-looppia ja luku tapahtuu ajassa O(n). Tämän jälkeen saatu boolean-taulukko loopataan läpi, missä kuluu O(n)
+
+Kaikenkaikkiaan purkaminen tapahtuu aikaluokassa O(n).
 
 
 
