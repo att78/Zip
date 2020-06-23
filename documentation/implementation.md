@@ -17,12 +17,12 @@ O-analyyseja
 
 
 ## Lempel Ziv Welch
-Aikavaativuudesta. Harjoitustyö noudattaa ainakin suuntaa antavasti Kolumbian yliopiston "ClassNotesCS 3137"-dokumentissa esittämää pseudokoodia.(linkki alla). 
+Aikavaativuudesta. Harjoitustyö noudattaa ainakin suuntaa antavasti Kolumbian yliopiston "ClassNotesCS 3137"-dokumentissa esittämää pseudokoodia.(linkki alla).  Alla esitetty arvio harjoitustyön aikavaativuudesta perustuu kuitenkin harjoitustyön omaan koodiin ja mainitut metodit ovat nimenomaan harjoitustyön metodeja.
 
 Ensin muodostetaan pakkaus-kirjasto metodilla createEncodeLibrary. Metodissa on yksinkertainen for-loop, jonka sisällä tallennetaan tietoa DiyHashMapiin. HashMapin tallennus tapahtuu ajassa O(1). Kokonaisuudessaan ajankäytön osalta on for-loop itse. Tämä tapahtuu aikaluokassa O(n). Tämän jälkeen kirjasto täytetään syötteen mukaisilla tiedoilla metodilla fillLibrary. Metodissa on jälleen yksinkertainen for-loop, jonka sisällä tosin if-else-tarkistus. Metodi toimii kuitenkin aikaluokassa O(n).
 Enkoodaus tapahtuu siis kahden operaation, joiden aikavaatimus on O(n) avulla.  Enkoodaus tapahtuu siis lineaarisessa ajassa.
 
-Dekoodaus puolestaan käyttää yksinkertaista for-loopia ensin luodessaan dekoodaus-kirjaston. Tämän jälkeen asetetaan enkoodattava lista toisella for-loopilla ja lopuksi rakennetaan DiyStringBuilderin avulla palautettava tiedosto kolmannella for-loopilla. Dekoodaus käyttää kolmea operaatiota, joiden kunkin aikavaatimus on O(n). Tästäkin voidaan katsoa, että koko purkamisoperaation aikavaatimus on lineaarinen ja aikaluokassa O(n). 
+Dekoodaus toimii decodeString-metodin avulla. Päämetodilla on 3 aikavaatimuksen kannalta oleellista apumetodia. Ensimmäiseksi päämetodi käyttää puolestaan käyttää  apumetodia createDecodeLibrary. Tämä käyttää yksinkertaista for-loopia ensin luodessaan dekoodaus-kirjaston. Tämän jälkeen apumetodilla setEncodedList asetetaan enkoodattava lista toisella for-loopilla. Lopuksi decodeloop-apumetodilla rakennetaan DiyStringBuilderin avulla palautettava tiedosto kolmannella for-loopilla. Dekoodaus käyttää kolmea operaatiota, joiden kunkin aikavaatimus on O(n). Tästäkin voidaan katsoa, että koko purkamisoperaation aikavaatimus on lineaarinen ja aikaluokassa O(n). 
 
 
 
