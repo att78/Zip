@@ -13,7 +13,7 @@ Alustava Luokkakaavio:
 
 ![Alustava luokkakaavio](https://github.com/att78/NalleZip/blob/master/documentation/NalleZipUpdate1.jpg)
 
-Molemmat algoritmit saavat syötteinä pienehköjä tiedostoja.
+Molemmat algoritmit saavat syötteinä pienehköjä tiedostoja, jotka on sijoitettu ohjelman juureen.
 
 ## Lähteitä:
 
