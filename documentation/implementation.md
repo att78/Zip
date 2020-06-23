@@ -42,4 +42,6 @@ http://www.cs.columbia.edu/~allen/S14/NOTES/lzw.pdf
 
 Muuta jännää:
 
+https://www.hackerearth.com/practice/basic-programming/complexity-analysis/time-and-space-complexity/tutorial/
+
 https://www.sciencedirect.com/topics/computer-science/compression-algorithm
