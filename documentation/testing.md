@@ -34,6 +34,16 @@ DiyHashmapiin liittyviä luokkia on 2, DiyHashMap ja DiyContent. DiyContent:ille
 
 ## Suorituskyvyn testaus
 
+Pakkausalgoritmin suorituskyvyn kannalta oleellisia mittareita ovat nopeus ja pakkautuvuus. Tyypillisesti pakkautuvuus on suurta, jos pakattavan tiedoston sisäinen toisteisuus on suuri ja vastaavasti tehokas pakkaaminen on haastavaa, jos toisteisuutta on vain vähän. Pakkautuvuutta mitattiin molemmille algoritmeille testisarjalla, jossa ei ollut toistuvia tiedostoja. Tiedostojen koko vaihteli lähtien n. 10k tavusta kasvaen lähes 100k tavuun ja molemmille algoritmeille käytettiin samaa testisarjaa. Huffman-algoritmi pakkasi tiedostojen koosta riippumatta hyvinkin saman verran. Pakkautuvuus oli n.57%, mikä asettuu tiralabran sivuilla asetetun tavoitteen 40-60% pakkausasteesta sisään, joskin yläpäähän. Tähän yläpäähän asettumiseen tietenkin vaikuttaa testimateriaalikin.
+
+![HuffmanCompressionRate](https://github.com/att78/NalleZip/blob/master/documentation/pictures/huffmancompression.png)
+
+
+
+
+
+
+
 Viikolla 4 on tehty alustavia testejä algoritmien suorituskykyyn liittyen. Testi koodi on oheisen linkin takana: 
 
 [Testikoodi](https://github.com/att78/NalleZip/blob/master/documentation/performance.md)
@@ -44,9 +54,15 @@ Testituloksista on myös kuvakaappaus:
 
 Pakkaus:
 
+
+
+
+
 Tuloksista voi vetää muutamia johtopäätöksiä, mutta niihin tulee suhtautua varauksella. Huffman-algoritmi on tällä hetkellä vielä hieman vajaa toiminnaltaan. Algoritmi kyllä tallentaa HuffmanTree:hen oikein, mutta visuaalisen hahmottamisen vuoksi algoritmissa on käytetty String-outputtia. todellisuudessahan tämä valinta kasvatttaa eikä pakkaa alkuperäistä syötettä. HuffmanTreestä näkee kuitenkin sen, miten algoritmi pakkaa tietoa. Kunpa sitä pakattua tietoa vielä käytettäisiin dekoodauksenkin puolella. Valmiiseen pakkaukseen tulee sekä pakattu tieto, että pakkaukseen käytetty HuffmanTree. HuffmanAlgoon tulee todennäköisesti ihan reippaita muutoksia, jotta kaikki pyörii byteinä. Tämän vuoksi algoritmien pakkauksia ei keskenään kannata nyt vertailla.
 
 LZW algoritmin pieni pakkaus on ihan ymmärrettävää, koska kyseessä on mm. kuvatiedostojen pakkaamisessa käytettävä algoritmi. Algoritmin hyödyllisyys tulee esiin vasta huomattavasti suuremmissa kokoluokissa.
+
+
 
 
 Nopeus:
