@@ -42,7 +42,12 @@ Ylläolevassa kuvassa y-akselilla on pakkaus% ja x-akselilla pakattujen tiedosto
 
 ![LZWCompression](https://github.com/att78/NalleZip/blob/master/documentation/pictures/lzwCompressinRate.png)
 
-Kuvasta voidaan todeta, että Lempel Ziv Welch-algoritmi käyttäytyi algoritmille asetettujen odotusten mukaisesti. Pienehköjen tiedostojen pakkaus alun poikkeusta lukuunottamatta jäi hyvin pieneksi, pakkausasteen ollessa n. 60-70% mutta suuremmilla tiedostoilla LZW muuttui Huffmania tehokkaammaksi. Kuvasta voidaan myös nähdä laskeva trendi ja tehdä johtopäätös, että testisarjan jatkaminen suurempaan suuntaan olisi todennäköisesti parantanut edelleen LZW-algoritmin pakkausastetta.
+Kuvasta voidaan todeta, että Lempel Ziv Welch-algoritmi käyttäytyi algoritmille asetettujen odotusten mukaisesti. Pienehköjen tiedostojen pakkaus alun poikkeusta lukuunottamatta jäi hyvin pieneksi, pakkausasteen ollessa n. 60-70% mutta suuremmilla tiedostoilla LZW muuttui Huffmania tehokkaammaksi. Kuvasta voidaan myös nähdä laskeva trendi ja tehdä johtopäätös, että testisarjan jatkaminen suurempaan suuntaan olisi todennäköisesti parantanut edelleen LZW-algoritmin pakkausastetta. Lempel Ziv Welchia testattiin myös lyhyesti testisarjalla, jossa oli paljon toisteisuutta. Suurten tiedostojen parempi pakkautuvuus verrattuna pieniin tiedostoihin näkyi myös tässä testisarjassa, mikä osoittaa algoritmin toimivan LZW:lle tyypillisellä tavalla.
+
+![LZWeasy](https://github.com/att78/NalleZip/blob/master/documentation/pictures/lzwEasy.png)
+
+Graafista voi vetää johtopäätöksen myös siitä, että pakattava materiaali vaikuttaa merkittävästi pakkaustulokseen.
+
 
 
 
