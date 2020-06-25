@@ -34,9 +34,14 @@ DiyHashmapiin liittyviä luokkia on 2, DiyHashMap ja DiyContent. DiyContent:ille
 
 ## Suorituskyvyn testaus
 
-Pakkausalgoritmin suorituskyvyn kannalta oleellisia mittareita ovat nopeus ja pakkautuvuus. Tyypillisesti pakkautuvuus on suurta, jos pakattavan tiedoston sisäinen toisteisuus on suuri ja vastaavasti tehokas pakkaaminen on haastavaa, jos toisteisuutta on vain vähän. Pakkautuvuutta mitattiin molemmille algoritmeille testisarjalla, jossa ei ollut toistuvia tiedostoja. Tiedostojen koko vaihteli lähtien n. 10k tavusta kasvaen lähes 100k tavuun ja molemmille algoritmeille käytettiin samaa testisarjaa. Huffman-algoritmi pakkasi tiedostojen koosta riippumatta hyvinkin saman verran. Pakkautuvuus oli n.57%, mikä asettuu tiralabran sivuilla asetetun tavoitteen 40-60% pakkausasteesta sisään, joskin yläpäähän. Tähän yläpäähän asettumiseen tietenkin vaikuttaa testimateriaalikin.
+Pakkausalgoritmin suorituskyvyn kannalta oleellisia mittareita ovat nopeus ja pakkautuvuus. Tyypillisesti pakkautuvuus on suurta, jos pakattavan tiedoston sisäinen toisteisuus on suuri ja vastaavasti tehokas pakkaaminen on haastavaa, jos toisteisuutta on vain vähän. Pakkautuvuutta mitattiin molemmille algoritmeille testisarjalla, jossa ei ollut toistuvia tiedostoja. Mukana oli muutama muukin teksti, mutta suurimmaksi osaksi testisarja sisälsi CNN:n sivuilta löytyviä kesäkuun 2020 poliittisia analyyseja. Tietenkin näissä oli yksittäisiä toistuvia asioita, kuten presidentti Trump, mutta kokonaisuutena analyysien aiheet kuitenkin vaihtelivat ja tarjosivat monenlaista sanastoa pakattavaksi.  Tiedostojen koko vaihteli lähtien n. 10k tavusta kasvaen lähes 100k tavuun ja molemmille algoritmeille käytettiin samaa testisarjaa. Huffman-algoritmi pakkasi tiedostojen koosta riippumatta hyvinkin saman verran. Pakkautuvuus oli n.57%, mikä asettuu tiralabran sivuilla asetetun tavoitteen 40-60% pakkausasteesta sisään, joskin yläpäähän. Tähän yläpäähän asettumiseen tietenkin vaikuttaa testimateriaalikin.
 
 ![HuffmanCompressionRate](https://github.com/att78/NalleZip/blob/master/documentation/pictures/huffmancompression.png)
+
+
+
+
+
 
 
 
