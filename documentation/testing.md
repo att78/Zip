@@ -46,7 +46,7 @@ Kuvasta voidaan todeta, että Lempel Ziv Welch-algoritmi käyttäytyi algoritmil
 
 ![LZWeasy](https://github.com/att78/NalleZip/blob/master/documentation/pictures/lzwEasy.png)
 
-Graafista voi vetää johtopäätöksen myös siitä, että pakattava materiaali vaikuttaa merkittävästi pakkaustulokseen.
+Graafista voi vetää johtopäätöksen myös siitä, että pakattava materiaali vaikuttaa merkittävästi pakkaustulokseen. Paljon toisteisuutta sisältävä materiaali pakkautui selkeästi pienemmäksi ja jo melko pienillä tiedostoilla päästiin alle 50% pakkautuvuuteen.
 
 
 
