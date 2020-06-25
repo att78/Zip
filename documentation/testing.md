@@ -38,7 +38,11 @@ Pakkausalgoritmin suorituskyvyn kannalta oleellisia mittareita ovat nopeus ja pa
 
 ![HuffmanCompressionRate](https://github.com/att78/NalleZip/blob/master/documentation/pictures/huffmancompression.png)
 
-Ylläolevassa kuvassa y-akselilla on pakkaus% ja x-akselilla pakattujen tiedostojen koko. Testisarjan perusteella voi tehdä johtopäätöksen, ettei tiedoston koko vaikuta Huffman-algoritmin pakkauskykyyn merkittävästi.
+Ylläolevassa kuvassa y-akselilla on pakkaus% ja x-akselilla pakattujen tiedostojen koko. Testisarjan perusteella voi tehdä johtopäätöksen, ettei tiedoston koko vaikuta Huffman-algoritmin pakkauskykyyn merkittävästi. Lempel Ziv Welch erosi tässä suhteessa Huffmanista merkittävästi. Lempel Ziv Welch-algoritmia käytetään tyypillisesti suurien tiedostojen pakkaamiseen, sillä jo teoriassa algoritmin kyky pakata suuria tiedostoja tehokkaasti on parempi kuin pienien tiedostojen. Tämä näkyi myös testituloksissa.
+
+![LZWCompression](https://github.com/att78/NalleZip/blob/master/documentation/pictures/lzwCompressinRate.png)
+
+Kuvasta voidaan todeta, että Lempel Ziv Welch-algoritmi käyttäytyi algoritmille asetettujen odotusten mukaisesti. Pienehköjen tiedostojen pakkaus alun poikkeusta lukuunottamatta jäi hyvin pieneksi, pakkausasteen ollessa n. 60-70% mutta suuremmilla tiedostoilla LZW muuttui Huffmania tehokkaammaksi. Kuvasta voidaan myös nähdä laskeva trendi ja tehdä johtopäätös, että testisarjan jatkaminen suurempaan suuntaan olisi todennäköisesti parantanut edelleen LZW-algoritmin pakkausastetta.
 
 
 
