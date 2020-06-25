@@ -92,13 +92,13 @@ public class DiyArrayList {
      *
      * @param number lisättävä luku
      */
-    public void add(Short number) {
+    public void add(short number) {
 
         if (tableIsFull()) {
             int doubleSize = size() * 2;
             doubleTable(doubleSize);
         }
-
+        
         this.diyArray[this.amount] = number;
         this.amount++;
 

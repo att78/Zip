@@ -10,7 +10,6 @@ import com.nallezip.app.util.DiyHashMap;
 import com.nallezip.app.util.DiyHeap;
 import com.nallezip.app.util.DiyStringBuilder;
 
-import java.util.PriorityQueue;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -146,15 +145,15 @@ public class HuffmanAlgoTest {
                
     }
     
-    @Test
-    public void testLastBye(){
-        HuffmanAlgo huff = new HuffmanAlgo();
-        byte[] buggedDot=huff.encodeString(".");
-        for (byte b : buggedDot) {
-            System.out.println("Byte: " + b);
-        }
-        
-    }
+//    @Test
+//    public void testLastBye(){
+//        HuffmanAlgo huff = new HuffmanAlgo();
+//        byte[] buggedDot=huff.encodeString(".");
+//        for (byte b : buggedDot) {
+//            System.out.println("Byte: " + b);
+//        }
+//        
+//    }
 //        
 //        Boolean[] zerosAndOnes = new Boolean[16];//minkäkokoinen
 //        int max = 128;

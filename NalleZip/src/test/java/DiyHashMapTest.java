@@ -54,6 +54,9 @@ public class DiyHashMapTest {
         assertEquals(diy.size(), 1);
         int answer = diy.get(test);
         assertEquals(test2, answer);
+        int test3 = 3;
+        diy.put(test, test3);
+        int answer2= diy.get(test);
     }
 
     @Test
@@ -64,6 +67,13 @@ public class DiyHashMapTest {
         diy.put(test, test2);
         int answer = diy.get(test);
         assertEquals(test2, answer);
+        Integer answer2 = diy.get(test2);
+        boolean check = false;
+        if(answer2==null){
+            check = true;
+        }
+        assertTrue(check);
+        
     }
 
     @Test
@@ -98,5 +108,5 @@ public class DiyHashMapTest {
         assertEquals(set.length(),2);
         assertEquals("{c, d, }",set.toString());
     }
-
+    
 }

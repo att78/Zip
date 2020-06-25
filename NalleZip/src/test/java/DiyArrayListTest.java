@@ -69,11 +69,7 @@ public class DiyArrayListTest {
         list.add(first);
         int answer = list.get(550);
         assertEquals(answer, -1);
-        Short test = null;
-        list.add(test);
-        Short answer2 = list.get(1);
-        Short compare = -1;
-        assertEquals(compare, answer2);
+
     }
     
     @Test

@@ -22,30 +22,30 @@ public class App {
 
     public static void main(String[] args) {
         //Test overrides parameters
-        if (args == null || args.length == 0) {
-            args = new String[]{"encrypt", "huffman", "test.txt", "test.huff"};
+//        if (args == null || args.length == 0) {
+//            args = new String[]{"encrypt", "huffman", "test.txt", "test.huff"};
+//            new UI(args);
+//
+//            args = new String[]{"decrypt", "huffman", "test.huff", "test-decrypted-huff.txt"};
+//            new UI(args);
+//
+//            args = new String[]{"encrypt", "lzw", "test.txt", "test.lzw"};
+//            new UI(args);
+//
+//            args = new String[]{"decrypt", "lzw", "test.lzw", "test-decrypted-lzw.txt"};
+//            new UI(args);
+//
+//        } else {
             new UI(args);
-
-            args = new String[]{"decrypt", "huffman", "test.huff", "test-decrypted-huff.txt"};
-            new UI(args);
-
-            args = new String[]{"encrypt", "lzw", "test.txt", "test.lzw"};
-            new UI(args);
-
-            args = new String[]{"decrypt", "lzw", "test.lzw", "test-decrypted-lzw.txt"};
-            new UI(args);
-
-        } else {
-            new UI(args);
-        }
+//        }
 
     }
 
     public static void test() {
 
-        String string = "Nalle on soma ja haluaa kovasti hunajaa. Nalle kiipeää puuhun. Siellä on mehiläisillä pesä. Nalle kurkottaa kohti hunajaa. Nalle kurkotti liian pitkälle ja tömähtää maahan."
-                + "Nallea tömähti onneksi pehmeään heinäkasaan.";
-        System.out.println("Original: " + string);
+//        String string = "Nalle on soma ja haluaa kovasti hunajaa. Nalle kiipeää puuhun. Siellä on mehiläisillä pesä. Nalle kurkottaa kohti hunajaa. Nalle kurkotti liian pitkälle ja tömähtää maahan."
+//                + "Nallea tömähti onneksi pehmeään heinäkasaan.";
+//        System.out.println("Original: " + string);
 //        HuffmanAlgo huff = new HuffmanAlgo();
 //        byte[] encoded = huff.encodeString(string);
 //        System.out.println("Encoded length: " + encoded.length);
@@ -71,12 +71,12 @@ public class App {
 //        System.out.println(testQueue);
 //
 //
-        LempelZivWelchAlgo algo = new LempelZivWelchAlgo();
-        byte[] testing = algo.encodeString(string);
-        System.out.println("Alkuperäinen koko on " + string.length());
-        System.out.println("Pakattu koko on: " + testing.length);
-        String answer = algo.decodeString(testing);
-        System.out.println(answer);
+//        LempelZivWelchAlgo algo = new LempelZivWelchAlgo();
+//        byte[] testing = algo.encodeString(string);
+//        System.out.println("Alkuperäinen koko on " + string.length());
+//        System.out.println("Pakattu koko on: " + testing.length);
+//        String answer = algo.decodeString(testing);
+//        System.out.println(answer);
 //        
 //        DiyHashMap<String,String> diy = new DiyHashMap();
 //        String nalle = "Nalle";

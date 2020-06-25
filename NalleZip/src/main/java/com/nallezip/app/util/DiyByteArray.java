@@ -19,6 +19,9 @@ public class DiyByteArray {
     public DiyByteArray(int size) {
         bytes = new byte[size];
     }
+    
+    
+    
 
     /**
      * kirjoittaa bitin taulukkoon.
