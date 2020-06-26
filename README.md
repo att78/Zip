@@ -12,6 +12,10 @@ Testausraportti, joka kuvaa tällä hetkellä neljännen viikon tilannetta, löy
 
 [Testaus](https://github.com/att78/NalleZip/blob/master/documentation/testing.md)
 
+Sovelluksen käyttöohje:
+
+[Manuaali](https://github.com/att78/NalleZip/blob/master/documentation/manual.md)
+
 
 Ensimmäisen viikon viikkoraportti:
 
@@ -51,4 +55,4 @@ Checkstyle raportin generointi: mvn jxr:jxr checkstyle:checkstyle
 
 javadocin apidocsien generointi: mvn javadoc:javadoc
 
-
+Jarin generointi : mvn package
