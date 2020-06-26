@@ -53,7 +53,11 @@ Kuvasta voidaan todeta, että Lempel Ziv Welch-algoritmi käyttäytyi algoritmil
 Graafista voi vetää johtopäätöksen myös siitä, että pakattava materiaali vaikuttaa merkittävästi pakkaustulokseen. Paljon toisteisuutta sisältävä materiaali pakkautui selkeästi pienemmäksi ja jo melko pienillä tiedostoilla päästiin alle 50% pakkautuvuuteen.
 
 
+Algoritmien suorituskykyä testattiin myös nopeuden osalta. Suorituskykyä testattiin samalla testisarjalla, jolla tutkittiin pakkautuvuutta. Huono puoli tässä oli se, että testiotokset olivat pieniä. 
 
+![HuffmanSpeed](https://github.com/att78/NalleZip/blob/master/documentation/pictures/speedTestHuffman.png)
+
+Kuvassa pakkautuvuuden ajoissa näkyy heijausta, eli ne eivät kasva lineaarisesti. Virhelähteenä tässä saattoi olla se testauksessa käytetyn tietokoneen muu taustalla tapahtunut toiminta. Suoritusajat ovat niin lyhyitä, että pienetkin asiat vaikuttavat tuloksiin.
 
 
 
