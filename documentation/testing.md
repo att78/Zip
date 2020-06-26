@@ -16,20 +16,23 @@ tapauksessa, että niiden toiminnassa on jotakin poikkeuksellisen monimutkaista 
 saattaa olla joko toiminnan tai muun testauksen kannalta kriittistä. Tavoitteena on varmistaa, että metodit
 toimivat niille tarkoitetulla tavalla, käydä läpi metodien koodin laatu ja ettei piiloon jää virhetilanteita, joita ei ole tullut ajatelleeksi. JUnit-testit on tehty kullekin luokalle samalla viikolla kuin luokat on luotu. Testeissä on paranneltavaa ja niitä onkin tarkoitus kehittää kattavammiksi kun varmuus luokkien lopullisesta olemuksesta kasvaa. Tällä hetkellä testien rivikattavuus on korkea, mutta kaikkia haaroja ei metodeista testata. 
 
-Tällä hetkellä JUnit-testauksen rivikattavuus on korkea, mutta haaraumakattavuus on alempi.
-![GeneralView](https://github.com/att78/NalleZip/blob/master/documentation/pictures/generalView.png)
+
+![Overall](https://github.com/att78/NalleZip/blob/master/documentation/pictures/overall.png)
 
 Huffman-algoritmin toiminta käyttää itsetehdyistä luokista tällä hetkellä HuffmanAlgo- ja HuffmanNode-luokkia. HuffmanNode-luokasta on testattu kaikkia metodeja, mutta HuffmanAlgossa on vielä hieman aukkoja.
-![Huffman](https://github.com/att78/NalleZip/blob/master/documentation/pictures/huffman.png)
+
+![HuffmanTotal](https://github.com/att78/NalleZip/blob/master/documentation/pictures/huffman.png)
+
+![HuffmanAlgo](https://github.com/att78/NalleZip/blob/master/documentation/pictures/huffmanalgo.png)
 
 
 Lempel Ziv Welch-algoritmin toiminnasta vastaa yksi luokka. Lisäksi Lempel Ziv Welchissä on otettu käyttöön DiyHashMap hoitamaan alussa generoitavien kirjastojen toimintaa. Manuaalisessa kokeilussa luokka näyttäisi toimivan, mutta JUnit testauksessa metodi ei toimi. Asiaa joutuu vielä tarkastelemaan tarkemmin.
-![Lempel Ziv Welch](https://github.com/att78/NalleZip/blob/master/documentation/pictures/lempel.png)
+![Lempel Ziv Welch](https://github.com/att78/NalleZip/blob/master/documentation/pictures/LZW.png)
 
 
 DiyHashmapiin liittyviä luokkia on 2, DiyHashMap ja DiyContent. DiyContent:ille ei ole tehty testejä, sillä luokalla on ainoastaan konstuktori ja automaattisesti generoituja gettereitä ja settereitä, joiden testaaminen ei ole järkevää.
 
-![DiyHashMap](https://github.com/att78/NalleZip/blob/master/documentation/pictures/diyHash.png)
+![Util](https://github.com/att78/NalleZip/blob/master/documentation/pictures/util.png)
 
 
 ## Suorituskyvyn testaus
