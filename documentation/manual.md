@@ -4,7 +4,7 @@ NalleZipillä ei ole graafista käyttöliittymää, vaan sitä käytetään kome
 
 1. Mene komentorivillä kansioon, jossa NalleZip.jar  on. Huolehdi, että pakattava tai purettava tiedosto on samassa kansiossa NalleZipin kanssa.
 
-2. Sovelluksen voi käynnistää komennolla ./NalleZip.jar .Syöttämällä pelkästään edellämainitun ohjelma ei kuitenkaan pakkaa mitään vaan antaa käyttöohjeet. Käyttöohjeet ovat hyvin
+2. Sovelluksen voi käynnistää komennolla cubblissa ./NalleZip.jar . Muissa linuxeissa toimii ainakin  java -jar Nallezip.jar. Windows yhteensopivuutta ei ole testattu. Syöttämällä pelkästään edellämainitun ohjelma ei kuitenkaan pakkaa mitään vaan antaa käyttöohjeet. Käyttöohjeet ovat hyvin
 minimalistiset, ja alla on esitelty käyttö laajemmin. NalleZipille annetaan 4 parametria, jotka on annettava oikeassa järjestyksessä ja eroteltava välilyönnillä.
 
   - Ensimmäinen parametri on päätös encrypt/decrypt. Encrypt pakkaa ja decrypt purkaa.
