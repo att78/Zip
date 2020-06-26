@@ -44,7 +44,7 @@ public class DiyStringBuilderTest {
         DiyStringBuilder builder = new DiyStringBuilder();
         builder.append(bear);
         String result = builder.toString();
-        //System.out.println("Result: " + result + ", size: " + result.length());
+
         assertEquals("nalle", result);        
     }
     

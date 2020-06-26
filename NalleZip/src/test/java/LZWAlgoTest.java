@@ -40,18 +40,13 @@ public class LZWAlgoTest {
     public void tearDown() {
     }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+
     @Test
     public void testCreateLibraries() {
         LempelZivWelchAlgo algo = new LempelZivWelchAlgo();
         algo.createEncodeLibrary();
 
         int value = algo.getLibrary().size();
-//        int value2= algo.getLibraryDecoded().size();
         assertEquals(512, value);
 
         algo.createDecodeLibrary();
@@ -66,8 +61,7 @@ public class LZWAlgoTest {
         algo.createEncodeLibrary();
         String s = "Nalle";
         algo.fillLibrary(s);
-        // assertEquals("[78, 97, 108, 108, 101]", algo.getEncoded().toString());
-        // huom- diyArrayListin käyttöönotto rikkoitestin
+
     }
 
     @Test
@@ -80,15 +74,5 @@ public class LZWAlgoTest {
         assertEquals("Nalle", answer);
     }
 
-//    @Test
-//    public void testDecodeLoop(){
-//    LempelZivWelchAlgo algo = new LempelZivWelchAlgo();
-//    DiyStringBuilder builder = new DiyStringBuilder();
-//    String string = "Nalle";
-//    algo.encodeString(string);
-//    algo.decodeLoop(builder, string);
-//    
-//    //assertEquals("Nalle", builder.toString());
-//    // huom diyArrayListin käyttöönotto rikkoi testin
-//    }
+
 }

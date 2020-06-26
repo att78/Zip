@@ -39,15 +39,11 @@ public class DiyHashMapTest {
     public void tearDown() {
     }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+
     @Test
     public void testPut() {
         DiyHashMap<Integer, Integer> diy = new DiyHashMap();
-        assertEquals(diy.size(), 0);//  tarkistus, koska diyHashMapin koon ei tule olla nolla tässä
+        assertEquals(diy.size(), 0);
         int test = 1;
         int test2 = 2;
         diy.put(test, test2);

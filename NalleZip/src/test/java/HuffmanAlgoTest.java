@@ -44,7 +44,7 @@ public class HuffmanAlgoTest {
 
 
     
-    //rampa testi tällä hetkellä
+   
     @Test
     public void testCreatePosition() {
         HuffmanAlgo algo = new HuffmanAlgo();
@@ -145,28 +145,7 @@ public class HuffmanAlgoTest {
                
     }
     
-//    @Test
-//    public void testLastBye(){
-//        HuffmanAlgo huff = new HuffmanAlgo();
-//        byte[] buggedDot=huff.encodeString(".");
-//        for (byte b : buggedDot) {
-//            System.out.println("Byte: " + b);
-//        }
-//        
-//    }
-//        
-//        Boolean[] zerosAndOnes = new Boolean[16];//minkäkokoinen
-//        int max = 128;
-//        int number;
-//        byte[] resultBytes = new byte[8]; //minkäkokoinen
-//                
-//        int j=0;//mikä arvo
-//        int lastByteLength = (int) resultBytes[0] & 0xFF;
-//        
-//
-//        
-//    
-//    }
+
     
     
 

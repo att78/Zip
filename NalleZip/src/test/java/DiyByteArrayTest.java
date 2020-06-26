@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 
+import com.nallezip.app.util.DiyBitArrayReader;
 import com.nallezip.app.util.DiyByteArray;
+import com.nallezip.app.util.DiyByteArrayReader;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -45,6 +47,28 @@ public class DiyByteArrayTest {
         byte testByte = 1;
         test.writeByte(testByte);
         assertEquals(1,test.getSize());
+    }
+    
+    @Test
+    public void bitArrayReaderTest(){
+        byte[] bytes = new byte[8];
+        bytes[0]=1;
+        DiyBitArrayReader test = new DiyBitArrayReader(bytes);
+        boolean result = test.readBit();
+        assertFalse(result);
+        bytes[1]= 0;
+
+    }
+    
+    @Test
+    public void byteArrayReaderTest(){
+        byte[] bytes = new byte[8];
+        byte input = 1;
+        bytes[0]=1;
+        DiyByteArrayReader test = new DiyByteArrayReader(bytes);
+        byte result = test.readByte();
+        assertEquals(input, result);
+        
     }
      
      
