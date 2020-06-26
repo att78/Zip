@@ -1,19 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.nallezip.app;
 
-import com.nallezip.app.huffman.HuffmanAlgo;
-import com.nallezip.app.huffman.HuffmanNode;
-import com.nallezip.app.lempelziv.LempelZivWelchAlgo;
+
 import com.nallezip.app.ui.UI;
-import com.nallezip.app.util.DiyArrayList;
-import com.nallezip.app.util.DiyHashMap;
+
 
 /**
- *
+ * Käynnistävä luokka
  * @author tallbera
  */
 public class App {

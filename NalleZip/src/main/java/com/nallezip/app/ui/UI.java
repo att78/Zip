@@ -1,18 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.nallezip.app.ui;
 
 import com.nallezip.app.huffman.HuffmanAlgo;
 import com.nallezip.app.io.FileIO;
 import com.nallezip.app.lempelziv.LempelZivWelchAlgo;
-import com.nallezip.app.util.DiyArrayList;
+
 import java.io.IOException;
-import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
