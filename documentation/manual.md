@@ -1,6 +1,6 @@
 # NalleZipin käyttöohje
 
-NalleZipillä ei ole graafista käyttöliittymää, vaan sitä käytetään komentoriviltä. 
+NalleZipillä ei ole graafista käyttöliittymää, vaan sitä käytetään komentoriviltä. NalleZip toimii varmimmin englanninkielisellä aakkostolla ja yleisimmillä erikoismerkeillä Huffmanin osalta. Huffman ei osaa ääkkösiä eikä skandinaavisia merkkejä. LZW puolisko toimii laajemmalla merkistöllä, esimerkiksi ääkkösillä. Siinäkin tulee kuitenkin esimerkiksi tyyliteltyjen erikoismerkkien kanssa helposti ongelmia.
 
 1. Mene komentorivillä kansioon, jossa NalleZip.jar  on. Huolehdi, että pakattava tai purettava tiedosto on samassa kansiossa NalleZipin kanssa.
 
