@@ -49,6 +49,8 @@ Dekoodaus toimii decodeString-metodin avulla. Päämetodilla on 3 aikavaatimukse
 
 Suurin parannuksen tarve on Huffman-algoritmissa. Algoritmi on aivan liian iso ja toteutettu kömpelöllä tavalla.Nythän algoritmi pakkaa syötteen ensin String-muotoiseksi jonoksi 101010 ja konvertoi tämän byte[]-taulukoksi. Tämän prosessin suoraviivaistaminen sellaiseksi, että syöte pakattaisiin suoraan byte[]-taulukoksi ainakin nopeuttaisi algoritmin toimintaa jonkin verran ja vähentäisi rivien määrää. Sen sijaan tiedostojen pakkaukseen tällä muutoksella ei välttämättä olisi mitään vaikutusta. Tämä poistaisi myös String-luokan maksimipituuden aiheuttamat potentiaaliset ongelmat isojen tiedostojen pakkauksissa.
 
+Huffman-algoritmin toimintaa tulisi muuttaa myös sellaiseksi, että se hyväksyisi ääkköset ja erikoismerkit. Tällä hetkellä se ei pysty käsittelemään mitään asciipuun alkupään ulkopuolista merkistöä. Lempel Ziv Welch-algoritmi on tässä suhteessa paremmin toteutettu, mutta siinäkin olisi parantamisen varaa tyyliteltyjen erikoismerkkien osalta.
+
 
 ## Lähteitä:
 
