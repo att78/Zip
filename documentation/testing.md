@@ -1,36 +1,37 @@
 # Testaus 
 
-Työtä on testattu etenemisen mukaan esimerkkisyötteillä ja JUnit-testeillä.
+Harjoitustyön etenemisen myötä projektia on testattu etenemisen mukaan esimerkkisyötteillä ja JUnit-testeillä. Viikolla 4 testattiin myös nopeutta alustavasti. Seuraavilla viikoilla pakkautuvuuttakin testailtiin, mutta näitä testejä ei dokumentoitu eikä raportoitu mihinkään. Kyseessä oli lähinnä sen varmistelu, että algoritmi toimii halutulla tavalla.
 
 ## Yleisesti
 
 Testaus on edennyt työn etenemisen myötä. Kaikkea mitä on tehty, on toteutetuksen yhteydessä testattu ensin manuaalisesti. Kun ongelmia on ratkottu
 mahdollisimman pian niiden syntyhetkestä, on pystytty välttämään tilanne, jossa koodiin liittyvät ongelmat alkavat kasautua. Kun luokat
 on olleet ns. periaatteessa toimivia, on niitä vielä testattu JUnit-testeillä pyrkimyksenä varmistaa luokkien metodien toiminnallisuus.
-Tarvittaessa koodiin on lisätty System.out.println-kutsuja, joilla on tarkasteltu metodin sisäistä toimintaa.
+Tarvittaessa koodiin on lisätty System.out.println-kutsuja, joilla on tarkasteltu metodin sisäistä toimintaa. Lopullisessa koodissa näitä kutsuja ei ole ainakaan tarkoituksellisesti jäljellä.
 
 ## JUnit-testaus
 
 Lähtökohtaisesti luokista on tarkoitus testata kaikki metodit poislukien getterit ja setterit. Konstruktorit testataan ainoastaan siinä
 tapauksessa, että niiden toiminnassa on jotakin poikkeuksellisen monimutkaista tai virhealtista. Osa toString-metodeista testataan, sillä niiden toiminta 
 saattaa olla joko toiminnan tai muun testauksen kannalta kriittistä. Tavoitteena on varmistaa, että metodit
-toimivat niille tarkoitetulla tavalla, käydä läpi metodien koodin laatu ja ettei piiloon jää virhetilanteita, joita ei ole tullut ajatelleeksi. JUnit-testit on tehty kullekin luokalle samalla viikolla kuin luokat on luotu. Testeissä on paranneltavaa ja niitä onkin tarkoitus kehittää kattavammiksi kun varmuus luokkien lopullisesta olemuksesta kasvaa. Tällä hetkellä testien rivikattavuus on korkea, mutta kaikkia haaroja ei metodeista testata. 
-
+toimivat niille tarkoitetulla tavalla, käydä läpi metodien koodin laatu ja ettei piiloon jää virhetilanteita, joita ei ole tullut ajatelleeksi. JUnit-testit on tehty kullekin luokalle samalla viikolla kuin luokat on luotu. UI on rajattu testauksen ulkopuolelle. Käytännössä myös IO-luokka ja App-luokka on testauksen ulkopuolella. Alla näkyy kokonaistilanne. Rivikattavuus ja myös haaraumakattavuus on yleisnäkymän perusteella hyvillä tasoilla. Tarkempi katsaus paljastaa, että joitakin yksittäisiä aukkoja testaukseen on kyllä jäänyt. Alla jacoco-raportin mukainen kuvaus kokonaistilanteesta.
 
 ![Overall](https://github.com/att78/NalleZip/blob/master/documentation/pictures/overall.png)
 
-Huffman-algoritmin toiminta käyttää itsetehdyistä luokista tällä hetkellä HuffmanAlgo- ja HuffmanNode-luokkia. HuffmanNode-luokasta on testattu kaikkia metodeja, mutta HuffmanAlgossa on vielä hieman aukkoja.
+Huffman-algoritmin toiminta pohjaa HuffmanAlgo- ja HuffmanNode-luokkiin. HuffmanNode-luokan 100% ei sinällään kerro koko totuutta, sillä se on verrattain yksinkertainen luokka, jota on kutsuttu paljon muiden luokkien testeissä.
 
 ![HuffmanTotal](https://github.com/att78/NalleZip/blob/master/documentation/pictures/huffman.png)
 
+
+HuffmanAlgo on Huffman-algoritmin sydän. Suurin osa metodeista on hyvin testattu, mutta jokunen puute testauksessa on nähtävissä. Vakavin puute on decodeString-metodin haaraumakattavuuteen liittyvä. Metodi toimii, mutta kaikkia poikkeavia tilanteita ei ole käyty testauksessa läpi.
 ![HuffmanAlgo](https://github.com/att78/NalleZip/blob/master/documentation/pictures/huffmanalgo.png)
 
 
-Lempel Ziv Welch-algoritmin toiminnasta vastaa yksi luokka. Lisäksi Lempel Ziv Welchissä on otettu käyttöön DiyHashMap hoitamaan alussa generoitavien kirjastojen toimintaa. Manuaalisessa kokeilussa luokka näyttäisi toimivan, mutta JUnit testauksessa metodi ei toimi. Asiaa joutuu vielä tarkastelemaan tarkemmin.
+Lempel Ziv Welch-algoritmin toiminnasta vastaa yksi luokka. LZW on toiminnaltaan verrattain yksinkertainen. Suurimmat puutteet testauksessa liittyvät jälleen purkamiseen. Tästä voisi päätellä, että purkamisen eli skenaarioihin oli vaikeampi keksiä hyviä testejä kuin muihin tilanteisiin.
 ![Lempel Ziv Welch](https://github.com/att78/NalleZip/blob/master/documentation/pictures/LZW.png)
 
 
-DiyHashmapiin liittyviä luokkia on 2, DiyHashMap ja DiyContent. DiyContent:ille ei ole tehty testejä, sillä luokalla on ainoastaan konstuktori ja automaattisesti generoituja gettereitä ja settereitä, joiden testaaminen ei ole järkevää.
+Util-pakkaus on työn toteutustavasta johtuen hyvin laaja. Util-pakkauksen luokkia testattiin monin tavoin paitsi luokkien rakennusvaiheessa myös algoritmeihin implementoinnin aikana. Joissakin tapauksissa luokkien lopulliseen muotoon vaikutti suuresti JUnit-testauksella saatu tieto. Tästä johtuen ei ole ihme, että util-pakkauksen testauksen rivikattavuus on korkea 92% ja haaraumakattavuus lähes yhtä korkea 87%.
 
 ![Util](https://github.com/att78/NalleZip/blob/master/documentation/pictures/util.png)
 
